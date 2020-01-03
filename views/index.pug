@@ -2,4 +2,12 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em iserBINGO] v0.0.1, developed by rai
+
+  if error
+    p Error getting dynamic content
+  else
+    p The game database has the following record counts:
+
+  ul
+    li #[strong Spaces:] !{data.space_count}
