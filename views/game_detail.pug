@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Welcome
+
+  p #[strong Description:] #{game.desc}
+  p #[strong Created by:] #{game.user_created}
+
+  p
+    a(href=game.url+'/delete') Delete Game
+  p
+    a(href=game.url+'/update') Update Game

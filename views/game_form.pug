@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='user_created') User Created:
+      input#usercreated.form-control(type='text' placeholder='Who created this game' name='user_created' required='true' value=(undefined===game ? '' : game.user_created) )
+      label(for='desc') Description:
+      input#desc.form-control(type='text' placeholder='Description' name='desc' required='true' value=(undefined===game ? '' : game.desc))
+    button.btn.btn-primary(type='submit') Submit
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

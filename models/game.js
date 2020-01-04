@@ -6,6 +6,12 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     user_created: type.STRING,
-    desc: type.STRING
+    desc: type.STRING,
+    url: {
+      type: type.VIRTUAL,
+      get() {
+        return '/play/game/' + this.getDataValue('id')
+      }
+    } 
   })
 }

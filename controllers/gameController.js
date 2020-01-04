@@ -2,24 +2,18 @@ const validator = require('express-validator');
 var sequelize = require('../sequelize');
 var async = require('async');
 
-exports.index = function(req, res) {
-  sequelize.Space.count().then(function (space_count) {
-    res.render('index', { title: 'iserBINGO Home', space_count: space_count });
+// Display list of all games
+exports.game_list = function(req, res, next) {
+  sequelize.Game.findAll().then(function (list_games) {
+    res.render('game_list', { title: 'Game List', game_list: list_games });
   });
 };
 
-// Display list of all spaces
-exports.space_list = function(req, res) {
-  sequelize.Space.findAll().then(function (list_spaces) {
-    res.render('space_list', { title: 'Space List', space_list: list_spaces });
-  });
-};
-
-// Display detail page for a specific space
-exports.space_detail = function(req, res, next) {
+// Display detail page for a specific game
+exports.game_detail = function(req, res, next) {
   async.parallel({
-    space: function(callback) {
-      sequelize.Space.findOne({
+    game: function(callback) {
+      sequelize.Game.findOne({
         where: {
           id: req.params.id
         }
@@ -27,23 +21,23 @@ exports.space_detail = function(req, res, next) {
     },
   }, function(results) {
     if (results.get()==null) { // No results
-      var err = new Error('Space not found');
+      var err = new Error('Game not found');
       err.status = 404;
       return next(err);
     }
     // Successful, so render
-    res.render('space_detail', { title: 'Space Detail', space: results.get() });
+    res.render('game_detail', { title: 'Game Detail', game: results.get() });
   });
+
 };
 
-
-// Display space create form on GET
-exports.space_create_get = function(req, res, next) {
-  res.render('space_form', { title: 'Create Space' });
+// Display game create form on GET
+exports.game_create_get = function(req, res, next) {
+  res.render('game_form', { title: 'Create Game' });
 };
 
-//Handle space create on POST
-exports.space_create_post = [
+//Handle game create on POST
+exports.game_create_post = [
   // Validate fields
   validator.body('user_created').isLength({ min: 1 }).trim().withMessage('You must select a user'),
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
@@ -59,32 +53,32 @@ exports.space_create_post = [
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values and error messages
-      res.render('space_form', { title: 'Create Space', space: req.body, errors: errors.array() });
+      res.render('game_form', { title: 'Create Game', game: req.body, errors: errors.array() });
       return;
     }
     else {
       // Data from form is valid
 
-      // Create a Space object with escaped and trimmed data
-      var space = new sequelize.Space(
+      // Create a Game object with escaped and trimmed data
+      var game = new sequelize.Game(
         {
           user_created: req.body.user_created,
           desc: req.body.desc
       });
-      res.redirect(space.url);
+      res.redirect(game.url);
 
-      space.save().catch(error => {
+      game.save().catch(error => {
         return next(error); 
       });
     }
   }
 ];
 
-// Display space delete form on GET
-exports.space_delete_get = function(req, res, next) {
+// Display game delete form on GET
+exports.game_delete_get = function(req, res, next) {
   async.parallel({
-    space: function(callback) {
-      sequelize.Space.findOne({
+    game: function(callback) {
+      sequelize.Game.findOne({
         where: {
           id: req.params.id
         }
@@ -92,43 +86,44 @@ exports.space_delete_get = function(req, res, next) {
     },
   }, function(results) {
     if (results.get()==null) { // No results
-      var err = new Error('Space not found');
+      var err = new Error('Game not found');
       err.status = 404;
       return next(err);
     }
     // Successful, so render
-    res.render('space_delete', { title: 'Delete Space', space: results.get() });
+    res.render('game_delete', { title: 'Delete Game', game: results.get() });
   });
 
 };
 
-// Handle space delete on POST
-exports.space_delete_post = function(req, res) {
+// Handle game delete on POST
+exports.game_delete_post = function(req, res, next) {
   async.parallel({
-    space: function(callback) {
-      sequelize.Space.findOne({
+    game: function(callback) {
+      sequelize.Game.findOne({
         where: {
-          id: req.body.spaceid
+          id: req.body.gameid
         }
       }).then(callback);
     },
   }, function(results) {
     if (results.get()==null) { // No results
-      var err = new Error('Space not found');
+      var err = new Error('Game not found');
       err.status = 404;
       return next(err);
     }
-    // Space exists, so delete and redirect
+    // Game exists, so delete and redirect
     results.destroy();
-    res.redirect('/play/spaces');
+    res.redirect('/play/games');
   });
+
 };
 
-// Display space update form on GET
-exports.space_update_get = function(req, res, next) {
+// Display game update form on GET
+exports.game_update_get = function(req, res, next) {
   async.parallel({
-    space: function(callback) {
-      sequelize.Space.findOne({
+    game: function(callback) {
+      sequelize.Game.findOne({
         where: {
           id: req.params.id
         }
@@ -136,17 +131,18 @@ exports.space_update_get = function(req, res, next) {
     },
   }, function(results) {
     if (results.get()==null) { // No results
-      var err = new Error('Space not found');
+      var err = new Error('Game not found');
       err.status = 404;
       return next(err);
     }
-    // Space exists, so render update form.
-    res.render('space_form', { title: 'Update Space', space: results.get() });
+    // Game exists, so render update form.
+    res.render('game_form', { title: 'Update Game', game: results.get() });
   });
+
 };
 
-// Handle space update on POST
-exports.space_update_post = [
+// Handle game update on POST
+exports.game_update_post = [
   // Validate fields
   validator.body('user_created').isLength({ min: 1 }).trim().withMessage('You must select a user'),
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
@@ -162,22 +158,22 @@ exports.space_update_post = [
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values and error messages
-      res.render('space_form', { title: 'Update Space', space: req.body, errors: errors.array() });
+      res.render('game_form', { title: 'Update Game', game: req.body, errors: errors.array() });
       return;
     }
     else {
       // Data from form is valid
 
       // Find and update with validated and sanitized data
-      sequelize.Space.findOne({
+      sequelize.Game.findOne({
         where: {
           id: req.params.id
         }
-      }).then(space => {
-        space.user_created = req.body.user_created;
-        space.desc = req.body.desc;
-        space.save().then(() => {
-          res.redirect(space.url);
+      }).then(game => {
+        game.user_created = req.body.user_created;
+        game.desc = req.body.desc;
+        game.save().then(() => {
+          res.redirect(game.url);
         });
       });
     }

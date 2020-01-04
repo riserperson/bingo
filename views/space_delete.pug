@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  p #[strong Delete the following space?]
+
+  p #[strong Description:] #{space.desc}
+
+  form(method='POST' action='')
+    div.form-group
+      input#spaceid.form-control(type='hidden',name='spaceid', required='true', value=space.id)
+      button.btn.btn-primary(type='submit') Delete

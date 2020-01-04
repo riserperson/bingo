@@ -6,6 +6,14 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     user_created: type.STRING,
-    desc: type.STRING
+    desc: type.STRING,
+//    approval_date: type.DATE,
+//    approved_by: type.STRING,
+    url: {
+      type: type.VIRTUAL,
+      get() {
+        return '/play/space/' + this.getDataValue('id')
+      }
+    }
   })
 }
