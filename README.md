@@ -7,7 +7,7 @@ during early development, but sequelize will make it easy to switch to mysql whe
 
 Pull requests welcome from all interested siblings :)
 
-Database currently has two tables: Spaces (id bingo space suggestions from users) and Games, which have a one to many rel with Spaces.
+Database currently has two tables: Spaces (i.e. bingo space suggestions from users) and Games, which have a one to many rel with Spaces.
 
 TODO:
 
