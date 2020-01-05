@@ -13,5 +13,6 @@ TODO:
 
 -User management and application of permissions to visibility of Games and Spaces
 
--Games controller (Space one is done)
+-Build out database tree, adding fields needed to play the game
 
+-Build out views for displaying game card for individual players
