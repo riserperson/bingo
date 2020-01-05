@@ -1,5 +1,5 @@
 const validator = require('express-validator');
-var sequelize = require('../sequelize');
+const sequelize = require('../sequelize');
 var async = require('async');
 
 exports.index = function(req, res) {
@@ -66,16 +66,19 @@ exports.space_create_post = [
       // Data from form is valid
 
       // Create a Space object with escaped and trimmed data
-      var space = new sequelize.Space(
-        {
-          user_created: req.body.user_created,
-          desc: req.body.desc
-      });
-      res.redirect(space.url);
-
-      space.save().catch(error => {
-        return next(error); 
-      });
+      function createNewSpace() {
+        const space = sequelize.Space.create(
+          {
+            user_created: req.body.user_created,
+            desc: req.body.desc
+          });
+        return space;
+      }
+      async function loadNew() {
+        var space = await createNewSpace();
+        res.redirect(space.url);
+      }
+      loadNew();
     }
   }
 ];

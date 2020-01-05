@@ -60,16 +60,19 @@ exports.game_create_post = [
       // Data from form is valid
 
       // Create a Game object with escaped and trimmed data
-      var game = new sequelize.Game(
-        {
-          user_created: req.body.user_created,
-          desc: req.body.desc
-      });
-      res.redirect(game.url);
-
-      game.save().catch(error => {
-        return next(error); 
-      });
+      function createNewGame() {
+        const game = sequelize.Game.create(
+          {
+            user_created: req.body.user_created,
+            desc: req.body.desc
+          });
+        return game;
+      }
+      async function loadNew() {
+        var game = await createNewGame();
+        res.redirect(game.url);
+      }
+      loadNew();
     }
   }
 ];
