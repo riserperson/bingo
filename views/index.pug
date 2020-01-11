@@ -2,12 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #[em iserBINGO] v0.0.1, developed by rai
-
-  if error
-    p Error getting dynamic content
+  if user  
+    p Welcome, #{user.username}, to #[em iserBINGO] v0.0.1, developed by rai
   else
-    p The game database has the following record counts:
+    p Welcome to #[em iserBINGO] v0.0.1, developed by rai
 
-  ul
-    li #[strong Spaces:] !{space_count}
+  p Would you like to:
+
+  a(class='button' href='/play/game/create') Create a New Game
+  hr
+  a(class='button' href='/play/spaces') Participate in an Existing Game
+  

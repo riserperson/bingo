@@ -13,18 +13,21 @@ html(lang='en')
       div(class='row')
         div(class='col-sm-2')
           block sidebar
-            ul(class='sidebar-nav')
-              li 
-                a(href='/play') Home
-              li 
-                a(href='/play/spaces') All spaces
-              li 
-                a(href='/play/games') All games
-              hr
-              li 
-                a(href='/play/space/create') Create new space
-              li 
-                a(href='/play/game/create') Create new game
+            if (!user)
+              a(href="/users/login") Login
+            else
+              ul(class='sidebar-nav')
+                li 
+                  a(href='/play') Home
+                li 
+                  a(href='/play/spaces') All spaces
+                li 
+                  a(href='/play/games') All games
+                hr
+                li 
+                  a(href='/play/space/create') Create new space
+                li 
+                  a(href='/play/game/create') Create new game
                 
         div(class='col-sm-10')
           block content

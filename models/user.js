@@ -8,6 +8,12 @@ var mydb = new Sequelize('mydb', 'myuser', 'mypass', {
   storage: 'mydb.sqlite'
 });
 
+mydb.sync()
+  .then(() => {
+    console.log('User database synced')
+  })
+
+
 // A helper to define the User model with username and password fields
 
 var User = passportLocalSequelize.defineUser(mydb, {
