@@ -4,7 +4,11 @@ var async = require('async');
 
 exports.index = function(req, res) {
   sequelize.Space.count().then(function (space_count) {
-    res.render('index', { title: 'iserBINGO Home', space_count: space_count });
+    res.render('index', { 
+      title: 'iserBINGO Home',
+      space_count: space_count,
+      user: req.user
+     });
   });
 };
 

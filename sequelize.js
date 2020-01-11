@@ -22,7 +22,7 @@ const Game = GameModel(sequelize, Sequelize);
 Game.hasMany(Space);
 Space.belongsTo(Game);
 
-sequelize.sync({ force: true })
+sequelize.sync()
   .then(() => {
     console.log('Database & tables created!')
   })

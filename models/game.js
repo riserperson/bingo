@@ -12,6 +12,11 @@ module.exports = (sequelize, type) => {
       get() {
         return '/play/game/' + this.getDataValue('id')
       }
-    } 
+    }
+//    number_of_players: {
+//      type: type.INTEGER,
+//      primaryKey: false,
+//      required: true
+//    } 
   })
 }
