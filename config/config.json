@@ -1,0 +1,22 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "bingo.db"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "si24090607",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
