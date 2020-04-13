@@ -1,19 +1,11 @@
-module.exports = (sequelize, type) => {
-  return sequelize.define('space', {
-    id: {
-      type: type.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    user_created: type.STRING,
-    desc: type.STRING,
-//    approval_date: type.DATE,
-//    approved_by: type.STRING,
-    url: {
-      type: type.VIRTUAL,
-      get() {
-        return '/play/space/' + this.getDataValue('id')
-      }
-    }
-  })
-}
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const space = sequelize.define('space', {
+    user_created: DataTypes.STRING,
+    desc: DataTypes.STRING
+  }, {});
+  space.associate = function(models) {
+    // associations can be defined here
+  };
+  return space;
+};
