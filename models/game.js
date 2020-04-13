@@ -1,11 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const game = sequelize.define('game', {
-    user_created: DataTypes.STRING,
-    desc: DataTypes.STRING
+  const Game = sequelize.define('Game', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false
+    },
+    group_name: DataTypes.STRING,
+    group_activity: DataTypes.STRING,
+    start_time: DataTypes.DATE,
+    end_time: DataTypes.DATE,
+    time_zone: DataTypes.INTEGER
   }, {});
-  game.associate = function(models) {
-    // associations can be defined here
+  Game.associate = function(models) {
+    Game.belongsTo(models.User);
+    Game.hasMany(models.Space);
   };
-  return game;
+  return Game;
 };
