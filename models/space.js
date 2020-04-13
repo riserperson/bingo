@@ -1,11 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const space = sequelize.define('space', {
-    user_created: DataTypes.STRING,
-    desc: DataTypes.STRING
+  const Space = sequelize.define('Space', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true
+    },
+    space_desc: DataTypes.STRING
   }, {});
-  space.associate = function(models) {
-    // associations can be defined here
+  Space.associate = function(models) {
+    Space.belongsTo(models.Game);
   };
-  return space;
+  return Space;
 };
