@@ -1,5 +1,5 @@
 const validator = require('express-validator');
-var sequelize = require('../sequelize');
+//var sequelize = require('../sequelize');
 var async = require('async');
 
 // Display list of all games
