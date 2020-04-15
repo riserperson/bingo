@@ -1,7 +1,9 @@
+var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
-const { Space, Game } = require('../sequelize');
+const Game = require('../models/index');
+
 
 /* GET home page. */
 router.get('/', function(req, res) {

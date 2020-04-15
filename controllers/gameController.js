@@ -1,10 +1,9 @@
 const validator = require('express-validator');
-//var sequelize = require('../sequelize');
 var async = require('async');
 
 // Display list of all games
 exports.game_list = function(req, res, next) {
-  sequelize.Game.findAll().then(function (list_games) {
+  models.Game.findAll().then(function (list_games) {
     res.render('game_list', { title: 'Game List', game_list: list_games });
   });
 };
@@ -13,7 +12,7 @@ exports.game_list = function(req, res, next) {
 exports.game_detail = function(req, res, next) {
   async.parallel({
     game: function(callback) {
-      sequelize.Game.findOne({
+      models.Game.findOne({
         where: {
           id: req.params.id
         }
@@ -61,7 +60,7 @@ exports.game_create_post = [
 
       // Create a Game object with escaped and trimmed data
       function createNewGame() {
-        const game = sequelize.Game.create(
+        const game = models.Game.create(
           {
             user_created: req.body.user_created,
             desc: req.body.desc
@@ -81,7 +80,7 @@ exports.game_create_post = [
 exports.game_delete_get = function(req, res, next) {
   async.parallel({
     game: function(callback) {
-      sequelize.Game.findOne({
+      models.Game.findOne({
         where: {
           id: req.params.id
         }
@@ -103,7 +102,7 @@ exports.game_delete_get = function(req, res, next) {
 exports.game_delete_post = function(req, res, next) {
   async.parallel({
     game: function(callback) {
-      sequelize.Game.findOne({
+      models.Game.findOne({
         where: {
           id: req.body.gameid
         }
@@ -126,7 +125,7 @@ exports.game_delete_post = function(req, res, next) {
 exports.game_update_get = function(req, res, next) {
   async.parallel({
     game: function(callback) {
-      sequelize.Game.findOne({
+      models.Game.findOne({
         where: {
           id: req.params.id
         }
@@ -168,7 +167,7 @@ exports.game_update_post = [
       // Data from form is valid
 
       // Find and update with validated and sanitized data
-      sequelize.Game.findOne({
+      models.Game.findOne({
         where: {
           id: req.params.id
         }
