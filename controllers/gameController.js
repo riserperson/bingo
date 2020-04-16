@@ -1,5 +1,6 @@
 const validator = require('express-validator');
 var async = require('async');
+var models = require('../models');
 
 // Display list of all games
 exports.game_list = function(req, res, next) {
@@ -38,11 +39,9 @@ exports.game_create_get = function(req, res, next) {
 //Handle game create on POST
 exports.game_create_post = [
   // Validate fields
-  validator.body('user_created').isLength({ min: 1 }).trim().withMessage('You must select a user'),
-  validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
+  validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
   // Sanitize fields
-  validator.sanitizeBody('user_created').escape(),
-  validator.sanitizeBody('desc').escape(),
+  validator.sanitizeBody('group_name').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
@@ -62,8 +61,7 @@ exports.game_create_post = [
       function createNewGame() {
         const game = models.Game.create(
           {
-            user_created: req.body.user_created,
-            desc: req.body.desc
+            group_name: req.body.group_name
           });
         return game;
       }
@@ -146,11 +144,9 @@ exports.game_update_get = function(req, res, next) {
 // Handle game update on POST
 exports.game_update_post = [
   // Validate fields
-  validator.body('user_created').isLength({ min: 1 }).trim().withMessage('You must select a user'),
-  validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
+  validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
   // Sanitize fields
-  validator.sanitizeBody('user_created').escape(),
-  validator.sanitizeBody('desc').escape(),
+  validator.sanitizeBody('group_name').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
@@ -172,8 +168,7 @@ exports.game_update_post = [
           id: req.params.id
         }
       }).then(game => {
-        game.user_created = req.body.user_created;
-        game.desc = req.body.desc;
+        game.group_name = req.body.group_name;
         game.save().then(() => {
           res.redirect(game.url);
         });

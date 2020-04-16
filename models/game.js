@@ -11,7 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     group_activity: DataTypes.STRING,
     start_time: DataTypes.DATE,
     end_time: DataTypes.DATE,
-    time_zone: DataTypes.INTEGER
+    time_zone: DataTypes.INTEGER,
+    url: {
+       type: DataTypes.VIRTUAL,
+       get() {
+         return '/play/game/' + this.getDataValue('id')
+       }
+    }
   }, {});
   Game.associate = function(models) {
     Game.belongsTo(models.User);
