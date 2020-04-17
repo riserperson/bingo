@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true
     },
-    space_desc: DataTypes.STRING
+    desc: DataTypes.STRING
   }, {});
   Space.associate = function(models) {
     Space.belongsTo(models.Game);
