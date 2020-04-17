@@ -5,8 +5,6 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      label(for='user_created') User Created:
-      input#usercreated.form-control(type='text' placeholder='Who created this space' name='user_created' required='true' value=(undefined===space ? '' : space.user_created) )
       label(for='desc') Description:
       input#desc.form-control(type='text' placeholder='Description' name='desc' required='true' value=(undefined===space ? '' : space.desc))
     button.btn.btn-primary(type='submit') Submit

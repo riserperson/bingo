@@ -3,8 +3,7 @@ extends layout
 block content
   h1 Welcome
 
-  p #[strong Description:] #{game.desc}
-  p #[strong Created by:] #{game.user_created}
+  p #[strong Description:] #{game.group_name}
 
   p
     a(href=game.url+'/delete') Delete Game

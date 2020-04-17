@@ -5,10 +5,22 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      label(for='user_created') User Created:
-      input#usercreated.form-control(type='text' placeholder='Who created this game' name='user_created' required='true' value=(undefined===game ? '' : game.user_created) )
-      label(for='desc') Description:
-      input#desc.form-control(type='text' placeholder='Description' name='desc' required='true' value=(undefined===game ? '' : game.desc))
+      So you want to play bingo?
+
+      Great idea! First step, let's get you a bingo ball. Gotta have one of those to play bingo, right?
+
+      Now then, whats the name of the group that will be playing?
+      label(for='group_name') Now then, whats the name of the group that will be playing?
+      input#group_name.form-control(type='text' placeholder='Group Name' name='group_name' required='true' value=(undefined===game ? '' : game.group_name))
+      label(for='group_activity') And what will you be doing while playing bingo?
+      input#group_activity.form-control(type='text' placeholder='Group Activity' name='group_activity' required='true' value=(undefined===game ? '' : game.group_activity))
+
+      label(for='start_time') At what precise time do you want the game to start?
+
+      label(for='end_time') And at what time do you want it to end?
+
+      
+
     button.btn.btn-primary(type='submit') Submit
   if errors 
     ul

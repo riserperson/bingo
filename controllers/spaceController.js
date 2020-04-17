@@ -1,9 +1,9 @@
 const validator = require('express-validator');
-const sequelize = require('../sequelize');
+const models = require('../models');
 var async = require('async');
 
 exports.index = function(req, res) {
-  sequelize.Space.count().then(function (space_count) {
+  models.Space.count().then(function (space_count) {
     res.render('index', { 
       title: 'iserBINGO Home',
       space_count: space_count,
@@ -14,7 +14,7 @@ exports.index = function(req, res) {
 
 // Display list of all spaces
 exports.space_list = function(req, res) {
-  sequelize.Space.findAll().then(function (list_spaces) {
+  models.Space.findAll().then(function (list_spaces) {
     res.render('space_list', { title: 'Space List', space_list: list_spaces });
   });
 };
@@ -23,7 +23,7 @@ exports.space_list = function(req, res) {
 exports.space_detail = function(req, res, next) {
   async.parallel({
     space: function(callback) {
-      sequelize.Space.findOne({
+      models.Space.findOne({
         where: {
           id: req.params.id
         }
@@ -49,10 +49,8 @@ exports.space_create_get = function(req, res, next) {
 //Handle space create on POST
 exports.space_create_post = [
   // Validate fields
-  validator.body('user_created').isLength({ min: 1 }).trim().withMessage('You must select a user'),
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
   // Sanitize fields
-  validator.sanitizeBody('user_created').escape(),
   validator.sanitizeBody('desc').escape(),
 
   // Process request after validation and sanitization
@@ -71,9 +69,8 @@ exports.space_create_post = [
 
       // Create a Space object with escaped and trimmed data
       function createNewSpace() {
-        const space = sequelize.Space.create(
+        const space = models.Space.create(
           {
-            user_created: req.body.user_created,
             desc: req.body.desc
           });
         return space;
@@ -91,7 +88,7 @@ exports.space_create_post = [
 exports.space_delete_get = function(req, res, next) {
   async.parallel({
     space: function(callback) {
-      sequelize.Space.findOne({
+      models.Space.findOne({
         where: {
           id: req.params.id
         }
@@ -113,7 +110,7 @@ exports.space_delete_get = function(req, res, next) {
 exports.space_delete_post = function(req, res) {
   async.parallel({
     space: function(callback) {
-      sequelize.Space.findOne({
+      models.Space.findOne({
         where: {
           id: req.body.spaceid
         }
@@ -135,7 +132,7 @@ exports.space_delete_post = function(req, res) {
 exports.space_update_get = function(req, res, next) {
   async.parallel({
     space: function(callback) {
-      sequelize.Space.findOne({
+      models.Space.findOne({
         where: {
           id: req.params.id
         }
@@ -155,10 +152,8 @@ exports.space_update_get = function(req, res, next) {
 // Handle space update on POST
 exports.space_update_post = [
   // Validate fields
-  validator.body('user_created').isLength({ min: 1 }).trim().withMessage('You must select a user'),
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
   // Sanitize fields
-  validator.sanitizeBody('user_created').escape(),
   validator.sanitizeBody('desc').escape(),
 
   // Process request after validation and sanitization
@@ -176,12 +171,11 @@ exports.space_update_post = [
       // Data from form is valid
 
       // Find and update with validated and sanitized data
-      sequelize.Space.findOne({
+      models.Space.findOne({
         where: {
           id: req.params.id
         }
       }).then(space => {
-        space.user_created = req.body.user_created;
         space.desc = req.body.desc;
         space.save().then(() => {
           res.redirect(space.url);
