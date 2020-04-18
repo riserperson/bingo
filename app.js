@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var playRouter = require('./routes/play'); // Import routes for "play" area of site
 
+var models = require('./models');
+
 var app = express();
 
 // view engine setup

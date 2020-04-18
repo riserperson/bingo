@@ -8,11 +8,34 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_name: {
-        type: Sequelize.STRING
+      username: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true
       },
       email: {
-        type: Sequelize.STRING
+         type: Sequelize.STRING,
+         unique: true
+      },
+      hash: {
+          type: Sequelize.TEXT,
+          allowNull: false
+      },
+      salt: {
+          type: Sequelize.STRING,
+          allowNull: false
+      },
+      activationKey: {
+          type: Sequelize.STRING,
+          allowNull: true
+      },
+      resetPasswordKey: {
+          type: Sequelize.STRING,
+          allowNull: true
+      },
+      verified: {
+          type: Sequelize.BOOLEAN,
+          allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -22,7 +45,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+   });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Users');
