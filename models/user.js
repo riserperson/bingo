@@ -1,17 +1,11 @@
 'use strict';
 
+var passportLocalSequelize = require('passport-local-sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-      autoIncrement: false
-    },
-    user_name: DataTypes.STRING,
+  var User = passportLocalSequelize.defineUser(sequelize, {
     email: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {});
+  });
   User.associate = function(models) {
     User.hasMany(models.Game);
   };
