@@ -51,7 +51,7 @@ exports.space_create_post = [
   // Validate fields
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
   // Sanitize fields
-  validator.sanitizeBody('desc').escape(),
+  validator.check('desc').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
@@ -154,7 +154,7 @@ exports.space_update_post = [
   // Validate fields
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
   // Sanitize fields
-  validator.sanitizeBody('desc').escape(),
+  validator.check('desc').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {

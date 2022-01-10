@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Game.associate = function(models) {
-    Game.belongsTo(models.User);
     Game.hasMany(models.Space);
   };
   return Game;
