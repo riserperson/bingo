@@ -5,7 +5,7 @@ var logger = require('morgan');
 var passport = require ('passport');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 var playRouter = require('./routes/play'); // Import routes for "play" area of site
 
 var models = require('./models');
@@ -31,11 +31,13 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/play', playRouter);
 
-passport.use(models.User.createStrategy());
-passport.serializeUser(models.User.serializeUser());
-passport.deserializeUser(models.User.deserializeUser());
+// passport.use(models.User.createStrategy());
+// passport.serializeUser(models.User.serializeUser());
+// passport.deserializeUser(models.User.deserializeUser());
 
 module.exports = app;
+
+app.listen('8080',process.env.IP,() => console.log("Server is running."));

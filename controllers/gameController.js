@@ -41,7 +41,7 @@ exports.game_create_post = [
   // Validate fields
   validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
   // Sanitize fields
-  validator.sanitizeBody('group_name').escape(),
+  validator.check('group_name').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
@@ -146,7 +146,7 @@ exports.game_update_post = [
   // Validate fields
   validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
   // Sanitize fields
-  validator.sanitizeBody('group_name').escape(),
+  validator.check('group_name').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {

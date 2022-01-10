@@ -11,26 +11,7 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      p So you want to play bingo? 
-
-      p Great idea! First step, let's get you a bingo ball. Gotta have one of those to play bingo, right?
-
-      p Now then, whats the name of the group that will be playing?
-      label(for='group_name') Now then, whats the name of the group that will be playing?
-      input#group_name.form-control(type='text' placeholder='Group Name' name='group_name' required='true' value=(undefined===game ? '' : game.group_name))
-      label(for='group_activity') And what will you be doing while playing bingo?
-      input#group_activity.form-control(type='text' placeholder='Group Activity' name='group_activity' required='true' value=(undefined===game ? '' : game.group_activity))
-
-      label(for='start_time') At what precise time do you want the game to start?
-      #datetimepicker1.input-group.date
-        input.form-control(type='text')
-        span.input-group-addon
-          span.glyphicon.glyphicon-calendar
-      label(for='end_time') And at what time do you want it to end?
-      script(type='text/javascript').
-        $(function () {
-        $('#datetimepicker1').datetimepicker();
-        });
+      p New Game
 
     button.btn.btn-primary(type='submit') Submit
   if errors 
