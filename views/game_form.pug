@@ -1,24 +1,27 @@
 extends layout
 
 block content
-  script(type='text/javascript', src='../../javascripts/jquery.js')
-  script(type='text/javascript', src='../../javascripts/moment.js')
-  script(type='text/javascript', src='../../javascripts/transition.js')
-  script(type='text/javascript', src='../../javascripts/index.js')
-  script(type='text/javascript', src='../../javascripts/bootstrap-datetimepicker.js')
-
   h1=title
+  div.container
+    div.row
+      form(method='POST' action='')
+        div.form-group
+          p Game Code: #{game.code} 
+          label(for='name') Game Name:
+          input#name.form-control(type='text' placeholder='Game Name' required='true')
+          
+    
+        button.btn.btn-primary(type='submit') Start Game
+    div.row
+      div.form-group
+        button.btn.btn-primary Add Space
+    div.row
+      ul.list-group#spaceList
 
-  form(method='POST' action='')
-    div.form-group
-      p Game Code: #{game.code} 
-      label(for='name') Game Name:
-      input#name.form-control(type='text' placeholder='Game Name' required='true')
-      
-
-    button.btn.btn-primary(type='submit') Start Game
 
   if errors 
     ul
       for error in errors
         li!= error.msg
+
+script(type='text/javascript', src='../../javascripts/game_form.js')
