@@ -6,15 +6,17 @@ block content
   div(class='container')
     div(class='row justify-content-center')
       div(class='col-6')
-        form(method='POST' action='game/create')
-          button.btn.btn-primary(type='submit') Create a New Game
+        div.form-group
+          form(method='POST' action='game/create')
+            button.btn.btn-primary(type='submit') Create a New Game
     div(class='row justify-content-center')
       div(class='col-6')
-        form(method='POST' action='')
-          div.form-group
-            label(for='gameCode') Code:
-            input#desc.form-control(type='text' placeholder='CODE' name='gameCode' required='true').col-1
-            button.btn.btn-primary(type='submit') Participate in an Existing Game
+        div.form-group
+          form(method='POST' action='')
+            div.form-group
+              label(for='gameCode') Code:
+              input#desc.form-control(type='text' placeholder='CODE' name='gameCode' required='true')
+              button.btn.btn-primary(type='submit') Participate in an Existing Game
       if errors 
         ul
           for error in errors
