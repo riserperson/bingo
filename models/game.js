@@ -7,11 +7,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false
     },
-    group_name: DataTypes.STRING,
-    group_activity: DataTypes.STRING,
-    start_time: DataTypes.DATE,
-    end_time: DataTypes.DATE,
-    time_zone: DataTypes.INTEGER,
+    code: DataTypes.STRING,
+    name: DataTypes.STRING,
+    status: DataTypes.BOOLEAN,
     url: {
        type: DataTypes.VIRTUAL,
        get() {

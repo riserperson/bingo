@@ -11,9 +11,13 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      p New Game
+      p Game Code: #{game.code} 
+      label(for='name') Game Name:
+      input#name.form-control(type='text' placeholder='Game Name' required='true')
+      
 
-    button.btn.btn-primary(type='submit') Submit
+    button.btn.btn-primary(type='submit') Start Game
+
   if errors 
     ul
       for error in errors
