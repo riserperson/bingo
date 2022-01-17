@@ -31,7 +31,7 @@ router.post('/space/:id/update', space_controller.space_update_post);
 // GET request for one Space
 router.get('/space/:id', space_controller.space_detail);
 
-// GET request for list of all Space items
+// GET request for list of all Space items for a particular game
 router.get('/spaces', space_controller.space_list);
 
 /// GAME ROUTES ///
