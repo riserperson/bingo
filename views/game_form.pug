@@ -14,7 +14,10 @@ block content
         button.btn.btn-primary(type='submit') Start Game
     div.row
       div.form-group
-        button.btn.btn-primary Add Space
+        label(for='newSpace') New Space:
+        input#newSpace.form-control(type='text' placeholder='New Space')
+        input(type='hidden' id='gameId' name='gameId' value=game.id)
+        button.btn.btn-primary#addSpaceButton Add Space
     div.row
       ul.list-group#spaceList
 
@@ -24,4 +27,5 @@ block content
       for error in errors
         li!= error.msg
 
-script(type='text/javascript', src='../../javascripts/game_form.js')
+  append foot
+    script(type='text/javascript', src='/javascripts/game_form.js')

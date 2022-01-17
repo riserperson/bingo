@@ -78,8 +78,8 @@ exports.game_create_post = [
     async function loadNew() {
       var game = await createNewGame();
 // After successfully creating a new game, we drop directly into the edit form with a GET request
-// so the user can see and share the code that allows others to load the form as well and they can 
-// begin adding spaces and making other edits.
+// so the user can see and share the code that allows others to load the form as well and they 
+// can begin adding spaces and making other edits.
       res.redirect(game.url + '/update');
     }
     loadNew();
