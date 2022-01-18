@@ -80,7 +80,7 @@ exports.game_create_post = [
 // After successfully creating a new game, we drop directly into the edit form with a GET request
 // so the user can see and share the code that allows others to load the form as well and they 
 // can begin adding spaces and making other edits.
-      res.redirect(game.url + '/update');
+     res.redirect(game.url + '/update');
     }
     loadNew();
     //}
@@ -132,7 +132,7 @@ exports.game_delete_post = function(req, res, next) {
 
 };
 
-// Display game update form on GET
+// Handle GET requests to update game 
 exports.game_update_get = function(req, res, next) {
   async.parallel({
     game: function(callback) {
@@ -155,21 +155,25 @@ exports.game_update_get = function(req, res, next) {
     } else {
       title = 'Update Game';
     }
-    res.render('game_form', { title: title, game: results.get() });
+    let game = results.get();
+    if (!game.status) {
+      game.status = 'false';
+    } else {
+      game.status = 'true';
+    }
+    res.render('game_form', { title: title, game: game });
   });
-
 };
 
 // Handle game update on POST
 exports.game_update_post = [
   // Validate fields
-  validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
+  // validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
   // Sanitize fields
-  validator.check('group_name').escape(),
+  // validator.check('group_name').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
-
     // Extract the validation errors from a request
     const errors = validator.validationResult(req);
 
@@ -187,9 +191,12 @@ exports.game_update_post = [
           id: req.params.id
         }
       }).then(game => {
-        game.group_name = req.body.group_name;
+        game.name = req.body.gameName;
+        let gameStatusBool = (req.body.gameStatus === 'true');
+        game.status = gameStatusBool;
         game.save().then(() => {
-          res.redirect(game.url);
+          res.send(game);
+          //res.redirect(game.url);
         });
       });
     }
