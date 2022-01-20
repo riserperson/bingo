@@ -1,6 +1,6 @@
 function parseGameStatus(gameStatus) {
-  // Parse a bool status to string
-  if (gameStatus == true) {
+  // Parse a bool status or string 'true' to string
+  if (gameStatus == 'true' || gameStatus == true) {
     return "Game In Progress";
   } else {
     return "Game Pending Start"
@@ -132,9 +132,9 @@ function updateGameName(gameName) {
   try
     {
       postRequest.onreadystatechange=getPostStatus;
-      postRequest.open("POST",postUrl,true);
-      postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      postRequest.send("gameName="+document.querySelector("#gameName").value);
+      postRequest.open('POST',postUrl,true);
+      postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      postRequest.send('gameName='+document.querySelector('#gameName').value + '&status=' + document.querySelector('#gameStatus').value);
     }
   catch(e)
     {
@@ -163,6 +163,52 @@ function updateGameName(gameName) {
         // Show the update button.
         document.querySelector('#gameNameChangeButton').classList.remove('noShow');
         document.querySelector('#gameNameChangeButton').classList.add('show');
+     }
+    }
+  }
+}
+
+function toggleGameStatus(currentStatus) {
+  var postRequest;
+  var postUrl;
+  postRequest = new XMLHttpRequest();
+  postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
+  if (currentStatus == 'false') {
+    var gameStatus = 'true';
+  } else {
+    var gameStatus = 'false';
+  }
+
+  try
+    {
+      postRequest.onreadystatechange=getPostStatus;
+      postRequest.open("POST",postUrl,true);
+      postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      postRequest.send('gameName='+document.querySelector('#gameName').value + '&gameStatus=' + gameStatus);
+  }
+  catch(e)
+    {
+      alert("Unable to process POST request");
+    }
+ 
+  function getPostStatus() {
+    if(postRequest.readyState==4) {
+      var game=JSON.parse(postRequest.responseText);
+      if (!game) {
+        // Response is null
+        console.log('GET request yielded null response.');
+      } else {
+        document.querySelector('#gameStatus').value = game.status;
+        document.querySelector('#gameStatusText').innerText = parseGameStatus(game.status);
+        if (game.status == true) {
+          document.querySelector('#requestCardDiv').classList.remove('noShow');
+          document.querySelector('#requestCardDiv').classList.add('show');
+          document.querySelector('#startGameButton').innerText = 'Stop Game';
+        } else {
+          document.querySelector('#requestCardDiv').classList.remove('show');
+          document.querySelector('#requestCardDiv').classList.add('noShow');
+          document.querySelector('#startGameButton').innerText = 'Start Game';
+        }
      }
     }
   }
@@ -292,4 +338,8 @@ gameNameChangeButton.onclick = function() {
   document.querySelector('#gameNameSaveButton').classList.add('show');
   document.querySelector('#gameNameChangeButton').classList.remove('show');
   document.querySelector('#gameNameChangeButton').classList.add('noShow');
+}
+
+startGameButton.onclick = function() {
+  toggleGameStatus(document.querySelector('#gameStatus').value);
 }
