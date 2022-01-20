@@ -40,4 +40,4 @@ app.use('/play', playRouter);
 
 module.exports = app;
 
-app.listen('8080',process.env.IP,() => console.log("Server is running."));
+app.listen(process.env.PORT || '8080',process.env.IP,() => console.log("Server is running."));
