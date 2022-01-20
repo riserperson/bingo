@@ -20,7 +20,7 @@ if (process.env.DATABASE_URL) {
         require: true,
         rejectUnauthorized: false
       }
-    }
+    },
     logging: true
   });
 } else {
