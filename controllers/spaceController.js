@@ -1,7 +1,10 @@
 const validator = require('express-validator');
 const models = require('../models');
 var async = require('async');
+const querystring = require('querystring');
 
+
+/*
 exports.index = function(req, res) {
   models.Space.count().then(function (space_count) {
     res.render('index', { 
@@ -11,11 +14,14 @@ exports.index = function(req, res) {
      });
   });
 };
+*/
 
-// Display list of all spaces
+// Display list of all spaces for a particular game
 exports.space_list = function(req, res) {
-  models.Space.findAll().then(function (list_spaces) {
-    res.render('space_list', { title: 'Space List', space_list: list_spaces });
+  models.Space.findAll({where: { gameId: parseInt(req.query.gameId) } }).then(function (list_spaces) {
+    // Doing away with rendering, returning objects instead for our API implementation.
+    // res.render('space_list', { title: 'Space List', space_list: list_spaces });
+    res.send(list_spaces);
   });
 };
 
@@ -48,10 +54,10 @@ exports.space_create_get = function(req, res, next) {
 
 //Handle space create on POST
 exports.space_create_post = [
-  // Validate fields
-  validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
+  // Validate fields - REVISE THESE LINES
+  // validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
   // Sanitize fields
-  validator.sanitizeBody('desc').escape(),
+  // validator.check('desc').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
@@ -61,23 +67,29 @@ exports.space_create_post = [
 
     if (!errors.isEmpty()) {
       // There are errors. Render form again with sanitized values and error messages
-      res.render('space_form', { title: 'Create Space', space: req.body, errors: errors.array() });
+      // res.render('space_form', { title: 'Create Space', space: req.body, errors: errors.array() });
       return;
     }
     else {
-      // Data from form is valid
-
+      // Data from request is valid
       // Create a Space object with escaped and trimmed data
       function createNewSpace() {
         const space = models.Space.create(
           {
-            desc: req.body.desc
+            desc: req.body.desc,
+            GameId: parseInt(req.body.gameId)
           });
         return space;
       }
       async function loadNew() {
         var space = await createNewSpace();
-        res.redirect(space.url);
+        // Rather than loading a new page we will now use this as an API and just need to return a 
+        // status showing the space was created.
+        //res.redirect(space.url);
+        
+        // Everything worked. Return 200.
+
+        res.sendStatus(200);
       }
       loadNew();
     }
@@ -100,8 +112,8 @@ exports.space_delete_get = function(req, res, next) {
       err.status = 404;
       return next(err);
     }
-    // Successful, so render
-    res.render('space_delete', { title: 'Delete Space', space: results.get() });
+    // Successful, so send success signal
+    res.sendStatus(200);
   });
 
 };
@@ -112,19 +124,19 @@ exports.space_delete_post = function(req, res) {
     space: function(callback) {
       models.Space.findOne({
         where: {
-          id: req.body.spaceid
+          id: req.params.id
         }
       }).then(callback);
     },
   }, function(results) {
-    if (results.get()==null) { // No results
+    /* if (results.get()==null) { // No results
       var err = new Error('Space not found');
       err.status = 404;
       return next(err);
-    }
+    }*/
     // Space exists, so delete and redirect
     results.destroy();
-    res.redirect('/play/spaces');
+    res.sendStatus(200);
   });
 };
 
@@ -154,11 +166,10 @@ exports.space_update_post = [
   // Validate fields
   validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
   // Sanitize fields
-  validator.sanitizeBody('desc').escape(),
+  validator.check('desc').escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {
-
     // Extract the validation errors from a request
     const errors = validator.validationResult(req);
 
@@ -178,7 +189,8 @@ exports.space_update_post = [
       }).then(space => {
         space.desc = req.body.desc;
         space.save().then(() => {
-          res.redirect(space.url);
+          res.send(space);
+          //res.redirect(space.url);
         });
       });
     }

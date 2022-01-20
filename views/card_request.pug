@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Get a Bingo Card
+  p For game: #{game.name}
+  p 
+    label(for='email') Email Address
+    input(id='email' type= 'text')
+    button Submit
+  p Go back to 
+    a(href='/play/game/'+game.id+'/update') Edit Game
+
