@@ -1,3 +1,11 @@
 #gameNameUpdateButton {
   display: none;
 }
+
+.noShow {
+  display: none;
+}
+
+.show {
+  display: inline;
+}
