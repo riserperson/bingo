@@ -18,7 +18,7 @@ exports.index = function(req, res) {
 
 // Display list of all spaces for a particular game
 exports.space_list = function(req, res) {
-  models.Space.findAll({where: { gameId: parseInt(req.query.gameId) } }).then(function (list_spaces) {
+  models.Space.findAll({where: { GameId: parseInt(req.query.gameId) } }).then(function (list_spaces) {
     // Doing away with rendering, returning objects instead for our API implementation.
     // res.render('space_list', { title: 'Space List', space_list: list_spaces });
     res.send(list_spaces);
