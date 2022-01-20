@@ -110,8 +110,8 @@ exports.space_delete_get = function(req, res, next) {
       err.status = 404;
       return next(err);
     }
-    // Successful, so render
-    res.render('space_delete', { title: 'Delete Space', space: results.get() });
+    // Successful, so send success signal
+    res.sendStatus(200);
   });
 
 };
@@ -122,19 +122,19 @@ exports.space_delete_post = function(req, res) {
     space: function(callback) {
       models.Space.findOne({
         where: {
-          id: req.body.spaceid
+          id: req.params.id
         }
       }).then(callback);
     },
   }, function(results) {
-    if (results.get()==null) { // No results
+    /* if (results.get()==null) { // No results
       var err = new Error('Space not found');
       err.status = 404;
       return next(err);
-    }
+    }*/
     // Space exists, so delete and redirect
     results.destroy();
-    res.redirect('/play/spaces');
+    res.sendStatus(200);
   });
 };
 
@@ -168,7 +168,6 @@ exports.space_update_post = [
 
   // Process request after validation and sanitization
   (req, res, next) => {
-
     // Extract the validation errors from a request
     const errors = validator.validationResult(req);
 
@@ -188,7 +187,8 @@ exports.space_update_post = [
       }).then(space => {
         space.desc = req.body.desc;
         space.save().then(() => {
-          res.redirect(space.url);
+          res.send(space);
+          //res.redirect(space.url);
         });
       });
     }
