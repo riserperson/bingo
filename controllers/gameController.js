@@ -165,7 +165,7 @@ exports.game_update_get = function(req, res, next) {
   });
 };
 
-// Handle game update on POST
+// Handle game update on POST #7
 exports.game_update_post = [
   // Validate fields
   // validator.body('group_name').isLength({ min: 1 }).trim().withMessage('You must enter a group name'),
