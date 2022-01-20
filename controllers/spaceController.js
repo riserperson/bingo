@@ -4,6 +4,7 @@ var async = require('async');
 const querystring = require('querystring');
 
 
+/*
 exports.index = function(req, res) {
   models.Space.count().then(function (space_count) {
     res.render('index', { 
@@ -13,6 +14,7 @@ exports.index = function(req, res) {
      });
   });
 };
+*/
 
 // Display list of all spaces for a particular game
 exports.space_list = function(req, res) {

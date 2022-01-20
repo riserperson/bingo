@@ -3,10 +3,12 @@ extends layout
 block content
   h1=title
   div
-    div.form-group
+    div
       p Game Code: #{game.code}
       p
         button#startGameButton Start Game 
+      p
+        a(href='/play/card_request?gameId='+game.id) Request a Card
       p
         div#gameStatusDiv
           div#gameStatusText Game Pending Start
