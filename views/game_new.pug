@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p New Game
+
+  Game ID
+
+  a(class='button' href='/play/game/create') Create a New Game
+  hr
+  form(method='POST' action='')
+    div.form-group
+      label(for='gameCode') ID: #{game.code}
+      input#desc.form-control(type='text' placeholder='ID' name='gameId' required='true' width=10)
+      button.btn.btn-primary(type='submit') Participate in an Existing Game
+
+  ul(class='list-group')
+    li(class='list-group-item') Someone eats green macaroni
+    li(class='list-group-item') Someone spills a drink
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg 
+  

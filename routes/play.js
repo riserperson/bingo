@@ -4,11 +4,16 @@ var router = express.Router();
 // Require controller modules
 var space_controller = require('../controllers/spaceController');
 var game_controller = require('../controllers/gameController');
-
-// SPACE ROUTES
+var card_controller = require('../controllers/cardController');
 
 // GET play home page
-router.get('/', space_controller.index);
+router.get('/', (req, res) => {
+  res.render('index', { title: 'iserBINGO Home' });
+});
+
+// space_controller.index);
+
+// SPACE ROUTES
 
 // GET request for creating a Space. NOTE this must come before routes that display Space (uses id).
 router.get('/space/create', space_controller.space_create_get);
@@ -31,7 +36,7 @@ router.post('/space/:id/update', space_controller.space_update_post);
 // GET request for one Space
 router.get('/space/:id', space_controller.space_detail);
 
-// GET request for list of all Space items
+// GET request for list of all Space items for a particular game
 router.get('/spaces', space_controller.space_list);
 
 /// GAME ROUTES ///
@@ -60,5 +65,8 @@ router.get('/game/:id', game_controller.game_detail);
 // GET request for list of all Games
 router.get('/games', game_controller.game_list);
 
+/// CARD ROUTES ///
+
+router.get('/card_request', card_controller.card_request);
 
 module.exports = router;

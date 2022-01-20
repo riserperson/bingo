@@ -2,14 +2,18 @@ extends layout
 
 block content
   h1= title
-  if user  
-    p Welcome, #{user.username}, to #[em iserBINGO] v0.0.1, developed by rai
-  else
-    p Welcome to #[em iserBINGO] v0.0.1, developed by rai
-
-  p Would you like to:
-
-  a(class='button' href='/play/game/create') Create a New Game
-  hr
-  a(class='button' href='/play/spaces') Participate in an Existing Game
-  
+  p Welcome to #[em iserBINGO] v0.0.1, developed by rai
+  div(class='container')
+    div
+      form(method='POST' action='/play/game/create')
+        button(type='submit') Create a New Game
+    div
+      form(method='POST' action='')
+        div
+          //label(for='gameCode') Code:
+          input#desc(type='text' placeholder='CODE' name='gameCode' required='true')
+          button(type='submit') Participate in an Existing Game
+      if errors 
+        ul
+          for error in errors
+            li!= error.msg 
