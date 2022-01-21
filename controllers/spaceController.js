@@ -97,6 +97,7 @@ exports.space_create_post = [
 ];
 
 // Display space delete form on GET
+// TO REMOVE
 exports.space_delete_get = function(req, res, next) {
   async.parallel({
     space: function(callback) {
@@ -118,10 +119,11 @@ exports.space_delete_get = function(req, res, next) {
 
 };
 
-// Handle space delete on POST
+// Handle space delete on POST #delete
 exports.space_delete_post = function(req, res) {
   async.parallel({
     space: function(callback) {
+      console.log('finding: ' + req.params.id);
       models.Space.findOne({
         where: {
           id: req.params.id
@@ -135,12 +137,14 @@ exports.space_delete_post = function(req, res) {
       return next(err);
     }*/
     // Space exists, so delete and redirect
+    console.log('deleting: ' + JSON.stringify(results));
     results.destroy();
     res.sendStatus(200);
   });
 };
 
 // Display space update form on GET
+// TO REMOVE
 exports.space_update_get = function(req, res, next) {
   async.parallel({
     space: function(callback) {

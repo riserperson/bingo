@@ -1,3 +1,5 @@
+
+
 function parseGameStatus(gameStatus) {
   // Parse a bool status or string 'true' to string
   if (gameStatus == 'true' || gameStatus == true) {
@@ -44,17 +46,30 @@ function deleteSpace(id) {
   postRequest = new XMLHttpRequest();
   postUrl = "/play/space/"+ id +"/delete";
 
-  try
-    {
-      postRequest.onreadystatechange=getPostStatus;
-      postRequest.open("POST",postUrl,true);
-      postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      postRequest.send("id="+id);
-    }
-  catch(e)
-    {
-      alert("Unable to process POST request");
-    }
+  return new Promise(function (resolve, reject) {
+    postRequest.onreadystatechange = function() {
+      if (postRequest.readyState !== 4) return;
+      if (postRequest.status >= 200 && postRequest.status < 300) {
+        resolve(postRequest);
+      } else {
+        reject({
+          status: postRequest.status,
+          statusText: postRequest.statusText
+        });
+      }
+    };
+    postRequest.open('POST', postUrl, true);
+    postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    postRequest.send("id="+id);
+  });
+}
+
+/*
+    Old code below:
+    postRequest.onreadystatechange=getPostStatus;
+    postRequest.open("POST",postUrl,true);
+    postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    postRequest.send("id="+id);
  
   function getPostStatus() {
     if(postRequest.readyState==4) {
@@ -67,58 +82,58 @@ function deleteSpace(id) {
      }
     }
   }
-}
+*/
 
-function addChangeSpaceButtonListener(i) {
-  if (document.querySelector('#changeButton'+i)) {
-    let button = document.querySelector('#changeButton'+i);
+function addChangeSpaceButtonListener(spaceId) {
+  if (document.querySelector('#changeButton' + spaceId)) {
+    let button = document.querySelector('#changeButton' + spaceId);
     button.onclick = function() {
-      document.querySelector('#spaceDiv' + i).classList.remove('show');
-      document.querySelector('#spaceDiv' + i).classList.add('noShow');
+      document.querySelector('#spaceDiv' + spaceId).classList.remove('show');
+      document.querySelector('#spaceDiv' + spaceId).classList.add('noShow');
 
-      document.querySelector('#spaceInput' + i).classList.remove('noShow');
-      document.querySelector('#spaceInput' + i).classList.add('show');
+      document.querySelector('#spaceInput' + spaceId).classList.remove('noShow');
+      document.querySelector('#spaceInput' + spaceId).classList.add('show');
 
       button.classList.remove('show');
       button.classList.add('noShow');
 
-      document.querySelector('#saveButton' +i ).classList.remove('noShow');
-      document.querySelector('#saveButton' + i).classList.add('show');
+      document.querySelector('#saveButton' + spaceId).classList.remove('noShow');
+      document.querySelector('#saveButton' + spaceId).classList.add('show');
     };
   }
 }
 
-function addSaveSpaceButtonListener(i, id) {
-  if (document.querySelector('#saveButton'+i)) {
-    let button = document.querySelector('#saveButton'+i);
+function addSaveSpaceButtonListener(spaceId) {
+  if (document.querySelector('#saveButton' + spaceId)) {
+    let button = document.querySelector('#saveButton' + spaceId);
     button.onclick = function() {
-      let desc = document.querySelector('#spaceInput'+i).value;
-      document.querySelector('#spaceDiv' + i).innerText = desc;
-      document.querySelector('#spaceDiv' + i).classList.remove('noShow');
-      document.querySelector('#spaceDiv' + i).classList.add('show');
+      let desc = document.querySelector('#spaceInput' + spaceId).value;
+      document.querySelector('#spaceDiv' + spaceId).innerText = desc;
+      document.querySelector('#spaceDiv' + spaceId).classList.remove('noShow');
+      document.querySelector('#spaceDiv' + spaceId).classList.add('show');
       
       // Update using previously defined function
-      updateSpaceDesc(id, desc);
+      updateSpaceDesc(spaceId, desc);
 
-      document.querySelector('#spaceInput' + i).classList.remove('show');
-      document.querySelector('#spaceInput' + i).classList.add('noShow');
+      document.querySelector('#spaceInput' + spaceId).classList.remove('show');
+      document.querySelector('#spaceInput' + spaceId).classList.add('noShow');
 
       button.classList.remove('show');
       button.classList.add('noShow');
 
-      document.querySelector('#changeButton' +i ).classList.remove('noShow');
-      document.querySelector('#changeButton' + i).classList.add('show');
+      document.querySelector('#changeButton' + spaceId).classList.remove('noShow');
+      document.querySelector('#changeButton' + spaceId).classList.add('show');
     };
   }
 }
 
-function addDeleteSpaceButtonListener(i, id) {
-  if (document.querySelector('#deleteButton'+i)) {
-    let button = document.querySelector('#deleteButton'+i);
-    button.onclick = function() {
-      deleteSpace(id);
-      document.querySelector('#spaceLi' + i).remove();
-      setTimeOut(() => refreshSpaces(), 200000);
+function addDeleteSpaceButtonListener(spaceId) {
+  if (document.querySelector('#deleteButton'+spaceId)) {
+    let button = document.querySelector('#deleteButton'+spaceId);
+    button.onclick = async function() {
+      const deleteResult = await deleteSpace(spaceId);
+      document.querySelector('#spaceLi' + spaceId).remove();
+      refreshSpaces();
     };
   }
 }
@@ -242,20 +257,28 @@ function refreshSpaces() {
           document.querySelector("#spaceList").removeChild(document.querySelector("#spaceList").firstChild);
         }
         for (i = 0; i < allSpaces.length; i++) {
+          let spaceId = allSpaces[i].id;
           // Create the li for each space
           let li = document.createElement('li');
-          li.setAttribute('id', 'spaceLi' + i);
+          li.setAttribute('id', 'spaceLi' + spaceId);
 
           // And a div to hold the text
           let div = document.createElement('div');
-          div.setAttribute('id', 'spaceDiv' + i);
+          div.setAttribute('id', 'spaceDiv' + spaceId);
           div.appendChild(document.createTextNode(allSpaces[i].desc));
           li.appendChild(div);
+
+          // Use a hidden input to keep track of the space id
+          let hiddenInput = document.createElement('input');
+          hiddenInput.setAttribute('type', 'hidden');
+          hiddenInput.setAttribute('id', 'spaceId' + spaceId);
+          hiddenInput.setAttribute('value', allSpaces[i].id);
+          li.appendChild(hiddenInput);
 
           // And an input box for edit mode
           let input = document.createElement('input');
           input.setAttribute('type', 'text');
-          input.setAttribute('id', 'spaceInput' + i);
+          input.setAttribute('id', 'spaceInput' + spaceId);
           input.setAttribute('value', allSpaces[i].desc);
           input.classList.add('noShow');
           li.appendChild(input);
@@ -263,28 +286,28 @@ function refreshSpaces() {
           // Adding a change button
           let changeButton = document.createElement('button');
           changeButton.innerText = 'Change';
-          changeButton.setAttribute('id', 'changeButton' + i);
+          changeButton.setAttribute('id', 'changeButton' + spaceId);
           changeButton.classList.add('show');
           li.appendChild(changeButton);
 
           // And a save button
           let saveButton = document.createElement('button');
           saveButton.innerText = 'Save';
-          saveButton.setAttribute('id', 'saveButton' +i );
+          saveButton.setAttribute('id', 'saveButton' + spaceId);
           saveButton.classList.add('noShow');
           li.appendChild(saveButton);
 
           // And a delete button
           let deleteButton = document.createElement('button');
           deleteButton.innerText = 'Delete';
-          deleteButton.setAttribute('id', 'deleteButton' +i );
+          deleteButton.setAttribute('id', 'deleteButton' + spaceId);
           deleteButton.classList.add('show');
           li.appendChild(deleteButton);
 
-          document.querySelector("#spaceList").insertBefore(li, document.querySelector("#spaceList").firstChild);
-          addChangeSpaceButtonListener(i);
-          addSaveSpaceButtonListener(i, allSpaces[0].id);
-          addDeleteSpaceButtonListener(i, allSpaces[0].id);
+          document.querySelector('#spaceList').insertBefore(li, document.querySelector('#newSpaceLi'));
+          addChangeSpaceButtonListener(spaceId);
+          addSaveSpaceButtonListener(spaceId);
+          addDeleteSpaceButtonListener(spaceId);
         }
       }
     }
@@ -343,3 +366,5 @@ gameNameChangeButton.onclick = function() {
 startGameButton.onclick = function() {
   toggleGameStatus(document.querySelector('#gameStatus').value);
 }
+
+refresh.onclick = refreshSpaces();
