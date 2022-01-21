@@ -4,10 +4,10 @@
     "storage": "bingo.db"
   },
   "test": {
-    "username": "postgres",
-    "password": "si24090607",
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "lhuftljlhbrwlr",
+    "password": "7332261d5111bb416f57a70ea3733a2252fd01506a05899e2a079d6958f84824",
+    "database": "dr646mg796bdu",
+    "host": "ec2-54-208-139-247.compute-1.amazonaws.com",
     "dialect": "postgres"
   },
   "production": {
