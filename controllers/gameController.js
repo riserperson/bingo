@@ -58,7 +58,7 @@ exports.game_create_post = [
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     function generateString(length) {
-        let result = ' ';
+        let result = '';
         const charactersLength = characters.length;
         for ( let i = 0; i < length; i++ ) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -196,9 +196,39 @@ exports.game_update_post = [
         game.status = gameStatusBool;
         game.save().then(() => {
           res.send(game);
-          //res.redirect(game.url);
         });
       });
     }
   }
 ];
+
+exports.game_join = [
+   (req, res, next) => {
+    // Validate fields (eventually)
+    // Extract the validation errors from a request
+    const errors = validator.validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values and error messages
+      res.render('game_form', { title: 'Update Game', game: req.body, errors: errors.array() });
+      return;
+    }
+    else {
+      // Data from form is valid
+
+      // Find the game based on the code provided
+      models.Game.findOne({
+        where: {
+          code: req.body.gameCode
+        }
+      }).then(game => {
+        res.redirect(game.url + '/update');
+      })
+      .catch(err => {
+        // Game not found
+
+        res.redirect('/', error = err);
+      });
+    }
+  }
+] 

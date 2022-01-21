@@ -65,6 +65,9 @@ router.get('/game/:id', game_controller.game_detail);
 // GET request for list of all Games
 router.get('/games', game_controller.game_list);
 
+// POST request to join a game
+router.post('/game/join', game_controller.game_join);
+
 /// CARD ROUTES ///
 
 router.get('/card_request', card_controller.card_request);
