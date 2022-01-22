@@ -39,6 +39,9 @@ router.get('/space/:id', space_controller.space_detail);
 // GET request for list of all Space items for a particular game
 router.get('/spaces', space_controller.space_list);
 
+// POST request to generate some spaces
+router.post('/generate_spaces', space_controller.generate_spaces);
+
 /// GAME ROUTES ///
 
 // GET request for creating Game. NOTE this must come before route for id (i.e. display game)

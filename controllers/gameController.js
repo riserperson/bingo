@@ -9,6 +9,7 @@ exports.game_list = function(req, res, next) {
   });
 };
 
+// TO DELETE
 // Display detail page for a specific game
 exports.game_detail = function(req, res, next) {
   async.parallel({
@@ -31,6 +32,7 @@ exports.game_detail = function(req, res, next) {
 
 };
 
+// TO DELETE
 // Display game create form on GET
 exports.game_create_get = function(req, res, next) {
   res.render('game_form', { title: 'Create Game' });
@@ -133,6 +135,7 @@ exports.game_delete_post = function(req, res, next) {
 };
 
 // Handle GET requests to update game 
+// This doubles as the new game form
 exports.game_update_get = function(req, res, next) {
   async.parallel({
     game: function(callback) {
