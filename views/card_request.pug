@@ -4,11 +4,15 @@ block content
   h1 Get a Bingo Card
   p For game: #{game.name}
   p 
-    form(method='POST' action='/play/card_request')
-      input(type='hidden' id='gameId' name='gameId' value=game.id)
-      label(for='email') Email Address
-      input(id='email' name='email' type= 'text')
-      button(type='submit') Submit
+    input(type='hidden' id='gameId' name='gameId' value=game.id)
+    label(for='email') Email Address
+    input(id='email' name='email' type='text')
+    button#submit Submit
+  p
+    div#cardLink
+
   p Go back to 
     a(href='/play/game/'+game.id+'/update') Edit Game
 
+  append foot
+    script(type='text/javascript', src='/javascripts/card_request.js')

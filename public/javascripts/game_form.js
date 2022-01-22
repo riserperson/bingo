@@ -64,26 +64,6 @@ function deleteSpace(id) {
   });
 }
 
-/*
-    Old code below:
-    postRequest.onreadystatechange=getPostStatus;
-    postRequest.open("POST",postUrl,true);
-    postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    postRequest.send("id="+id);
- 
-  function getPostStatus() {
-    if(postRequest.readyState==4) {
-      var game=JSON.parse(postRequest.responseText);
-      if (!game) {
-        // Response is null
-        console.log('GET request yielded null response.');
-      } else {
-        return true;
-     }
-    }
-  }
-*/
-
 function addChangeSpaceButtonListener(spaceId) {
   if (document.querySelector('#changeButton' + spaceId)) {
     let button = document.querySelector('#changeButton' + spaceId);
@@ -368,3 +348,27 @@ startGameButton.onclick = function() {
 }
 
 refresh.onclick = refreshSpaces();
+
+generate.onclick = () => {
+  var postRequest;
+  var postUrl;
+  postRequest = new XMLHttpRequest();
+  postUrl = '/play/generate_spaces';
+
+  return new Promise(function (resolve, reject) {
+    postRequest.onreadystatechange = function() {
+      if (postRequest.readyState !== 4) return;
+      if (postRequest.status >= 200 && postRequest.status < 300) {
+        resolve(postRequest);
+      } else {
+        reject({
+          status: postRequest.status,
+          statusText: postRequest.statusText
+        });
+      }
+    };
+    postRequest.open('POST', postUrl, true);
+    postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    postRequest.send('gameId=' + document.querySelector('#gameId').value);
+  });
+}
