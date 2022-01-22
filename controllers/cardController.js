@@ -32,7 +32,7 @@ exports.card_send_post = function(req, res, next) {
     });
     let info = await transporter.sendMail({
       to: email,
-      subject: 'Here\'s your card'
+      subject: 'Here\'s your card',
       text: 'http://iserbingo.herokuapp.com/play/card'+hashedId
     });
   }
