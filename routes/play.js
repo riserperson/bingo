@@ -70,6 +70,8 @@ router.post('/game/join', game_controller.game_join);
 
 /// CARD ROUTES ///
 
-router.get('/card_request', card_controller.card_request);
+router.get('/card_request', card_controller.card_request_get);
+
+router.post('/card_request', card_controller.card_send_post);
 
 module.exports = router;

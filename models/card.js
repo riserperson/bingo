@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     phone: DataTypes.STRING,
-    layout: DataTypes.STRING
+    layout: DataTypes.STRING,
+    hashedId: DataTypes.STRING
   }, {});
   Card.associate = function(models) {
     Card.belongsTo(models.Game);
