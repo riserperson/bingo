@@ -19,7 +19,7 @@ exports.card_send_post = function(req, res, next) {
   // Define our mailer
   async function sendEmail(email, hashedId) {
     let transporter = nodemailer.createTransport({
-      host: "smtp.mailgun.org",
+      host: process.env.EMAIL_URL,
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
