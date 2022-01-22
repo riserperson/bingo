@@ -23,9 +23,12 @@ exports.card_send_post = function(req, res, next) {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: postmaster@sandbox9ab8a9f963b04035a011960a11609240.mailgun.org
-        pass: 08ee7d218cbf5a11522d819de1f0d130-ef80054a-1c605fbe
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PWD
       },
+      tls: {
+        ciphers:'SSLv3'
+      }
     });
     let info = await transporter.sendMail({
       to: email,
