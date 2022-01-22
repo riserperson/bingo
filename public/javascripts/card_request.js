@@ -18,7 +18,7 @@ submit.onclick = () => {
     };
     postRequest.open('POST', postUrl, true);
     postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    postRequest.send('gameId=' + document.querySelector('#gameId').value + '&email=' + document.querySelector('#email'));
+    postRequest.send('gameId=' + document.querySelector('#gameId').value + '&email=' + document.querySelector('#email').value);
   })
   .then( (card) => {
     console.log('hello');
