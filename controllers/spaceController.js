@@ -2,7 +2,7 @@ const validator = require('express-validator');
 const models = require('../models');
 var async = require('async');
 const querystring = require('querystring');
-
+const generator = require('../generator');
 
 /*
 exports.index = function(req, res) {
@@ -199,4 +199,9 @@ exports.space_update_post = [
       });
     }
   }
-];
+]
+
+exports.generate_spaces = function(req, res) {
+  generator.generate(req.body.gameId);
+  res.redirect('/play/game/'+req.body.gameId+'/update');
+};
