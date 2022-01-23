@@ -98,4 +98,8 @@ exports.card_send_post = function(req, res, next) {
 
 // Display an existing card from a GET request
 
-
+exports.card_display = function(req, res, next) {
+  models.Card.findOne({where: { hashedId: req.params.hashedId } }).then(function (card) {
+   res.render('card_display', { card: card });
+  });
+}
