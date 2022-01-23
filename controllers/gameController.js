@@ -137,36 +137,17 @@ exports.game_delete_post = function(req, res, next) {
 // Handle GET requests to update game 
 // This doubles as the new game form
 exports.game_update_get = function(req, res, next) {
-  async.parallel({
-    game: function(callback) {
-      models.Game.findOne({
-        where: {
-          id: req.params.id
-        }
-      }).then(callback);
-    },
-  }, function(results) {
-    if (results.get()==null) { // No results
-      var err = new Error('Game not found');
-      err.status = 404;
-      return next(err);
-    }
-    // Game exists, so render update form.
+  models.Game.findOne({where: { id: parseInt(req.params.id) } }).then(function (game) {
+    console.log('hello');
     let title = '';
-    if (results.get().status == 0) {
+    if (game.status == 0) {
       title = 'New Game';
     } else {
       title = 'Update Game';
     }
-    let game = results.get();
-    if (!game.status) {
-      game.status = 'false';
-    } else {
-      game.status = 'true';
-    }
-    res.render('game_form', { title: title, game: game });
+    res.render('game_form', {title: title, game: game });
   });
-};
+}
 
 // Handle game update on POST #7
 exports.game_update_post = [
