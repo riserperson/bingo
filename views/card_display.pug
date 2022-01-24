@@ -5,24 +5,25 @@ block content
   - var spaces = JSON.parse(card.layout);
   table
     tr
-      td B
-      td I
-      td N
-      td G
-      td O
+      th B
+      th I
+      th N
+      th G
+      th O
     tr
       - for (var i = 0; i < 5; i++)
-        td #{JSON.stringify(spaces[i]["desc"])}
+        td(id='td'+spaces[i]['id']) #{spaces[i]['desc']}
     tr
       - for (var i = 5; i < 10; i++)
-        td #{JSON.stringify(spaces[i]["desc"])}
+        td #{spaces[i]["desc"]}
     tr
       - for (var i = 10; i < 15; i++)
-        td #{JSON.stringify(spaces[i]["desc"])}
+        td #{spaces[i]["desc"]}
     tr
       - for (var i = 15; i < 20; i++)
-        td #{JSON.stringify(spaces[i]["desc"])}
+        td #{spaces[i]["desc"]}
     tr
       - for (var i = 20; i < 25; i++)
-        td #{JSON.stringify(spaces[i]["desc"])}
-
+        td #{spaces[i]["desc"]}
+  append foot
+    script(type='text/javascript', src='/javascripts/card_display.js')
