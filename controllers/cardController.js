@@ -34,7 +34,7 @@ exports.card_send_post = function(req, res, next) {
       from: 'richard.iserman@gmail.com',
       to: email,
       subject: 'Here\'s your card',
-      text: 'http://iserbingo.herokuapp.com/play/card'+hashedId
+      text: 'http://iserbingo.herokuapp.com/play/card/'+hashedId
     });
   }
 
