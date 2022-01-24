@@ -1,6 +1,8 @@
 const validator = require('express-validator');
 var async = require('async');
 var models = require('../models');
+const Hashids = require('hashids/cjs');
+const hashids = new Hashids('hokier smokes', 4, 'ABCDEFGHIJKLMNOPQRSTUV');
 
 // Display list of all games
 exports.game_list = function(req, res, next) {
@@ -57,36 +59,15 @@ exports.game_create_post = [
     // }
     // else {
       // Data from form is valid
-    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    function generateString(length) {
-        let result = '';
-        const charactersLength = characters.length;
-        for ( let i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-    
-        return result;
+    // Create a Game object with escaped and trimmed data
+    models.Game.create( { status: false } ).then(function (game) {
+      game.code = hashids.encode(game.id);
+      game.save().then((game) => {
+        res.redirect(game.url + '/update');
+      })
+    });
     }
-      // Create a Game object with escaped and trimmed data
-    function createNewGame() {
-      const game = models.Game.create(
-        {
-          code: generateString(4),
-          status: false
-        });
-      return game;
-    }
-    async function loadNew() {
-      var game = await createNewGame();
-// After successfully creating a new game, we drop directly into the edit form with a GET request
-// so the user can see and share the code that allows others to load the form as well and they 
-// can begin adding spaces and making other edits.
-     res.redirect(game.url + '/update');
-    }
-    loadNew();
-    //}
-  }
 ];
 
 // Display game delete form on GET
@@ -138,7 +119,6 @@ exports.game_delete_post = function(req, res, next) {
 // This doubles as the new game form
 exports.game_update_get = function(req, res, next) {
   models.Game.findOne({where: { id: parseInt(req.params.id) } }).then(function (game) {
-    console.log('hello');
     let title = '';
     if (game.status == 0) {
       title = 'New Game';
