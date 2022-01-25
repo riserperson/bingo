@@ -11,67 +11,64 @@ block content
       th G
       th O
     tr
-      - let y = 1;
+      - var y = 1;
       - for (var i = 0; i < 5; i++)
         td(id='td'+spaces[i]['id'] class='space') 
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check
+            button(id = 'button' + spaces[i]['id']) Check off
         - y++;
     tr
-      - let y = 1;
+      - var y = 1;
       - for (var i = 5; i < 10; i++)
         td(id='td'+spaces[i]['id'] class='space') 
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check
+            button(id = 'button' + spaces[i]['id']) Check off
         - y++;
     tr
-      - let y = 1;
+      - var y = 1;
       - for (var i = 10; i < 12; i++)
         td(id='td'+spaces[i]['id'] class='space') 
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check
+            button(id = 'button' + spaces[i]['id']) Check off
         - y++;
-        td #{spaces[i]["desc"]}
-      td#freeSpace Free space
-      - let y = 1;
-      - for (var i = 14; i < 15; i++)
+      td#freeSpace Free Space
+      - var y = 1;
+      - for (var i = 13; i < 15; i++)
         td(id='td'+spaces[i]['id'] class='space') 
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check
+            button(id = 'button' + spaces[i]['id']) Check off
         - y++;
-        td #{spaces[i]["desc"]}
     tr
-      - let y = 1;
+      - var y = 1;
       - for (var i = 15; i < 20; i++)
         td(id='td'+spaces[i]['id'] class='space') 
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check
+            button(id = 'button' + spaces[i]['id']) Check off
         - y++;
     tr
-      - let y = 1;
+      - var y = 1;
       - for (var i = 20; i < 25; i++)
         td(id='td'+spaces[i]['id'] class='space') 
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check
+            button(id = 'button' + spaces[i]['id']) Check off
         - y++;
-      - for (var i = 20; i < 25; i++)
   append foot
     script(type='text/javascript', src='/javascripts/card_display.js')
