@@ -18,7 +18,7 @@ block content
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check off
+            button(id = spaces[i]['id'] class='button') Check off
         - y++;
     tr
       - var y = 1;
@@ -28,7 +28,7 @@ block content
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check off
+            button(id = spaces[i]['id'] class='button') Check off
         - y++;
     tr
       - var y = 1;
@@ -38,7 +38,7 @@ block content
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check off
+            button(id = spaces[i]['id'] class='button') Check off
         - y++;
       td#freeSpace Free Space
       - var y = 1;
@@ -48,7 +48,7 @@ block content
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check off
+            button(id = spaces[i]['id'] class='button') Check off
         - y++;
     tr
       - var y = 1;
@@ -58,7 +58,7 @@ block content
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check off
+            button(id = spaces[i]['id'] class='button') Check off
         - y++;
     tr
       - var y = 1;
@@ -68,7 +68,7 @@ block content
           input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = '1')
           input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = y)
           p 
-            button(id = 'button' + spaces[i]['id']) Check off
+            button(id = spaces[i]['id'] class='button') Check off
         - y++;
   append foot
     script(type='text/javascript', src='/javascripts/card_display.js')
