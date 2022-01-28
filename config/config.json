@@ -11,10 +11,16 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "lhuftljlhbrwlr",
+    "password": "7332261d5111bb416f57a70ea3733a2252fd01506a05899e2a079d6958f84824",
+    "database": "dr646mg796bdu",
+    "host": process.env.DATABASE_URL,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "dialect": "postgres"
   }
 }
