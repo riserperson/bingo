@@ -22,14 +22,8 @@ module.exports = {
       code: {
         allowNull: false,
         type: Sequelize.STRING
-      },
-      url: {
-        type: Sequelize.VIRTUAL,
-        get() {
-          return '/play/game/' + this.getDataValue('id')
-        }
-      } 
-    });
+      }
+   });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Games');
