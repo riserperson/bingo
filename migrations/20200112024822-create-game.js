@@ -8,39 +8,30 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_created: {
-        type: Sequelize.STRING
-      },
       desc: {
         type: Sequelize.STRING
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      group_name: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      start_time: {
+      status: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
-      end_time: {
+      code: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
-      time_zone: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      }
+      url: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return '/play/game/' + this.getDataValue('id')
+        }
+      } 
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('games');
+    return queryInterface.dropTable('Games');
   }
 };

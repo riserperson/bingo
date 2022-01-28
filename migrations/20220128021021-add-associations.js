@@ -3,12 +3,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
-      'Games',
-      'UserId',
+      'Spaces',
+      'GameId',
       {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'Games',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -17,7 +17,7 @@ module.exports = {
     )
       .then(() => {
         return queryInterface.addColumn(
-          'Spaces',
+          'Cards',
           'GameId',
           {
             type: Sequelize.INTEGER,
@@ -31,17 +31,16 @@ module.exports = {
         );
       });
   },
-
-  down: (queryInterface, Sequelize) => {
+  down: async (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
-      'Games',
-      'UserId'
+      'Spaces',
+      'GameId'
     )
-      .then(() => {
-        return queryInterface.removeColumn(
-          'Spaces',
-          'GameId'
-        );
-      });
-    }
+    .then(() => {
+      return queryInterface.removeColumn(
+        'Cards',
+        'GameId'
+      );
+    });
+  }
 };

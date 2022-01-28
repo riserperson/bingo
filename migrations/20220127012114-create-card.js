@@ -1,27 +1,27 @@
 'use strict';
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Games', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Cards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      group_name: {
-        type: Sequelize.STRING
-      },
-      group_activity: {
-        type: Sequelize.STRING
-      },
-      start_time: {
-        type: Sequelize.DATE
-      },
-      end_time: {
-        type: Sequelize.DATE
-      },
-      time_zone: {
+      id: {
         type: Sequelize.INTEGER
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      phone: {
+        type: Sequelize.STRING
+      },
+      hashedId: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -33,7 +33,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Games');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Cards');
   }
 };
