@@ -3,7 +3,6 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "build": "sequelize db:migrate --env production",
     "start": "node app.js"
   },
   "dependencies": {
