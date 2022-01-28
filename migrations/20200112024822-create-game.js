@@ -20,15 +20,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       status: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       code: {
-        allowNull: false,
         type: Sequelize.STRING
       }
    });
