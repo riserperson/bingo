@@ -80,9 +80,11 @@ exports.card_send_post = function(req, res, next) {
 
       var selectedSpaces = [];
       
-      async function addSpace(spaceId) {
+      async function addSpace(spaceId, position) {
         const cardSpace = models.Card_Space.create(
           {
+            checked: false,
+            position: position,
             SpaceId: spaceId,
             CardId: card.id
           });
@@ -90,10 +92,8 @@ exports.card_send_post = function(req, res, next) {
       }
 
       for (let i = 0; i < 25; i++) {
-        selectedSpaces.push(await addSpace(allSpaces[i].id));
+        selectedSpaces.push(await addSpace(allSpaces[i].id, i));
       }
-
-      console.log(JSON.stringify(selectedSpaces));
 
       // New card created, but now that it has an ID we need to update it with a hashed ID
       models.Card.findOne({where: { id: card.id } }).then( (updatedCard) => {
@@ -118,12 +118,23 @@ exports.card_send_post = function(req, res, next) {
 
 exports.card_display = function(req, res, next) {
   models.Card.findOne({where: { hashedId: req.params.hashedId } }).then(function (card) {
-    console.log(JSON.stringify(card));
-/*
-    let spaces = [];
-    for (let i = 0; i < 25; i++) {
-      spaces.push( models.Space.findOne( {where: { id: card[i]
-*/
-//    res.render('card_display', { card: card });
+    async function main() {
+      let spaces = [];
+      async function getSpace(CardId, position) {
+        const cardSpace = models.Card_Space.findOne({ where:
+          {
+            CardId: CardId,
+            position: position
+          }
+        });
+        return cardSpace;
+      }
+  
+      for (let i = 0; i < 25; i++) {
+        spaces.push(await getSpace(card.id, i));
+      }
+      res.render('card_display', { card: card, spaces: spaces });
+    }
+    main();
   });
 }

@@ -6,7 +6,8 @@
       primaryKey: true,
       allowNull: false
     },
-    checked: DataTypes.BOOLEAN
+    checked: DataTypes.BOOLEAN,
+    position: DataTypes.INTEGER
   }, {});
  return Card_Space;
 }

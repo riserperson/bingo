@@ -19,6 +19,9 @@ module.exports = {
       },
       checked: {
         type: Sequelize.BOOLEAN
+      },
+      position: {
+        type: Sequelize.INTEGER
       }
     });
   },
