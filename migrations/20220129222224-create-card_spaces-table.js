@@ -1,7 +1,8 @@
 'use strict';
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Games', {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Card_Spaces', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,21 +17,13 @@ module.exports = {
         allowNull: false,
         type:Sequelize.DATE
       },
-      desc: {
-        type: Sequelize.STRING
-      },
-      name: {
-        type: Sequelize.STRING
-      },
-      status: {
+      checked: {
         type: Sequelize.BOOLEAN
-      },
-      code: {
-        type: Sequelize.STRING
       }
-   });
+    });
   },
-  down: (queryInterface, Sequelize) => {
+
+  down: async (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Games');
   }
 };

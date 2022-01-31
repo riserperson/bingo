@@ -56,40 +56,58 @@ exports.card_send_post = function(req, res, next) {
   // Have to define an async function to use promises
   async function main() {
     // Get the spaces for our game
-    var spaces = await models.Space.findAll({where: { GameId: req.body.gameId } });
+    var allSpaces = await models.Space.findAll({where: { GameId: req.body.gameId } });
 
     // Check to make sure we have enough
-    if (spaces.length < 24) {
+    if (allSpaces.length < 24) {
       let err = new Error('Too few spaces');
       return next(err);
     } else {
       // Shuffle the spaces
-      spaces = shuffle(spaces);
+      allSpaces = shuffle(allSpaces);
 
       // Create a new card 
       function createNewCard() {
         const card = models.Card.create(
           {
             email: req.body.email,
-            layout: JSON.stringify(spaces),
             GameId: parseInt(req.body.gameId)
           });
         return card;
       }
       let card = await createNewCard();
+      // Add the spaces to the junction table for spaces and cards
+
+      var selectedSpaces = [];
+      
+      async function addSpace(spaceId) {
+        const cardSpace = models.Card_Space.create(
+          {
+            SpaceId: spaceId,
+            CardId: card.id
+          });
+        return cardSpace;
+      }
+
+      for (let i = 0; i < 25; i++) {
+        selectedSpaces.push(await addSpace(allSpaces[i].id));
+      }
+
+      console.log(JSON.stringify(selectedSpaces));
 
       // New card created, but now that it has an ID we need to update it with a hashed ID
-          
       models.Card.findOne({where: { id: card.id } }).then( (updatedCard) => {
         updatedCard.hashedId = hashids.encode(card.id);
         updatedCard.save().then(() => {
           // Everything worked. Email the new card out.
-          sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
+          if (process.env.NODE_ENV == 'production') {
+            sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
+          }
 
           // Send the new card in the response
           res.send(updatedCard);
 
-        });
+        }).catch(console.error);
       });
     }  
   }
@@ -100,6 +118,12 @@ exports.card_send_post = function(req, res, next) {
 
 exports.card_display = function(req, res, next) {
   models.Card.findOne({where: { hashedId: req.params.hashedId } }).then(function (card) {
-   res.render('card_display', { card: card });
+    console.log(JSON.stringify(card));
+/*
+    let spaces = [];
+    for (let i = 0; i < 25; i++) {
+      spaces.push( models.Space.findOne( {where: { id: card[i]
+*/
+//    res.render('card_display', { card: card });
   });
 }

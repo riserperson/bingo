@@ -1,4 +1,5 @@
 'use strict';
+//const Card_Space = require('./card_space');
 module.exports = (sequelize, DataTypes) => {
   const Space = sequelize.define('Space', {
     id: {
@@ -10,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     desc: DataTypes.STRING
   }, {});
   Space.associate = function(models) {
-    Space.belongsTo(models.Game);
+    Space.hasMany(models.Card);
+  };
+  Space.associate = function(models) {
+    Space.belongsToMany(models.Card, { through: 'Card_Space' });
   };
   return Space;
 };
