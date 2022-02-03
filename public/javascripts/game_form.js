@@ -168,6 +168,7 @@ function toggleGameStatus(currentStatus) {
   var postUrl;
   postRequest = new XMLHttpRequest();
   postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
+  console.log(currentStatus);
   if (currentStatus == 'false') {
     var gameStatus = 'true';
   } else {
@@ -370,5 +371,7 @@ generate.onclick = () => {
     postRequest.open('POST', postUrl, true);
     postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     postRequest.send('gameId=' + document.querySelector('#gameId').value);
+  }).then(resolve => {
+    refreshSpaces();
   });
 }

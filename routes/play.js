@@ -79,4 +79,6 @@ router.post('/card_request', card_controller.card_send_post);
 
 router.get('/card/:hashedId', card_controller.card_display);
 
+router.post('/card/:cardId', card_controller.card_update);
+
 module.exports = router;

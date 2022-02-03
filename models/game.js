@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Game.associate = function(models) {
     Game.hasMany(models.Space);
+    Game.hasMany(models.Card);
   };
   return Game;
 };

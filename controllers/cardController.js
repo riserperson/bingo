@@ -138,3 +138,14 @@ exports.card_display = function(req, res, next) {
     main();
   });
 }
+
+// Handle a POST request to handle updates to card contents
+
+exports.card_update = function(req, res, next) {
+  models.Card_Space.findOne({where: {CardId: req.body.cardId, position: req.body.position} }).then(function (cardSpace) {
+    cardSpace.checked = req.body.checked;
+    cardSpace.save().then( (cardSpace) => {
+      res.send(cardSpace);
+    })
+  });
+}

@@ -10,8 +10,7 @@ submit.onclick = () => {
       if (postRequest.status >= 200 && postRequest.status < 300) {
         resolve(postRequest);
       } else {
-        reject({
-          status: postRequest.status,
+        reject({ status: postRequest.status,
           statusText: postRequest.statusText
         });
       }
@@ -21,9 +20,9 @@ submit.onclick = () => {
     postRequest.send('gameId=' + document.querySelector('#gameId').value + '&email=' + document.querySelector('#email').value);
   })
   .then( (card) => {
-    console.log('hello');
-    if (card.hashedId) {
-      document.querySelector('#cardLink').innerHTML = '<a href="https://iserbingo.herokuapp.com/play/card/' + card.hashedId +'">View Your Card</a>'
+    console.log(JSON.parse(card.response));
+    if (JSON.parse(card.response).hashedId) {
+      document.querySelector('#cardLink').innerHTML = '<a href="http://'+location.host+'/play/card/' + JSON.parse(card.response).hashedId +'">View Your Card</a>'
     }
   });
 }
