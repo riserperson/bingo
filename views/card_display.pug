@@ -17,8 +17,7 @@ block content
         td(id='td'+spaces[i]['position'] class='space') 
           input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = x)
           input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '5')
-          | #{spaces[i]['checked']}
-          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'])
+          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'] class='checkValue')
           p 
             button(id = spaces[i]['position'] class='button') Check off
           - x++;
@@ -29,6 +28,7 @@ block content
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = x)
           input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '4')
+          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'] class='checkValue')
           p 
             button(id = spaces[i]['position'] class='button') Check off
           - x++;
@@ -39,38 +39,48 @@ block content
           | #{spaces[i]['desc']}
           input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = x)
           input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '3')
+          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'] class='checkValue')
           p 
             button(id = spaces[i]['position'] class='button') Check off
           - x++;
-      td#freeSpace Free Space
+      td#freeSpace.space.checked 
+        | Free Space
+        input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = '3')
+        input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '3')
+        input(id='checked12' type='hidden' value = 'true' class='checkValue')
+        p
+          button.button.noShow Check off
       - x = 4;
       - for (var i = 13; i < 15; i++)
-        td(id='td'+spaces[i]['id'] class='space') 
+        td(id='td'+spaces[i]['position'] class='space') 
           | #{spaces[i]['desc']}
-          input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = x)
-          input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = '3')
+          input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = x)
+          input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '3')
+          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'] class='checkValue')
           p 
             button(id = spaces[i]['id'] class='button') Check off
           - x++;
     tr
       - x = 1;
       - for (var i = 15; i < 20; i++)
-        td(id='td'+spaces[i]['id'] class='space') 
+        td(id='td'+spaces[i]['position'] class='space') 
           | #{spaces[i]['desc']}
-          input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = x)
-          input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = '2')
+          input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = x)
+          input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '2')
+          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'] class='checkValue')
           p 
             button(id = spaces[i]['id'] class='button') Check off
           - x++;
     tr
       - x = 1;
       - for (var i = 20; i < 25; i++)
-        td(id='td'+spaces[i]['id'] class='space') 
+        td(id='td'+spaces[i]['position'] class='space') 
           | #{spaces[i]['desc']}
-          input(id='xLoc'+spaces[i]['id'] type = 'hidden' value = x)
-          input(id='yLoc'+spaces[i]['id'] type = 'hidden' value = '1')
+          input(id='xLoc'+spaces[i]['position'] type = 'hidden' value = x)
+          input(id='yLoc'+spaces[i]['position'] type = 'hidden' value = '1')
+          input(id='checked'+i type='hidden' value = ''+spaces[i]['checked'] class='checkValue')
           p 
-            button(id = spaces[i]['id'] class='button') Check off
+            button(id = spaces[i]['position'] class='button') Check off
           - x++;
   append foot
     script(type='text/javascript', src='/javascripts/card_display.js')

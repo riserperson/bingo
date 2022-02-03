@@ -1,4 +1,6 @@
 var allButtons = document.querySelectorAll('.button');
+var allTds = document.querySelectorAll('.space');
+var allCheckValues = document.querySelectorAll('.checkValue');
 
 function setCheckButtonListener(button, position) {
   button.onclick = () => {
@@ -28,8 +30,8 @@ function setCheckButtonListener(button, position) {
       postRequest.send('cardId=' + document.querySelector('#cardId').value + '&position=' + position + '&checked=' + checked);
     })
     .then( (space) => {
-      console.log(position);
-      if (space.checked) {
+      document.querySelector('#checked'+position).value = JSON.parse(space.response).checked;
+      if (JSON.parse(space.response).checked) {
         document.querySelector('#td'+position).classList.add('checked');
       } else {
         document.querySelector('#td'+position).classList.remove('checked');
@@ -42,3 +44,8 @@ for (var i = 0; i < allButtons.length; i++) {
   setCheckButtonListener(allButtons[i], i);
 }
 
+for (var i = 0; i < allCheckValues.length; i++) {
+  if (allCheckValues[i].value == 'true') {
+    allTds[i].classList.add('checked');
+  }
+}
