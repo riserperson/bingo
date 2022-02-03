@@ -31,12 +31,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 app.use('/play', playRouter);
-
-// passport.use(models.User.createStrategy());
-// passport.serializeUser(models.User.serializeUser());
-// passport.deserializeUser(models.User.deserializeUser());
 
 module.exports = app;
 
