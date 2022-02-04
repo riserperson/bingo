@@ -32,9 +32,9 @@ function setCheckButtonListener(button, position) {
     .then( (space) => {
       document.querySelector('#checked'+position).value = JSON.parse(space.response).checked;
       if (JSON.parse(space.response).checked) {
-        document.querySelector('#td'+position).classList.add('checked');
+        document.querySelector('#td'+position).classList.add('warning');
       } else {
-        document.querySelector('#td'+position).classList.remove('checked');
+        document.querySelector('#td'+position).classList.remove('warning');
       }
     });
   }
@@ -46,6 +46,6 @@ for (var i = 0; i < allButtons.length; i++) {
 
 for (var i = 0; i < allCheckValues.length; i++) {
   if (allCheckValues[i].value == 'true') {
-    allTds[i].classList.add('checked');
+    allTds[i].classList.add('warning');
   }
 }
