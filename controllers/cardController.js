@@ -123,6 +123,9 @@ exports.card_display = function(req, res, next) {
         {
           CardId: card.id
         },
+      order: [
+        ['position', 'ASC']
+      ],
       include: {
         model: models.Space
       }
