@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     hashedId: DataTypes.STRING
   }, {});
   Card.associate = function(models) {
-    Card.belongsToMany(models.Space, { through: 'Card_Space' });
+    Card.hasMany(models.Card_Space);
   };
  return Card;
 };

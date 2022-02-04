@@ -9,6 +9,10 @@
     checked: DataTypes.BOOLEAN,
     position: DataTypes.INTEGER
   }, {});
+  Card_Space.associate = function(models) {
+    Card_Space.belongsTo(models.Card);
+    Card_Space.belongsTo(models.Space);
+  };
  return Card_Space;
 }
  

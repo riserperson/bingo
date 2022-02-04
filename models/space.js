@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     Space.hasMany(models.Card);
   };
   Space.associate = function(models) {
-    Space.belongsToMany(models.Card, { through: 'Card_Space' });
+    Space.hasMany(models.Card_Space);
   };
   return Space;
 };

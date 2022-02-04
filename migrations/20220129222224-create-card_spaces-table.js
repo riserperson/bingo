@@ -27,6 +27,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Games');
+    return queryInterface.dropTable('Card_Spaces');
   }
 };

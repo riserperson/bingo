@@ -118,24 +118,19 @@ exports.card_send_post = function(req, res, next) {
 
 exports.card_display = function(req, res, next) {
   models.Card.findOne({where: { hashedId: req.params.hashedId } }).then(function (card) {
-    async function main() {
-      let spaces = [];
-      async function getSpace(CardId, position) {
-        const cardSpace = models.Card_Space.findOne({ where:
-          {
-            CardId: CardId,
-            position: position
-          }
-        });
-        return cardSpace;
+    models.Card_Space.findAll({ 
+      where:
+        {
+          CardId: card.id
+        },
+      include: {
+        model: models.Space
       }
-  
-      for (let i = 0; i < 24; i++) {
-        spaces.push(await getSpace(card.id, i));
-      }
-      res.render('card_display', { card: card, spaces: spaces });
-    }
-    main();
+    })
+    .then( (result) => {
+      //res.send(result);
+      res.render('card_display', { card: result });
+    });
   });
 }
 
@@ -143,7 +138,6 @@ exports.card_display = function(req, res, next) {
 
 exports.card_update = function(req, res, next) {
   models.Card_Space.findOne({where: {CardId: req.body.cardId, position: req.body.position} }).then(function (cardSpace) {
-    console.log(req.body.checked);
     cardSpace.checked = req.body.checked;
     cardSpace.save().then( (cardSpace) => {
       res.send(cardSpace);
