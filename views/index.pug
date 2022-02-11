@@ -1,19 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #[em iserBINGO] v0.0.2, developed by rai
-  div(class='container')
-    div
-      form(method='POST' action='/play/game/create')
-        button(type='submit') Create a New Game
-    div
-      form(method='POST' action='/play/game/join')
-        div
-          //label(for='gameCode') Code:
-          input#desc(type='text' placeholder='CODE' name='gameCode' required='true')
-          button(type='submit') Participate in an Existing Game
-      if errors 
-        ul
-          for error in errors
-            li!= error.msg 
+  div.row.w-50
+    div.col
+      div.alert.alert-primary.text-center(role='alert')
+        form.justify-content-center(method='POST' action='/play/game/create')
+          button.btn.btn-secondary(type='submit') Create a New Game
+  div.row.w-50
+    div.col
+      div.alert.alert-primary.text-center(role='alert')
+        form(method='POST' action='/play/game/join')
+          input#desc.form-control(type='text' placeholder='CODE' name='gameCode' required='true')
+          button.btn.btn-secondary.form-control(type='submit') Participate in an Existing Game
+    if errors 
+      ul
+        for error in errors
+          li!= error.msg 
