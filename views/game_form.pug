@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  h1=title
   div
     div
       p Game Code: #{game.code}
@@ -18,6 +17,7 @@ block content
         p Game Name:
         p
           div#gameNameDiv
+            if game.name
           input#gameName.show(type='text' placeholder='Game Name')
           button#gameNameSaveButton.show Save
           button#gameNameChangeButton.noShow Change
