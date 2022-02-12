@@ -3,15 +3,18 @@ extends layout
 block content
   div.row.w-50
     div.col
-      div.alert.alert-primary.text-center(role='alert')
-        form.justify-content-center(method='POST' action='/play/game/create')
-          button.btn.btn-secondary(type='submit') Create a New Game
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3
+          form.justify-content-center(method='POST' action='/play/game/create')
+            div.form-group
+              button.btn.btn-tertiary.m-3(type='submit') Create a New Game
   div.row.w-50
     div.col
-      div.alert.alert-primary.text-center(role='alert')
-        form(method='POST' action='/play/game/join')
-          input#desc.form-control(type='text' placeholder='CODE' name='gameCode' required='true')
-          button.btn.btn-secondary.form-control(type='submit') Participate in an Existing Game
+      div.border.rounded-3.text-box.text-center
+        div.col-lg-6.offset-3
+          form(method='POST' action='/play/game/join')
+            input#desc.form-control.m-1(type='text' placeholder='CODE' name='gameCode' required='true')
+            button.btn.btn-tertiary.m-1.form-control(type='submit') Participate in an Existing Game
     if errors 
       ul
         for error in errors

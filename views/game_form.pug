@@ -1,40 +1,53 @@
 extends layout
 
 block content
-  div
-    div
-      p Game Code: #{game.code}
-      p
-        button#startGameButton Start Game 
-      p
-        div#requestCardDiv.noShow
-          a(href='/play/card_request?gameId='+game.id) Request a Card
-      p
+  div.row.w-50
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3
+        h1
+          | Game Code: #{game.code}
+  div.row.w-50
+    div.col
+      div.border.rounded-3.text-center.text-box.quaternary
+        div.col-lg-6.offset-3     
+          | Game Name:
+          div#gameNameDiv
+            
+            if game.name
+          input.form-control.m-1#gameName.show(type='text' placeholder='Game Name')
+          button.btn.btn-tertiary#gameNameSaveButton.show Save
+          button.btn.btn-tertiary#gameNameChangeButton.noShow Change
+  div.row.w-50
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3      
         div#gameStatusDiv
           div#gameStatusText Game Pending Start
           input(type='hidden' id='gameStatus' name='gameStatus' value='false')
-      p
-        p Game Name:
-        p
-          div#gameNameDiv
-            if game.name
-          input#gameName.show(type='text' placeholder='Game Name')
-          button#gameNameSaveButton.show Save
-          button#gameNameChangeButton.noShow Change
-        p
-          Your Game's Spaces (you need 24 to start):
-        p
-          ul#spaceList
-            li#newSpaceLi
-              input#newSpace(type='text' placeholder='New Space')
-              input(type='hidden' id='gameId' name='gameId' value=game.id)
-              button#addSpaceButton Add Space
-        p
+  div.row.w-50
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3
+          div#spaces
+            p
+              Your Game's Spaces (you need 24 to start):
+            ul.list-group#spaceList
+              li.list-group-item#newSpaceLi
+                input.form-control.m-1#newSpace(type='text' placeholder='New Space')
+                input(type='hidden' id='gameId' name='gameId' value=game.id)
+            button.btn.btn-tertiary#addSpaceButton Add Space
+  div.row.w-50
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3
+          button.btn.btn-tertiary#startGameButton Start Game 
+      
+        div.col-lg-6.offset-3#requestCardDiv.noShow
+          a(href='/play/card_request?gameId='+game.id) Request a Card
+
           button#refresh Refresh Spaces
-        p
           button#generate Generate Spaces
-        p
-          a(href='/') Home
 
   if errors 
     ul

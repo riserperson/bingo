@@ -9,11 +9,12 @@ html(lang='en')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    div(class='container min-vh-100 d-flex justify-content-center align-items-center flex-column')
+    div(class='container min-vh-100 d-flex justify-content-center align-items-center flex-column gap-3')
       div.row.w-50
         div.col
-          div.alert.alert-primary.text-center(role='alert')
-            | #{title}
+          div.border.rounded-3.text-center.text-box
+            span.quaternary 
+              | #{title}
       block content
     
     footer

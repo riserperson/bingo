@@ -13,3 +13,20 @@
 .checked {
   background-color: green;
 }
+
+body {
+  background-color: #FFFFFF;
+}
+
+.text-box {
+  background-color: #FFD5C2;
+}
+
+.btn-tertiary {
+  color: #F28F3B;
+  background-color: #C8553D;
+}
+
+.quaternary {
+  color: #F28F3B;
+}
