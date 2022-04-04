@@ -1,5 +1,3 @@
-
-
 function parseGameStatus(gameStatus) {
   // Parse a bool status or string 'true' to string
   if (gameStatus == 'true' || gameStatus == true) {
@@ -164,11 +162,14 @@ function updateGameName(gameName) {
 }
 
 function toggleGameStatus(currentStatus) {
+  //Tweaking this to make this less of a toggle and more of a one-way change.
+  //Rather than letting users endlessly go back and forth, now we expose
+  //A hidden div (later could animate) with a confirmation request
+  //Starting a game is now one-way. 
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
   postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
-  console.log(currentStatus);
   if (currentStatus == 'false') {
     var gameStatus = 'true';
   } else {
@@ -197,12 +198,18 @@ function toggleGameStatus(currentStatus) {
         document.querySelector('#gameStatus').value = game.status;
         document.querySelector('#gameStatusText').innerText = parseGameStatus(game.status);
         if (game.status == true) {
-          document.querySelector('#requestCardDiv').classList.remove('noShow');
-          document.querySelector('#requestCardDiv').classList.add('show');
-          document.querySelector('#startGameButton').innerText = 'Stop Game';
+          document.querySelector('#requestCardButtonBox').classList.remove('noShow');
+          document.querySelector('#requestCardButtonBox').classList.add('show');
+          document.querySelector('#spaceRow').classList.add('noShow');
+          document.querySelector('#gameControlsBox').classList.remove('show');
+          document.querySelector('#gameControlsBox').classList.add('noShow');
+          document.querySelector('#gameStateConfirmBox').classList.remove('show');
+          document.querySelector('#gameStateConfirmBox').classList.add('noShow');
+          document.querySelector('#gameNameChangeButton').classList.remove('show');
+          document.querySelector('#gameNameChangeButton').classList.add('noShow');
         } else {
-          document.querySelector('#requestCardDiv').classList.remove('show');
-          document.querySelector('#requestCardDiv').classList.add('noShow');
+          document.querySelector('#requestCardButtonBox').classList.remove('show');
+          document.querySelector('#requestCardButtonBox').classList.add('noShow');
           document.querySelector('#startGameButton').innerText = 'Start Game';
         }
      }
@@ -226,6 +233,7 @@ function refreshSpaces() {
     {
       alert("Unable to process GET request");
     }
+
  
   function getGetStatus() {
     if(getRequest.readyState==4) {
@@ -237,7 +245,8 @@ function refreshSpaces() {
         while (document.querySelector("#spaceList").firstChild.id != "newSpaceLi") {
           document.querySelector("#spaceList").removeChild(document.querySelector("#spaceList").firstChild);
         }
-        for (i = 0; i < allSpaces.length; i++) {
+        
+       for (i = 0; i < allSpaces.length; i++) {
           let spaceId = allSpaces[i].id;
           // Create the li for each space
           let li = document.createElement('li');
@@ -335,6 +344,7 @@ gameNameSaveButton.onclick = function() {
 }
 
 gameNameChangeButton.onclick = function() {
+  document.querySelector('#gameName').value = document.querySelector('#gameNameDiv').innerText;
   document.querySelector('#gameNameDiv').innerText = '';
   document.querySelector('#gameName').classList.remove('noShow');
   document.querySelector('#gameName').classList.add('show');
@@ -345,10 +355,26 @@ gameNameChangeButton.onclick = function() {
 }
 
 startGameButton.onclick = function() {
+  document.querySelector("#gameControlsBox").classList.remove("show")
+  document.querySelector("#gameControlsBox").classList.add("noShow")
+  document.querySelector("#gameStateConfirmBox").classList.remove("noShow")
+  document.querySelector("#gameStateConfirmBox").classList.add("show")
+}
+
+gameStartYesButton.onclick = function() {
   toggleGameStatus(document.querySelector('#gameStatus').value);
 }
 
+gameStartNoButton.onclick = function() {
+  document.querySelector("#gameControlsBox").classList.remove("noShow")
+  document.querySelector("#gameControlsBox").classList.add("show")
+  document.querySelector("#gameStateConfirmBox").classList.remove("show")
+  document.querySelector("#gameStateConfirmBox").classList.add("noShow")
+}
+
 refresh.onclick = refreshSpaces();
+
+
 
 generate.onclick = () => {
   var postRequest;

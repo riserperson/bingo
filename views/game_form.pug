@@ -13,11 +13,16 @@ block content
         div.col-lg-6.offset-3     
           | Game Name:
           div#gameNameDiv
-            
             if game.name
-          input.form-control.m-1#gameName.show(type='text' placeholder='Game Name')
-          button.btn.btn-tertiary#gameNameSaveButton.show Save
-          button.btn.btn-tertiary#gameNameChangeButton.noShow Change
+              | #{game.name}
+          if game.name
+            button.btn.btn-tertiary.m-1#gameNameChangeButton.show Change
+            input.form-control.m-1#gameName.noShow(type='text' placeholder='Game Name')
+            button.btn.btn-tertiary.m-1#gameNameSaveButton.noShow Save
+          else
+            button.btn.btn-tertiary.m-1#gameNameChangeButton.noShow Change
+            input.form-control.m-1#gameName.show(type='text' placeholder='Game Name')
+            button.btn.btn-tertiary.m-1#gameNameSaveButton.show Save
   div.row.w-50
     div.col
       div.border.rounded-3.text-center.text-box
@@ -25,7 +30,7 @@ block content
         div#gameStatusDiv
           div#gameStatusText Game Pending Start
           input(type='hidden' id='gameStatus' name='gameStatus' value='false')
-  div.row.w-50
+  div.row.w-50#spaceRow
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-3
@@ -36,18 +41,26 @@ block content
               li.list-group-item#newSpaceLi
                 input.form-control.m-1#newSpace(type='text' placeholder='New Space')
                 input(type='hidden' id='gameId' name='gameId' value=game.id)
-            button.btn.btn-tertiary#addSpaceButton Add Space
-  div.row.w-50
+            button.btn.btn-tertiary.m-1#addSpaceButton Add Space
+  div.row.w-50#gameControlsBox.show
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-3
-          button.btn.btn-tertiary#startGameButton Start Game 
-      
-        div.col-lg-6.offset-3#requestCardDiv.noShow
+          button.btn.btn-tertiary.m-1#startGameButton Start Game 
+          button.btn.btn-tertiary.m-1#refresh Refresh Spaces
+          button.btn.btn-tertiary.m-1#generate Generate Spaces
+  div.row.w-50#gameStateConfirmBox.noShow
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3
+          | Are you sure you want to start the game? This cannot be undone.
+          button.btn.btn-tertiary.m-1#gameStartYesButton Yes
+          button.btn.btn-tertiary.m-1#gameStartNoButton No
+  div.row.w-50#requestCardButtonBox.noShow
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-3   
           a(href='/play/card_request?gameId='+game.id) Request a Card
-
-          button#refresh Refresh Spaces
-          button#generate Generate Spaces
 
   if errors 
     ul
