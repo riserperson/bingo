@@ -33,8 +33,8 @@ exports.card_send_post = function(req, res, next) {
     let info = await transporter.sendMail({
       from: 'richard.iserman@gmail.com',
       to: email,
-      subject: 'Here\'s your card',
-      text: 'http://iserbingo.herokuapp.com/play/card/'+hashedId
+      subject: 'Here\'s your BINGO card',
+      text: 'Your BINGO card can be reached here: http://iserbingo.herokuapp.com/play/card/'+hashedId+'. Please keep this email! You will need this link anytime you wish to access your BINGO card.'
     });
   }
 
