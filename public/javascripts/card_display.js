@@ -4,6 +4,7 @@ var allCheckValues = document.querySelectorAll('.checkValue');
 
 function setCheckButtonListener(button, position) {
   button.onclick = () => {
+    console.log('hello');
     let checked = document.querySelector('#checked'+position).value;
     if (checked == 'false') {
       checked = true;
@@ -32,20 +33,20 @@ function setCheckButtonListener(button, position) {
     .then( (space) => {
       document.querySelector('#checked'+position).value = JSON.parse(space.response).checked;
       if (JSON.parse(space.response).checked) {
-        document.querySelector('#td'+position).classList.add('warning');
+        document.querySelector('#td'+position).classList.add('bg-warning');
       } else {
-        document.querySelector('#td'+position).classList.remove('warning');
+        document.querySelector('#td'+position).classList.remove('bg-warning');
       }
     });
   }
 }
 
-for (var i = 0; i < allButtons.length; i++) {
+for (var i = 0; i < allButtons.length; i++) {  
   setCheckButtonListener(allButtons[i], i);
 }
 
 for (var i = 0; i < allCheckValues.length; i++) {
   if (allCheckValues[i].value == 'true') {
-    allTds[i].classList.add('warning');
+    allTds[i].classList.add('bg-warning');
   }
 }
