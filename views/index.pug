@@ -7,14 +7,14 @@ block content
         div.col-lg-6.offset-3
           form.justify-content-center(method='POST' action='/play/game/create')
             div.form-group
-              button.btn.btn-tertiary.m-3(type='submit') Create a New Game
+              button.btn.btn-tertiary.m-3.btn-lg(type='submit') Create a New Game
   div.row.col-12
     div.col
       div.border.rounded-3.text-box.text-center
         div.col-lg-6.offset-3
           form(method='POST' action='/play/game/join')
             input#desc.form-control.m-1(type='text' placeholder='CODE' name='gameCode' required='true')
-            button.btn.btn-tertiary.m-1.form-control(type='submit') Participate in an Existing Game
+            button.btn.btn-tertiary.m-1.form-control.btn-lg(type='submit') Participate in an Existing Game
     if errors 
       ul
         for error in errors
