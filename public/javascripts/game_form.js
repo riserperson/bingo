@@ -1,4 +1,5 @@
 $("#messageBox").hide();
+$("#generate").hide();
 
 if(document.querySelector("#gameNameDiv").innerText != "") {
   $("#gameName").hide();
@@ -25,7 +26,7 @@ function updateSpaceDesc(id, desc) {
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
-  postUrl = "/play/desc/"+ id +"/update";
+  postUrl = "/play/space/"+ id +"/update";
 
   try
     {
@@ -83,9 +84,7 @@ function addChangeSpaceButtonListener(spaceId) {
       $('#spaceDiv' + spaceId).hide();
 
       $('#spaceInput' + spaceId).show();
-
-      button.classList.remove('show');
-      button.classList.add('noShow');
+      $('#changeButton' + spaceId).hide();
 
       $('#saveButton' + spaceId).show()
     };
@@ -98,20 +97,16 @@ function addSaveSpaceButtonListener(spaceId) {
     button.onclick = function() {
       let desc = document.querySelector('#spaceInput' + spaceId).value;
       document.querySelector('#spaceDiv' + spaceId).innerText = desc;
-      document.querySelector('#spaceDiv' + spaceId).classList.remove('noShow');
-      document.querySelector('#spaceDiv' + spaceId).classList.add('show');
+      $('#spaceDiv' + spaceId).show();
       
       // Update using previously defined function
       updateSpaceDesc(spaceId, desc);
 
-      document.querySelector('#spaceInput' + spaceId).classList.remove('show');
-      document.querySelector('#spaceInput' + spaceId).classList.add('noShow');
+      $('#spaceInput' + spaceId).hide();
+      
+      $('#saveButton' + spaceId).hide();
 
-      button.classList.remove('show');
-      button.classList.add('noShow');
-
-      document.querySelector('#changeButton' + spaceId).classList.remove('noShow');
-      document.querySelector('#changeButton' + spaceId).classList.add('show');
+      $('#changeButton' + spaceId).show();
     };
   }
 }
