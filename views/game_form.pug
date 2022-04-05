@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  div.row.w-50
+  div.row.w-lg-50.w-sm-90
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-3
         h1
           | Game Code: #{game.code}
-  div.row.w-50
+  div.row.w-lg-50.w-sm-90
     div.col
       div.border.rounded-3.text-center.text-box.quaternary
         div.col-lg-6.offset-3     
@@ -24,7 +24,7 @@ block content
             button.btn.btn-tertiary.m-1#gameNameChangeButton Change
             input.form-control.m-1#gameName(type='text' placeholder='Game Name')
             button.btn.btn-tertiary.m-1#gameNameSaveButton Save
-  div.row.w-50
+  div.row.w-lg-50.w-sm-90
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-3      
@@ -35,7 +35,7 @@ block content
             div#gameStatusText Game In Progress
           input(type='hidden' id='gameStatus' name='gameStatus' value='false')
   if(game.status == false)   
-    div.row.w-50#spaceRow
+    div.row.w-lg-50.w-sm-90#spaceRow
       div.col
         div.border.rounded-3.text-center.text-box
           div.col-lg-6.offset-3
@@ -48,14 +48,14 @@ block content
                   input(type='hidden' id='gameId' name='gameId' value=game.id)
               button.btn.btn-tertiary.m-1#addSpaceButton Add Space
   if(game.status == false)
-    div.row.w-50#gameControlsBox
+    div.row.w-lg-50.w-sm-90#gameControlsBox
       div.col
         div.border.rounded-3.text-center.text-box
           div.col-lg-6.offset-3
             button.btn.btn-tertiary.m-1#startGameButton Start Game 
             button.btn.btn-tertiary.m-1#refresh Refresh Spaces
             button.btn.btn-tertiary.m-1#generate Generate Spaces
-  div.row.w-50#messageBox
+  div.row.w-lg-50.w-sm-90#messageBox
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-3
@@ -63,7 +63,7 @@ block content
           button.btn.btn-tertiary.m-1#yesButton Yes
           button.btn.btn-tertiary.m-1#noButton No
   if(game.status == true)
-    div.row.w-50#requestCardButtonBox
+    div.row.w-lg-50.w-sm-90#requestCardButtonBox
       div.col
         div.border.rounded-3.text-center.text-box
           div.col-lg-6.offset-3   
