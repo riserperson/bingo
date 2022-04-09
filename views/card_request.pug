@@ -1,18 +1,32 @@
 extends layout
 
 block content
-  h1 Get a Bingo Card
-  p For game: #{game.name}
-  p 
-    input(type='hidden' id='gameId' name='gameId' value=game.id)
-    label(for='email') Email Address
-    input(id='email' name='email' type='text')
-    button#submit Submit
-  p
-    div#cardLink
-
-  p Go back to 
-    a(href='/play/game/'+game.id+'/update') Edit Game
+  div.row.col-12
+    div.col
+      div.border.rounded-3.text-center.text-box.quaternary
+        div.col-lg-6.offset-lg-3
+            h1 Get a Bingo Card
+            p For game: #{game.name}
+            p 
+              form#requestForm(action='' method='POST' novalidate onsubmit="return false;").mx-2.needs-validation
+                input(type='hidden' id='gameId' name='gameId' value=game.id)
+                label(for='email') Email Address
+                input(id='email' name='email' type='email' required).form-control
+                div.invalid-feedback
+                  | Please enter a valid email address.
+                button.btn.btn-tertiary.m-2#submit Submit
+  div.row.col-12#confirmation
+      div.col
+        div.border.rounded-3.text-center.text-box
+          div.col-lg-6.offset-3-lg-3 
+            | Your card has been sent!
+            div#cardLink
+  div.row.col-12
+      div.col
+        div.border.rounded-3.text-center.text-box
+          div.col-lg-6.offset-3-lg-3     
+            | Go back to 
+            a(href='/play/game/'+game.id+'/update') View Game
 
   append foot
     script(type='text/javascript', src='/javascripts/card_request.js')

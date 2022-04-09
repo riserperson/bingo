@@ -100,9 +100,8 @@ exports.card_send_post = function(req, res, next) {
         updatedCard.hashedId = hashids.encode(card.id);
         updatedCard.save().then(() => {
           // Everything worked. Email the new card out.
-          if (process.env.NODE_ENV == 'production') {
-            sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
-          }
+          console.log('Sending email');
+          sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
 
           // Send the new card in the response
           res.send(updatedCard);
