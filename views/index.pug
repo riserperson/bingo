@@ -8,14 +8,22 @@ block content
           form.justify-content-center(method='POST' action='/play/game/create')
             div.form-group
               button.btn.btn-tertiary.m-3.btn-lg(type='submit') Create a New Game
+  div.row.col-12#messageBox
+    div.col
+      div.border.rounded-3.text-box.text-center
+        div.col-lg-6.offset-lg-3
+          | Invalid code!
   div.row.col-12
     div.col
       div.border.rounded-3.text-box.text-center
         div.col-lg-6.offset-lg-3
           form(method='POST' action='/play/game/join')
-            input#desc.form-control.m-1(type='text' placeholder='CODE' name='gameCode' required='true')
+            input#gameCode.form-control.m-1(type='text' placeholder='CODE' name='gameCode' required='true' onkeyup="this.value = this.value.toUpperCase();" maxlength="4")
             button.btn.btn-tertiary.m-1.form-control.btn-lg(type='submit') Participate in an Existing Game
       if errors 
         ul
           for error in errors
             li!= error.msg 
+  
+    footer
+      script(src="/javascripts/landing.js")

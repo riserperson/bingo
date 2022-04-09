@@ -1,3 +1,7 @@
+.body {
+  background-color: #F4FCD9;
+}
+
 #gameNameUpdateButton {
   display: none;
 }
@@ -19,14 +23,14 @@ body {
 }
 
 .text-box {
-  background-color: #FFD5C2;
+  background-color: #C5D8A4;
 }
 
 .btn-tertiary {
-  color: #F28F3B;
-  background-color: #C8553D;
+  color: #534340;
+  background-color: #BB9981;
 }
 
 .quaternary {
-  color: #F28F3B;
+  color: #534340;
 }
