@@ -4,21 +4,9 @@ var async = require('async');
 const querystring = require('querystring');
 const generator = require('../generator');
 
-/*
-exports.index = function(req, res) {
-  models.Space.count().then(function (space_count) {
-    res.render('index', { 
-      title: 'iserBINGO Home',
-      space_count: space_count,
-      user: req.user
-     });
-  });
-};
-*/
-
 // Display list of all spaces for a particular game
 exports.space_list = function(req, res) {
-  models.Space.findAll({where: { GameId: parseInt(req.query.gameId) } }).then(function (list_spaces) {
+  models.Space.findAll({where: { GameId: parseInt(req.query.gameId) }, order: [ ['id', 'DESC'] ] }).then(function (list_spaces) {
     // Doing away with rendering, returning objects instead for our API implementation.
     // res.render('space_list', { title: 'Space List', space_list: list_spaces });
     res.send(list_spaces);
@@ -54,11 +42,9 @@ exports.space_create_get = function(req, res, next) {
 
 //Handle space create on POST
 exports.space_create_post = [
-  // Validate fields - REVISE THESE LINES
-  // validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
-  // Sanitize fields
-  // validator.check('desc').escape(),
-
+  // Validate and sanitize fields 
+  validator.body('desc').not().isEmpty().trim().escape(),
+  
   // Process request after validation and sanitization
   (req, res, next) => {
 
@@ -97,7 +83,7 @@ exports.space_create_post = [
 ];
 
 // Display space delete form on GET
-// TO REMOVE
+
 exports.space_delete_get = function(req, res, next) {
   async.parallel({
     space: function(callback) {
@@ -168,9 +154,7 @@ exports.space_update_get = function(req, res, next) {
 // Handle space update on POST
 exports.space_update_post = [
   // Validate fields
-  validator.body('desc').isLength({ min: 1 }).trim().withMessage('You must enter a description'),
-  // Sanitize fields
-  validator.check('desc').escape(),
+  validator.body('desc').not().isEmpty().trim().escape(),
 
   // Process request after validation and sanitization
   (req, res, next) => {

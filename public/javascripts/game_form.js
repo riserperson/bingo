@@ -1,6 +1,12 @@
 $("#messageBox").hide();
 $("#generate").hide();
 
+var decodeHTML = function (html) {
+	var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+};
+
 if(document.querySelector("#gameNameDiv").innerText != "") {
   $("#gameName").hide();
   $("#gameNameSaveButton").hide();
@@ -262,7 +268,7 @@ function refreshSpaces() {
           // And a div to hold the text
           let div = document.createElement('div');
           div.setAttribute('id', 'spaceDiv' + spaceId);
-          div.appendChild(document.createTextNode(allSpaces[i].desc));
+          div.appendChild(document.createTextNode(i+1 + '. ' + decodeHTML(allSpaces[i].desc)));
           li.appendChild(div);
 
           // Use a hidden input to keep track of the space id
@@ -277,6 +283,7 @@ function refreshSpaces() {
           input.setAttribute('type', 'text');
           input.setAttribute('id', 'spaceInput' + spaceId);
           input.setAttribute('value', allSpaces[i].desc);
+          input.setAttribute('maxlength','100')
           input.classList.add('noShow');
           li.appendChild(input);
 

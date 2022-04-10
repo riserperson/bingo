@@ -41,13 +41,31 @@ block content
         div.border.rounded-3.text-center.text-box
           div.col-lg-6.offset-lg-3
             div#spaces
-              p
-                Your Game's Spaces (you need at least 24 to start, but can include as many as you like):
-              ul.list-group#spaceList
+              ul.list-group.m-1
+                li.list-group-item 
+                  | RULES
+              ol.m-1.list-group.list-group-numbered#rules
+                li.list-group-item
+                  | Be nice! Assume everyone in the world can see this (because they can).
+                li.list-group-item
+                  | Anyone participating can add spaces below. No one will know who added what. See rule 1.
+                li.list-group-item
+                  | Once you have 24 spaces anyone can start the game.
+                li.list-group-item
+                  | Once you start the game you cannot add more spaces, but you can get a card and start playing!
+              ul.m-1.list-group#spaceList
                 li.list-group-item#newSpaceLi
-                  input.form-control.m-1#newSpace(type='text' placeholder='New Space')
-                  input(type='hidden' id='gameId' name='gameId' value=game.id)
-              button.btn.btn-tertiary.btn-lg.m-1#addSpaceButton Add Space
+                  form(action='' method='POST' novalidate onsubmit="return false;")
+                    input.form-control.m-1#newSpace(type='text' placeholder='New Space' maxlength='80')
+                    input(type='hidden' id='gameId' name='gameId' value=game.id)
+                    button.btn.btn-tertiary.btn-lg.m-1#addSpaceButton(type="submit") Add Space
+  div.row.col-12#messageBox
+    div.col
+      div.border.rounded-3.text-center.text-box
+        div.col-lg-6.offset-lg-3
+          div#messageText
+          button.btn.btn-tertiary.btn-lg.m-1#yesButton Yes
+          button.btn.btn-tertiary.btn-lg.m-1#noButton No
   if(game.status == false)
     div.row.col-12#gameControlsBox
       div.col
@@ -56,13 +74,6 @@ block content
             button.btn.btn-tertiary.btn-lg.m-1#startGameButton Start Game 
             button.btn.btn-tertiary.btn-lg.m-1#refresh Refresh Spaces
             button.btn.btn-tertiary.btn-lg.m-1#generate Generate Spaces
-  div.row.col-12#messageBox
-    div.col
-      div.border.rounded-3.text-center.text-box
-        div.col-lg-6.offset-lg-3
-          div#messageText
-          button.btn.btn-tertiary.btn-lg.m-1#yesButton Yes
-          button.btn.btn-tertiary.btn-lg.m-1#noButton No
   if(game.status == true)
     div.row.col-12#requestCardButtonBox
       div.col
