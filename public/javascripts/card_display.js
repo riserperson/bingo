@@ -4,7 +4,6 @@ var allCheckValues = document.querySelectorAll('.checkValue');
 
 function setCheckButtonListener(button, position) {
   button.onclick = () => {
-    console.log('hello');
     let checked = document.querySelector('#checked'+position).value;
     if (checked == 'false') {
       checked = true;
