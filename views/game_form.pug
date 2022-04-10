@@ -4,9 +4,9 @@ block content
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box
-        div.col-lg-6.offset-3-lg-3     
-        h1
-          | Game Code: #{game.code}
+        div.col-lg-6.offset-lg-3
+          h1
+            | Game Code: #{game.code}
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box.quaternary
@@ -41,18 +41,21 @@ block content
         div.border.rounded-3.text-center.text-box
           div.col-lg-6.offset-lg-3
             div#spaces
-              ul.list-group.m-1
-                li.list-group-item 
-                  | RULES
-              ol.m-1.list-group.list-group-numbered#rules
-                li.list-group-item
-                  | Be nice! Assume everyone in the world can see this (because they can).
-                li.list-group-item
-                  | Anyone participating can add spaces below. No one will know who added what. See rule 1.
-                li.list-group-item
-                  | Once you have 24 spaces anyone can start the game.
-                li.list-group-item
-                  | Once you start the game you cannot add more spaces, but you can get a card and start playing!
+              div.accordion.m-1
+                div.accordion-item
+                  h2.accordion-header#headingOne
+                    button.accordion-button(data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne") RULES
+                  div#collapseOne.accordion-collapse.collapse.show(aria-labelledby="headingOne" data-bs-parent="#accordionExample")
+                    div.accordion-body
+                      ol.m-1.list-group.list-group-numbered#rules
+                        li.list-group-item
+                          | Be nice! Assume everyone in the world can see this (because they can).
+                        li.list-group-item
+                          | Anyone participating can add spaces below. No one will know who added what. See rule 1.
+                        li.list-group-item
+                          | Once you have 24 spaces anyone can start the game.
+                        li.list-group-item
+                          | Once you start the game you cannot add more spaces, but you can get a card and start playing!
               ul.m-1.list-group#spaceList
                 li.list-group-item#newSpaceLi
                   form(action='' method='POST' novalidate onsubmit="return false;")
