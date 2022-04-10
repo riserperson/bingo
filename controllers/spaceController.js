@@ -6,7 +6,7 @@ const generator = require('../generator');
 
 // Display list of all spaces for a particular game
 exports.space_list = function(req, res) {
-  models.Space.findAll({where: { GameId: parseInt(req.query.gameId) }, order: [ ['id', 'DESC'] ] }).then(function (list_spaces) {
+  models.Space.findAll({where: { GameId: parseInt(req.query.gameId) }, order: [ ['id', 'ASC'] ] }).then(function (list_spaces) {
     // Doing away with rendering, returning objects instead for our API implementation.
     // res.render('space_list', { title: 'Space List', space_list: list_spaces });
     res.send(list_spaces);
