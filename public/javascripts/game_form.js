@@ -313,6 +313,7 @@ function refreshSpaces() {
           addSaveSpaceButtonListener(spaceId);
           addDeleteSpaceButtonListener(spaceId);
         }
+        document.querySelector("#totalSpaces").innerHTML = allSpaces.length+1 + '. ';
       }
     }
   }

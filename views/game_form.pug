@@ -59,8 +59,11 @@ block content
               ul.m-1.list-group#spaceList
                 li.list-group-item#newSpaceLi
                   form(action='' method='POST' novalidate onsubmit="return false;")
-                    input.form-control.m-1#newSpace(type='text' placeholder='New Space' maxlength='80')
-                    input(type='hidden' id='gameId' name='gameId' value=game.id)
+                    div.input-group
+                      div.input-group-prepend
+                        span.input-group-text#totalSpaces
+                      input.form-control#newSpace(type='text' placeholder='New Space' maxlength='80')
+                    input(type='hidden' id='gameId' name='gameId' value=game.id)  
                     button.btn.btn-tertiary.btn-lg.m-1#addSpaceButton(type="submit") Add Space
   div.row.col-12#messageBox
     div.col
