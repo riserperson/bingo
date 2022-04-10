@@ -1,4 +1,4 @@
-.body {
+body {
   background-color: #F4FCD9;
 }
 
@@ -9,17 +9,13 @@
 .noShow {
   display: none;
 }
-
+  
 .show {
   display: inline;
 }
 
 .checked {
   background-color: green;
-}
-
-body {
-  background-color: #FFFFFF;
 }
 
 .text-box {
@@ -33,4 +29,16 @@ body {
 
 .quaternary {
   color: #534340;
+}
+
+/*
+td {
+  word-wrap:break-word;
+  word-break:break-all;
+}
+*/
+
+table {
+  table-layout:fixed;
+  width:100%;
 }
