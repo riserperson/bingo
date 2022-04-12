@@ -93,8 +93,12 @@ function setCheckBoxListener(checkbox, position) {
 
 // Assign the listeners to the vertical list items
 
-for (var i = 0; i < allCheckboxes.length; i++) {  
-  setCheckBoxListener(allCheckboxes[i], i);
+var counter = 0;
+for (j=0; j<5; j++) {
+  for (var i = j; i < allCheckboxes.length; i+=5) {  
+    setCheckBoxListener(allCheckboxes[counter], i);
+    counter++;
+  }
 }
 
 // Check at page load for existing checks

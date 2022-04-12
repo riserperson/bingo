@@ -13,7 +13,7 @@ block content
               thead
                 tr
                   th(scope="col") B
-                  th(scope="col") I-
+                  th(scope="col") I
                   th(scope="col") N
                   th(scope="col") G
                   th(scope="col") O
@@ -103,61 +103,20 @@ block content
                         - x++;
                       span.d-inline.d-md-none
           ul.d-inline.d-md-none.list-group.mx-3.text-left
-            - row = 1;
-            - for (var i = 0; i < 25; i += 5)
-              if i==13
-                li.list-group-item.mx-3(id='vlistItem12')
-                  input(type='checkbox' value='checkbox12' disabled).checkbox
-                  |  FREE SPACE
-              else
-                li.list-group-item.mx-3(id='vlistItem'+i)
-                    input(type="checkbox" value='checkbox'+i).checkbox
-                    |  B-#{row}. #{card[i]['Space']['desc']}
-                - row++;
-            - row = 1;
-            - for (var i = 0; i < 25; i += 5)
-              if i==13
-                li.list-group-item.mx-3(id='vlistItem12')
-                  input(type='checkbox' value='checkbox12' disabled).checkbox
-                  |  FREE SPACE
-              else
-                li.list-group-item.mx-3(id='vlistItem'+i)
-                    input(type="checkbox" value='checkbox'+i).checkbox
-                    |  I-#{row}. #{card[i]['Space']['desc']}
-                - row++;
-            - row = 1;
-            - for (var i = 0; i < 25; i += 5)
-              if i==13
-                li.list-group-item.mx-3(id='vlistItem12')
-                  input(type='checkbox' value='checkbox12' disabled).checkbox
-                  |  FREE SPACE
-              else
-                li.list-group-item.mx-3(id='vlistItem'+i)
-                    input(type="checkbox" value='checkbox'+i).checkbox
-                    |  N-#{row}. #{card[i]['Space']['desc']}
-                - row++;
-            - row = 1;
-            - for (var i = 0; i < 25; i += 5)
-              if i==13
-                li.list-group-item.mx-3(id='vlistItem12')
-                  input(type='checkbox' value='checkbox12' disabled).checkbox
-                  |  FREE SPACE
-              else
-                li.list-group-item.mx-3(id='vlistItem'+i)
-                    input(type="checkbox" value='checkbox'+i).checkbox
-                    |  G-#{row}. #{card[i]['Space']['desc']}
-                - row++;
-            - row = 1;
-            - for (var i = 0; i < 25; i += 5)
-              if i==13
-                li.list-group-item.mx-3(id='vlistItem12')
-                  input(type='checkbox' value='checkbox12' disabled).checkbox
-                  |  FREE SPACE
-              else
-                li.list-group-item.mx-3(id='vlistItem'+i)
-                    input(type="checkbox" value='checkbox'+i).checkbox
-                    |  O-#{row}. #{card[i]['Space']['desc']}
-                - row++;                  
+            - var letters = ['B','I','N','G','O']            
+            - for (var j = 0; j < 5; j++)
+              - row = 1;
+              - for (var i = j; i < 25; i += 5)
+                if i==12
+                  li.list-group-item.mx-3(id='vlistItem12')
+                    input(type='checkbox' value='checkbox12' disabled).checkbox
+                    |  FREE SPACE
+                  - row++;
+                else
+                  li.list-group-item.mx-3(id='vlistItem'+i)
+                      input(type="checkbox" value='checkbox'+i).checkbox
+                      |  #{letters[j]}-#{row}. #{card[i]['Space']['desc']}
+                  - row++;                
                 
 
               
