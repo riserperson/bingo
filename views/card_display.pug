@@ -32,7 +32,7 @@ block content
                         p         
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn-primary') Check off
                       - x++;
-                      
+                      span.d-inline.d-md-none  
                 tr
                   th(scope="row").d-inline.d-md-none 2
                   - x = 1;
@@ -46,6 +46,7 @@ block content
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
                         - x++;
+                      span.d-inline.d-md-none  
                 tr
                   th(scope="row").d-inline.d-md-none 3
                   - x = 1;
@@ -59,6 +60,7 @@ block content
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
                         - x++;
+                      span.d-inline.d-md-none  
                   td#freeSpace.space.checked 
                     | Free Space
                     input(id='xLoc'+card[i]['position'] type = 'hidden' value = '3')
@@ -77,6 +79,7 @@ block content
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
                         - x++;
+                      span.d-inline.d-md-none  
                 tr
                   th(scope="row").d-inline.d-md-none 4
                   - x = 1;
@@ -89,7 +92,8 @@ block content
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
-                        - x++;             
+                        - x++;
+                      span.d-inline.d-md-none       
                 tr
                   th(scope="row").d-inline.d-md-none 5
                   - x = 1;
@@ -103,6 +107,7 @@ block content
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
                         - x++;
+                      span.d-inline.d-md-none
           ul.d-inline.d-md-none.list-group.mx-3.text-left
             - for (var i = 0; i < 12; i++)
               li.list-group-item.mx-3(id='vlistItem'+i)
