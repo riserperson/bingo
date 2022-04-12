@@ -9,103 +9,103 @@ block content
             h1 Bingo Card
             input(id='gameId' type='hidden' value=card[0]['Space'].GameId)
             input(id='cardId' type='hidden' value=card[0].CardId)
-            table
-              tr
-                th B
-                th I
-                th N
-                th G
-                th O
-              tr
-                - var x = 1;
-                - for (var i = 0; i < 5; i++)
-                  td(id='td'+i class='space') 
-                    div.d-none.d-md-inline
-                      | #{card[i]['Space']['desc']}
-                      input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
-                      input(id='yLoc'+card[i]['position'] type = 'hidden' value = '5')
-                      input(id='checked'+card[i]['position'] type='hidden' value = ''+card[i]['checked'] class='checkValue')
-                      p         
-                        button(id = 'button'+card[i]['position'] class='button btn-sm btn-primary') Check off
-                    - x++;
-                    div.d-inline.d-md-none
-                      | 1
-              tr
-                - x = 1;
-                - for (var i = 5; i < 10; i++)
-                  td(id='td'+card[i]['position'] class='space') 
-                    div.d-none.d-md-inline
-                      | #{card[i]['Space']['desc']}
-                      input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
-                      input(id='yLoc'+card[i]['position'] type = 'hidden' value = '4')
-                      input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
-                      p 
-                        button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
+            table.table
+              thead
+                tr
+                  th B
+                  th I
+                  th N
+                  th G
+                  th O
+              tbody
+                tr
+                  th(scope="row").d-inline.d-md-none 1
+                  - var x = 1;
+                  - for (var i = 0; i < 5; i++)
+                    td(id='td'+i class='space') 
+                      div.d-none.d-md-inline
+                        | #{card[i]['Space']['desc']}
+                        input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
+                        input(id='yLoc'+card[i]['position'] type = 'hidden' value = '5')
+                        input(id='checked'+card[i]['position'] type='hidden' value = ''+card[i]['checked'] class='checkValue')
+                        p         
+                          button(id = 'button'+card[i]['position'] class='button btn-sm btn-primary') Check off
                       - x++;
-                    div.d-inline.d-md-none
-                      | 2
-              tr
-                - x = 1;
-                - for (var i = 10; i < 12; i++)
-                  td(id='td'+card[i]['position'] class='space') 
-                    div.d-none.d-md-inline
-                      | #{card[i]['Space']['desc']}
-                      input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
-                      input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
-                      input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
-                      p 
-                        button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
-                      - x++;
-                    div.d-inline.d-md-none
-                      | 3                  
-                td#freeSpace.space.checked 
-                  | Free Space
-                  input(id='xLoc'+card[i]['position'] type = 'hidden' value = '3')
-                  input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
-                  input(id='checked12' type='hidden' value = 'true' class='checkValue')
-                  p
-                    button.button.noShow Check off
-                - x = 3;              
-                - for (var i = 13; i < 15; i++)
-                  td(id='td'+card[i]['position'] class='space') 
-                    div.d-none.d-md-inline
-                      | #{card[i]['Space']['desc']}
-                      input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
-                      input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
-                      input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
-                      p 
-                        button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
-                      - x++;
-                    div.d-inline.d-md-none
-                      | 3                  
-              tr
-                - x = 1;
-                - for (var i = 15; i < 20; i++)
-                  td(id='td'+card[i]['position'] class='space') 
-                    div.d-none.d-md-inline
-                      | #{card[i]['Space']['desc']}
-                      input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
-                      input(id='yLoc'+card[i]['position'] type = 'hidden' value = '2')
-                      input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
-                      p 
-                        button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
-                      - x++;
-                    div.d-inline.d-md-none
-                      | 4                  
-              tr
-                - x = 1;
-                - for (var i = 20; i < 25; i++)
-                  td(id='td'+card[i]['position'] class='space') 
-                    div.d-none.d-md-inline
-                      | #{card[i]['Space']['desc']}
-                      input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
-                      input(id='yLoc'+card[i]['position'] type = 'hidden' value = '1')
-                      input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
-                      p 
-                        button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
-                      - x++;
-                    div.d-inline.d-md-none
-                      | 5 
+                      
+                tr
+                  th(scope="row").d-inline.d-md-none 2
+                  - x = 1;
+                  - for (var i = 5; i < 10; i++)
+                    td(id='td'+card[i]['position'] class='space') 
+                      div.d-none.d-md-inline
+                        | #{card[i]['Space']['desc']}
+                        input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
+                        input(id='yLoc'+card[i]['position'] type = 'hidden' value = '4')
+                        input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
+                        p 
+                          button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
+                        - x++;
+                tr
+                  th(scope="row").d-inline.d-md-none 3
+                  - x = 1;
+                  - for (var i = 10; i < 12; i++)
+                    td(id='td'+card[i]['position'] class='space') 
+                      div.d-none.d-md-inline
+                        | #{card[i]['Space']['desc']}
+                        input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
+                        input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
+                        input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
+                        p 
+                          button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
+                        - x++;
+                      div.d-inline.d-md-none
+                        | 3                  
+                  td#freeSpace.space.checked 
+                    | Free Space
+                    input(id='xLoc'+card[i]['position'] type = 'hidden' value = '3')
+                    input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
+                    input(id='checked12' type='hidden' value = 'true' class='checkValue')
+                    p
+                      button.button.noShow Check off
+                  - x = 3;              
+                  - for (var i = 13; i < 15; i++)
+                    td(id='td'+card[i]['position'] class='space') 
+                      div.d-none.d-md-inline
+                        | #{card[i]['Space']['desc']}
+                        input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
+                        input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
+                        input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
+                        p 
+                          button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
+                        - x++;
+                tr
+                  th(scope="row").d-inline.d-md-none 4
+                  - x = 1;
+                  - for (var i = 15; i < 20; i++)
+                    td(id='td'+card[i]['position'] class='space') 
+                      div.d-none.d-md-inline
+                        | #{card[i]['Space']['desc']}
+                        input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
+                        input(id='yLoc'+card[i]['position'] type = 'hidden' value = '2')
+                        input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
+                        p 
+                          button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
+                        - x++;
+                      div.d-inline.d-md-none
+                        | 4                  
+                tr
+                  th(scope="row").d-inline.d-md-none 5
+                  - x = 1;
+                  - for (var i = 20; i < 25; i++)
+                    td(id='td'+card[i]['position'] class='space') 
+                      div.d-none.d-md-inline
+                        | #{card[i]['Space']['desc']}
+                        input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
+                        input(id='yLoc'+card[i]['position'] type = 'hidden' value = '1')
+                        input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
+                        p 
+                          button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
+                        - x++;
           ul.d-inline.d-md-none.list-group.mx-3.text-left
             - for (var i = 0; i < 12; i++)
               li.list-group-item.mx-3(id='vlistItem'+i)
