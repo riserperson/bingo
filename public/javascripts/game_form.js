@@ -350,9 +350,9 @@ addSpaceButton.onclick = function() {
   document.getElementById('newSpace').value = '';
 }
 
-startGameButton.onclick = function() {
-  updateGame(document.querySelector("#gameName"),document.querySelector("#gameStatus"));
-}
+// startGameButton.onclick = function() {
+//   updateGame(document.querySelector("#gameName"),document.querySelector("#gameStatus"));
+// }
 
 gameNameSaveButton.onclick = function() {
   updateGameName(document.querySelector("#gameName").value);

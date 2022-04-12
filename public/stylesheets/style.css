@@ -42,3 +42,7 @@ table {
   table-layout:fixed;
   width:100%;
 }
+
+.vlist-checked {
+  text-decoration: line-through;
+}
