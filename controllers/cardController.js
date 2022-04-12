@@ -67,46 +67,65 @@ exports.card_send_post = function(req, res, next) {
       allSpaces = shuffle(allSpaces);
 
       // Create a new card 
-      function createNewCard() {
-        const card = models.Card.create(
-          {
-            email: req.body.email,
+      function getCard() {
+        const card = models.Card.findOrCreate({
+          where: {
+            email: req.body.email.trim(),
             GameId: parseInt(req.body.gameId)
-          });
+          },
+          defaults: {
+            email: req.body.email.trim(),
+            GameId: parseInt(req.body.gameId)
+          }              
+        })
         return card;
       }
-      let card = await createNewCard();
-      // Add the spaces to the junction table for spaces and cards
 
-      var selectedSpaces = [];
+
+      let card = await getCard();
       
-      async function addSpace(spaceId, position) {
-        const cardSpace = models.Card_Space.create(
-          {
-            checked: false,
-            position: position,
-            SpaceId: spaceId,
-            CardId: card.id
-          });
-        return cardSpace;
-      }
+      if (card[1]) {
+        // Add the spaces to the junction table for spaces and cards
 
-      for (let i = 0; i < 25; i++) {
-        selectedSpaces.push(await addSpace(allSpaces[i].id, i));
-      }
+        var selectedSpaces = [];
+        
+        async function addSpace(spaceId, position) {
+          const cardSpace = models.Card_Space.create(
+            {
+              checked: false,
+              position: position,
+              SpaceId: spaceId,
+              CardId: card[0].id
+            });
+          return cardSpace;
+        }
 
+        for (let i = 0; i < 25; i++) {
+          selectedSpaces.push(await addSpace(allSpaces[i].id, i));
+        }
+      }
+      
       // New card created, but now that it has an ID we need to update it with a hashed ID
-      models.Card.findOne({where: { id: card.id } }).then( (updatedCard) => {
-        updatedCard.hashedId = hashids.encode(card.id);
-        updatedCard.save().then(() => {
+      models.Card.findOne({where: { id: card[0].id } }).then( (updatedCard) => {
+        if (card[1]) {
+          updatedCard.hashedId = hashids.encode(card[0].id);
+          updatedCard.save().then(() => {
+            // Everything worked. Email the new card out.
+            console.log('Sending email');
+            sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
+
+            // Send the new card in the response
+            res.send(updatedCard);
+
+          }).catch(console.error);
+        } else {
           // Everything worked. Email the new card out.
           console.log('Sending email');
           sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
 
           // Send the new card in the response
           res.send(updatedCard);
-
-        }).catch(console.error);
+        }
       });
     }  
   }
