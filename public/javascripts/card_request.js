@@ -25,6 +25,7 @@ document.querySelector("#submit").addEventListener("click", () => {
     .then( (card) => {
       console.log(JSON.parse(card.response));
       if (JSON.parse(card.response).hashedId) {
+        $("#requestForm").hide();
         $("#confirmation").show();
         document.querySelector('#cardLink').innerHTML = '<a href="http://'+location.host+'/play/card/' + JSON.parse(card.response).hashedId +'">View Your Card</a>'
       }
