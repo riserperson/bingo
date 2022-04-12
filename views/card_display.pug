@@ -12,7 +12,6 @@ block content
             table.table
               thead
                 tr
-                  th(scope="col") #
                   th(scope="col") B
                   th(scope="col") I
                   th(scope="col") N
@@ -20,7 +19,6 @@ block content
                   th(scope="col") O
               tbody
                 tr
-                  th(scope="row").d-inline.d-md-none 1
                   - var x = 1;
                   - for (var i = 0; i < 5; i++)
                     td(id='td'+i class='space') 
@@ -32,9 +30,7 @@ block content
                         p         
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn-primary') Check off
                       - x++;
-                      span.d-inline.d-md-none  
                 tr
-                  th(scope="row").d-inline.d-md-none 2
                   - x = 1;
                   - for (var i = 5; i < 10; i++)
                     td(id='td'+card[i]['position'] class='space') 
@@ -48,7 +44,6 @@ block content
                         - x++;
                       span.d-inline.d-md-none  
                 tr
-                  th(scope="row").d-inline.d-md-none 3
                   - x = 1;
                   - for (var i = 10; i < 12; i++)
                     td(id='td'+card[i]['position'] class='space') 
@@ -81,7 +76,6 @@ block content
                         - x++;
                       span.d-inline.d-md-none  
                 tr
-                  th(scope="row").d-inline.d-md-none 4
                   - x = 1;
                   - for (var i = 15; i < 20; i++)
                     td(id='td'+card[i]['position'] class='space') 
@@ -95,7 +89,6 @@ block content
                         - x++;
                       span.d-inline.d-md-none       
                 tr
-                  th(scope="row").d-inline.d-md-none 5
                   - x = 1;
                   - for (var i = 20; i < 25; i++)
                     td(id='td'+card[i]['position'] class='space') 
