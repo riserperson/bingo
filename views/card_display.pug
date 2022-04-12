@@ -58,8 +58,6 @@ block content
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
                         - x++;
-                      div.d-inline.d-md-none
-                        | 3                  
                   td#freeSpace.space.checked 
                     | Free Space
                     input(id='xLoc'+card[i]['position'] type = 'hidden' value = '3')
@@ -90,9 +88,7 @@ block content
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
                         p 
                           button(id = 'button'+card[i]['position'] class='button btn-sm btn btn-sm btn-primary') Check off
-                        - x++;
-                      div.d-inline.d-md-none
-                        | 4                  
+                        - x++;             
                 tr
                   th(scope="row").d-inline.d-md-none 5
                   - x = 1;
