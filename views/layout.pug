@@ -5,17 +5,23 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/favicon.ico')
     meta(charsets='utf-8')
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    link(rel="stylesheet", href='/stylesheets/bootstrap.min.css')
+    link(rel="stylesheet", href='/stylesheets/bootstrap.css')
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css")
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(type='text/javascript', src='/javascripts/decode.js')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
   body.body
     div(class='container min-vh-100 d-flex justify-content-center align-items-center flex-column gap-3')    
       div.row.col-12
         div.col
             div.border.rounded-3.text-center.text-box         
-              a(href="/") Home  
+              a(href="/").masthead BINGO
+              span.material-icons-outlined 
+                
       block content
     
     footer

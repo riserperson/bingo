@@ -46,3 +46,8 @@ table {
 .vlist-checked {
   text-decoration: line-through;
 }
+
+.masthead {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5em;
+}
