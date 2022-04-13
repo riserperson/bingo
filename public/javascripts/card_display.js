@@ -103,10 +103,12 @@ for (j=0; j<5; j++) {
 
 // Check at page load for existing checks
 
-for (var i = 0; i < allCheckValues.length; i++) {
-  if (allCheckValues[i].value == 'true') {
+
+for (var i = 0; i < 25; i++) {
+  console.log(i);
+  if (document.querySelector("#checked"+i).value == 'true') {
     allTds[i].classList.add('bg-warning');
     $('#vlistItem'+i).addClass('vlist-checked');
-    allCheckboxes[i].checked = true;
+    document.querySelector("#checkbox"+i).checked = true;
   }
 }

@@ -109,12 +109,12 @@ block content
               - for (var i = j; i < 25; i += 5)
                 if i==12
                   li.list-group-item.mx-3(id='vlistItem12')
-                    input(type='checkbox' value='checkbox12' disabled).checkbox
+                    input(type='checkbox' value='checkbox12' id='checkbox12' disabled).checkbox
                     |  FREE SPACE
                   - row++;
                 else
                   li.list-group-item.mx-3(id='vlistItem'+i)
-                      input(type="checkbox" value='checkbox'+i).checkbox
+                      input(type="checkbox" value='checkbox'+i id='checkbox'+i).checkbox
                       |  #{letters[j]}-#{row}. #{card[i]['Space']['desc']}
                   - row++;                
                 
