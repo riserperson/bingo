@@ -51,3 +51,7 @@ table {
   font-family: 'Pacifico', cursive;
   font-size: 2.5em;
 }
+
+tr {
+  height: 4em;
+}
