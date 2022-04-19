@@ -1,6 +1,17 @@
 extends layout
 
 block content
+  div.modal.fade#confirmModal(tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true")
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h5.modal-title Confirm
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        div.modal-body
+          p#messageText
+        div.modal-footer
+          button.btn.btn-secondary#cancelButton(type='button' data-bs-dismiss='modal') Cancel
+          button.btn.btn-primary#yesButton Yes
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box
@@ -18,17 +29,20 @@ block content
               | #{game.name}
           if game.name            
             if(game.status == false)
-              button.btn.btn-primary.btn-lg.m-1#gameNameChangeButton Change
-              input.form-control.m-1#gameName(type='text' placeholder='Game Name')
-              button.btn.btn-primary.m-1#gameNameSaveButton Save
-          else            
-            button.btn.btn-primary.m-1#gameNameChangeButton Change
-            input.form-control.m-1#gameName(type='text' placeholder='Game Name')
-            button.btn.btn-primary.btn-lg.m-1#gameNameSaveButton Save
+              form(action='' method='POST' novalidate onsubmit="return false;").m-1
+                button.btn.btn-primary.btn-lg#gameNameChangeButton Change
+                input.form-control#gameName(type='text' placeholder='Game Name')
+                button.btn.btn-primary#gameNameSaveButton Save
+          else
+            form(action='' method='POST' novalidate onsubmit="return false;").m-1
+              button.btn.btn-primary#gameNameChangeButton Change
+              input.form-control#gameName(type='text' placeholder='Game Name')
+              button.btn.btn-primary.btn-lg#gameNameSaveButton(type='submit') Save
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-lg-3      
+        input(type='hidden' id='gameId' name='gameId' value=game.id)  
         div#gameStatusDiv
           if(game.status == false)
             div#gameStatusText Game Pending Start
@@ -63,15 +77,7 @@ block content
                       div.input-group-prepend
                         span.input-group-text#totalSpaces
                       input.form-control#newSpace(type='text' placeholder='New Space' maxlength='80')
-                    input(type='hidden' id='gameId' name='gameId' value=game.id)  
                     button.btn.btn-primary.btn-lg.m-1#addSpaceButton(type="submit") Add Space
-  div.row.col-12#messageBox
-    div.col
-      div.border.rounded-3.text-center.text-box
-        div.col-lg-6.offset-lg-3
-          div#messageText
-          button.btn.btn-primary.btn-lg.m-1#yesButton Yes
-          button.btn.btn-primary.btn-lg.m-1#noButton No
   if(game.status == false)
     div.row.col-12#gameControlsBox
       div.col
@@ -92,5 +98,5 @@ block content
       for error in errors
         li!= error.msg
 
-  append foot
+  append footer
     script(type='text/javascript', src='/javascripts/game_form.js')

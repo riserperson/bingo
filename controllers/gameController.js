@@ -34,7 +34,6 @@ exports.game_detail = function(req, res, next) {
 
 };
 
-// TO DELETE
 // Display game create form on GET
 exports.game_create_get = function(req, res, next) {
   res.render('game_form', { title: 'Create Game' });

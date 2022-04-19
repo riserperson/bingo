@@ -1,6 +1,7 @@
 $("#messageBox").hide();
 $("#generate").hide();
 
+
 var decodeHTML = function (html) {
 	var txt = document.createElement('textarea');
 	txt.innerHTML = html;
@@ -268,6 +269,7 @@ function refreshSpaces() {
           // And a div to hold the text
           let div = document.createElement('div');
           div.setAttribute('id', 'spaceDiv' + spaceId);
+          div.classList.add('spaceDiv');
           div.appendChild(document.createTextNode(i+1 + '. ' + decodeHTML(allSpaces[i].desc)));
           li.appendChild(div);
 
@@ -350,10 +352,6 @@ addSpaceButton.onclick = function() {
   document.getElementById('newSpace').value = '';
 }
 
-// startGameButton.onclick = function() {
-//   updateGame(document.querySelector("#gameName"),document.querySelector("#gameStatus"));
-// }
-
 gameNameSaveButton.onclick = function() {
   updateGameName(document.querySelector("#gameName").value);
 }
@@ -369,95 +367,55 @@ gameNameChangeButton.onclick = function() {
 
 startGameButton.onclick = function() {
   refreshSpaces();
+  var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'), {
+    keyboard: false
+  });
   
-  document.querySelector("#messageText").innerText = "Are you sure you want to start the game? This cannot be undone.";
-  $("#yesButton").show();
-  $("#noButton").show();
-  $("#messageBox").show();
-  $("#gameControlsBox").fadeToggle();
-}
-
-yesButton.onclick = function() {
-  // First let's check and make sure we have 24 spaces. We could check
-  // number of li's on the page, but that wouldn't reflect the current
-  // DB status. Doing it this way instead does create the possibility 
-  // of starting a game without having seen something that someone
-  // has added after you clicked "Start." I'll try to mitigate this
-  // by having the page refresh when you click "start" before 
-  // user clicks "yes" to confirm.
-  
-  var getRequest;
-  var getUrl;
-  getRequest = new XMLHttpRequest();
-  getUrl = "/play/spaces?gameId="+document.getElementById("gameId").value;
-
-  try
-    {
-      getRequest.onreadystatechange=getGetStatus;
-      getRequest.open("GET",getUrl,true);
-      getRequest.send();
-    }
-  catch(e)
-    {
-      alert("Unable to process GET request");
-    }
- 
-  function getGetStatus() {
-    if(getRequest.readyState==4) {
-      var allSpaces=JSON.parse(getRequest.responseText);
-      if (!allSpaces) {
-        // Response is null
-        console.log("GET request yielded null response.");
-      } else {
-        // Check whether we have 24 spaces
-        if(allSpaces.length < 24) {          
-          document.querySelector("#messageText").innerText = "You need at least 24 spaces to start.";
-          $("#yesButton").hide();
-          $("#noButton").hide(); 
-          $("#messageBox").delay(5000).slideToggle();
-          $("#gameControlsBox").show();
-        // Check whether there's a game name
-        } else if(document.querySelector("#gameNameDiv").innerText == '') {
-          document.querySelector("#messageText").innerText = "You need a game name to start.";
-          $("#yesButton").hide();
-          $("#noButton").hide(); 
-          $("#messageBox").delay(5000).slideToggle();
-          $("#gameControlsBox").show();
-        // Otherwise, proceed with changing the game status and then refresh the page.
-        } else {
-          var postRequest;
-          var postUrl;
-          postRequest = new XMLHttpRequest();
-          postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
-          return new Promise(function (resolve, reject) {
-            postRequest.onreadystatechange = function() {
-              if (postRequest.readyState !== 4) return;
-              if (postRequest.status >= 200 && postRequest.status < 300) {
-                resolve(postRequest);
-              } else {
-                reject({
-                  status: postRequest.status,
-                  statusText: postRequest.statusText
-                });
-              }
-            };
-            postRequest.open('POST', postUrl, true);
-            postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            postRequest.send('gameName='+document.querySelector('#gameName').value + '&gameStatus=true');
-          }).then(resolve => {
-            location.reload();
-          });
-        }
-      }  
-    }
+  // Check whether there are 24 spaces on the page
+  if (document.querySelectorAll('.spaceDiv').length < 25) {
+    document.querySelector("#messageText").innerText = 'You need at least 24 spaces to start the game.';
+    $('#cancelButton').text('Close');
+    $('#yesButton').hide();
+    confirmModal.show();
+  } else if (document.querySelector("#gameNameDiv").innerText == '') {
+    document.querySelector('#messageText').innerText = 'You need to set a game name in order to start.';
+    $('#cancelButton').text('Close');
+    $('#yesButton').hide();
+    confirmModal.show();
+  } else {
+    document.querySelector('#messageText').innerText = 'Are you sure you want to start the game? This cannot be undone.';
+    $('#cancelButton').text('Cancel');
+    $('#yesButton').show();
+    confirmModal.show();
   }
 }
 
-noButton.onclick = function() {
-  document.querySelector("#messageText").innerText = "";
-  $("#gameControlsBox").show();
-  $("#messageBox").hide();
+yesButton.onclick = function() {
+  console.log('hello');
+  var postRequest;
+  var postUrl;
+  postRequest = new XMLHttpRequest();
+  postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
+  return new Promise(function (resolve, reject) {
+    postRequest.onreadystatechange = function() {
+      if (postRequest.readyState !== 4) return;
+      if (postRequest.status >= 200 && postRequest.status < 300) {
+        resolve(postRequest);
+      } else {
+        reject({
+          status: postRequest.status,
+          statusText: postRequest.statusText
+        });
+      }
+    };
+    postRequest.open('POST', postUrl, true);
+    postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    postRequest.send('gameName='+document.querySelector('#gameName').value + '&gameStatus=true');
+  }).then(resolve => {
+    location.reload();
+  });
 }
+
 
 refresh.onclick = refreshSpaces();
 

@@ -150,7 +150,9 @@ exports.card_display = function(req, res, next) {
     })
     .then( (result) => {
       //res.send(result);
-      res.render('card_display', { card: result });
+      models.Game.findOne( {where: { id: card.GameId } }).then(function (game) {
+        res.render('card_display', { card: result, code: game.code, player: card.email });
+      });
     });
   });
 }
