@@ -1,20 +1,29 @@
 extends layout
 
 block content
+  div.modal.fade#alertModal(tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true")
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h5.modal-title Alert
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        div.modal-body
+          p#messageText
+        div.modal-footer
+          button.btn.btn-secondary#cancelButton(type='button' data-bs-dismiss='modal') Close
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-lg-3
           form.justify-content-center(method='POST' action='/play/game/create')
             div.form-group
-              button.btn.btn-primary.m-3.btn-lg(type='submit') Create a New Game
-              button.btn.btn-primary.m-3.btn-lg(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal') Test
-              
-  div.row.col-12#messageBox
-    div.col
-      div.border.rounded-3.text-box.text-center
-        div.col-lg-6.offset-lg-3
-          | Invalid code!
+              button.btn.btn-primary.m-3.btn-lg(type='submit') Create a New Game              
+  if error
+    div.row.col-12#messageBox
+      div.col
+        div.border.rounded-3.text-box.text-center
+          div.col-lg-6.offset-lg-3
+            | Invalid code!
   div.row.col-12
     div.col
       div.border.rounded-3.text-box.text-center

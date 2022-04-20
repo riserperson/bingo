@@ -1,6 +1,4 @@
-$("#messageBox").hide();
-$("#generate").hide();
-
+$('#generate').hide();
 
 var decodeHTML = function (html) {
 	var txt = document.createElement('textarea');
@@ -18,7 +16,6 @@ if(document.querySelector("#gameNameDiv").innerText != "") {
 if($("#gameStatus").value == 'true') {
   $("#gameNameSaveButton").hide();
 }
-
 
 function parseGameStatus(gameStatus) {
   // Parse a bool status or string 'true' to string
@@ -65,14 +62,15 @@ function deleteSpace(id) {
   var postUrl;
   postRequest = new XMLHttpRequest();
   postUrl = "/play/space/"+ id +"/delete";
-
+  
   return new Promise(function (resolve, reject) {
+  
     postRequest.onreadystatechange = function() {
       if (postRequest.readyState !== 4) return;
       if (postRequest.status >= 200 && postRequest.status < 300) {
         resolve(postRequest);
       } else {
-        reject({
+        reject({ 
           status: postRequest.status,
           statusText: postRequest.statusText
         });
@@ -270,7 +268,7 @@ function refreshSpaces() {
           let div = document.createElement('div');
           div.setAttribute('id', 'spaceDiv' + spaceId);
           div.classList.add('spaceDiv');
-          div.appendChild(document.createTextNode(i+1 + '. ' + decodeHTML(allSpaces[i].desc)));
+          div.appendChild(document.createTextNode(i+1 + '. ' + allSpaces[i].desc));
           li.appendChild(div);
 
           // Use a hidden input to keep track of the space id
@@ -391,7 +389,6 @@ startGameButton.onclick = function() {
 }
 
 yesButton.onclick = function() {
-  console.log('hello');
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();

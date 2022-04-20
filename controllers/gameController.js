@@ -185,12 +185,16 @@ exports.game_join = [
           code: req.body.gameCode
         }
       }).then(game => {
-        res.redirect(game.url + '/update');
+        if (game===null) {
+          res.render('index', { error: 'Game not found' });
+        } else {
+          res.redirect(game.url + '/update');
+        }
+        
       })
       .catch(err => {
         // Game not found
-
-        res.redirect('/', error = err);
+        res.render('index', { error: 'Game not found' });
       });
     }
   }
