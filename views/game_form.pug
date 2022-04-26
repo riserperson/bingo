@@ -12,12 +12,24 @@ block content
         div.modal-footer
           button.btn.btn-secondary#cancelButton(type='button' data-bs-dismiss='modal') Cancel
           button.btn.btn-primary#yesButton Yes
+  div.modal.fade#shareModal(tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true")
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h5.modal-title Share
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        div.modal-body
+          p#messageText
+        div.modal-footer
+          button.btn.btn-secondary#cancelButton(type='button' data-bs-dismiss='modal') Cancel
+          button.btn.btn-primary#sendButton Send
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-lg-3
           h1
             | Game Code: #{game.code}
+            a(href='send') Send game code
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box.quaternary
@@ -76,7 +88,7 @@ block content
                     div.input-group
                       div.input-group-prepend
                         span.input-group-text#totalSpaces
-                      input.form-control#newSpace(type='text' placeholder='New Space' maxlength='80')
+                      input.form-control#newSpace(type='text' placeholder='New Space' maxlength='120')
                     button.btn.btn-primary.btn-lg.m-1#addSpaceButton(type="submit") Add Space
   if(game.status == false)
     div.row.col-12#gameControlsBox
