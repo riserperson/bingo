@@ -28,7 +28,7 @@ block content
       div.border.rounded-3.text-center.text-box
         div.col-lg-6.offset-lg-3
           h1
-            | Game Code: #{game.code}
+            | Game Code: !{game.code}
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box.quaternary
@@ -37,7 +37,7 @@ block content
           div#gameNameDiv
             if game.name
             h2 
-              | #{game.name}
+              | !{game.name}
           if game.name            
             if(game.status == false)
               form(action='' method='POST' novalidate onsubmit="return false;").m-1

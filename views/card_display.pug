@@ -6,8 +6,8 @@ block content
       div.border.rounded-3.text-box.quaternary
         div
           div.text-center
-            h4 Game Code: #{code}
-            h4 Player: #{player}
+            h4 Game Code: !{code}
+            h4 Player: !{player}
             input(id='gameId' type='hidden' value=card[0]['Space'].GameId)
             input(id='cardId' type='hidden' value=card[0].CardId)
             table.table.table-bordered.table-sm

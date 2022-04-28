@@ -101,7 +101,7 @@ function addSaveSpaceButtonListener(spaceId) {
     let button = document.querySelector('#saveButton' + spaceId);
     button.onclick = function() {
       let desc = document.querySelector('#spaceInput' + spaceId).value;
-      document.querySelector('#spaceDiv' + spaceId).innerText = desc;
+      document.querySelector('#spaceDiv' + spaceId).innerText = document.querySelector('#spaceIdListPlace' + spaceId).value + '. ' + desc;
       $('#spaceDiv' + spaceId).show();
       
       // Update using previously defined function
@@ -272,11 +272,18 @@ function refreshSpaces() {
           li.appendChild(div);
 
           // Use a hidden input to keep track of the space id
-          let hiddenInput = document.createElement('input');
-          hiddenInput.setAttribute('type', 'hidden');
-          hiddenInput.setAttribute('id', 'spaceId' + spaceId);
-          hiddenInput.setAttribute('value', allSpaces[i].id);
-          li.appendChild(hiddenInput);
+          let hiddenInput0 = document.createElement('input');
+          hiddenInput0.setAttribute('type', 'hidden');
+          hiddenInput0.setAttribute('id', 'spaceId' + spaceId);
+          hiddenInput0.setAttribute('value', allSpaces[i].id);
+          li.appendChild(hiddenInput0);
+
+          // Use a hidden input to keep track of the list order
+          let hiddenInput1 = document.createElement('input');
+          hiddenInput1.setAttribute('type', 'hidden');
+          hiddenInput1.setAttribute('id', 'spaceIdListPlace' + spaceId);
+          hiddenInput1.setAttribute('value', i+1);
+          li.appendChild(hiddenInput1);  
 
           // And an input box for edit mode
           let input = document.createElement('input');
