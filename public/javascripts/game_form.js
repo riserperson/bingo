@@ -268,7 +268,7 @@ function refreshSpaces() {
           let div = document.createElement('div');
           div.setAttribute('id', 'spaceDiv' + spaceId);
           div.classList.add('spaceDiv');
-          div.appendChild(document.createTextNode(i+1 + '. ' + allSpaces[i].desc));
+          div.appendChild(document.createTextNode(i+1 + '. ' + decodeHTML(allSpaces[i].desc));
           li.appendChild(div);
 
           // Use a hidden input to keep track of the space id
@@ -361,7 +361,6 @@ gameNameChangeButton.onclick = function() {
   $('#gameNameSaveButton').show();
   $('#gameNameChangeButton').hide();
 }
-
 
 startGameButton.onclick = function() {
   refreshSpaces();
