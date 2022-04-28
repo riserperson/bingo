@@ -282,7 +282,7 @@ function refreshSpaces() {
           let input = document.createElement('input');
           input.setAttribute('type', 'text');
           input.setAttribute('id', 'spaceInput' + spaceId);
-          input.setAttribute('value', decodeHMTML(allSpaces[i].desc));
+          input.setAttribute('value', decodeHTML(allSpaces[i].desc));
           input.setAttribute('maxlength','100')
           input.classList.add('noShow');
           li.appendChild(input);
