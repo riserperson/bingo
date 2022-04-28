@@ -90,8 +90,8 @@ function addChangeSpaceButtonListener(spaceId) {
 
       $('#spaceInput' + spaceId).show();
       $('#changeButton' + spaceId).hide();
-
       $('#saveButton' + spaceId).show()
+      $('#cancelButton' + spaceId).show()      
     };
   }
 }
@@ -110,8 +110,22 @@ function addSaveSpaceButtonListener(spaceId) {
       $('#spaceInput' + spaceId).hide();
       
       $('#saveButton' + spaceId).hide();
-
+      $('#cancelButton' + spaceId).hide()
       $('#changeButton' + spaceId).show();
+    };
+  }
+}
+
+function addCancelButtonListener(spaceId) {
+  if (document.querySelector('#cancelButton' + spaceId)) {
+    let button = document.querySelector('#cancelButton' + spaceId);
+    button.onclick = function() {
+      $('#spaceDiv' + spaceId).show();
+
+      $('#spaceInput' + spaceId).hide();
+      $('#changeButton' + spaceId).show();
+      $('#saveButton' + spaceId).hide()
+      $('#cancelButton' + spaceId).hide()
     };
   }
 }
@@ -291,22 +305,28 @@ function refreshSpaces() {
           input.setAttribute('id', 'spaceInput' + spaceId);
           input.setAttribute('value', decodeHTML(allSpaces[i].desc));
           input.setAttribute('maxlength','100')
-          input.classList.add('noShow');
           li.appendChild(input);
 
           // Adding a change button
           let changeButton = document.createElement('button');
           changeButton.innerText = 'Change';
           changeButton.setAttribute('id', 'changeButton' + spaceId);
-          changeButton.classList.add('show','btn','btn-tertiary','m-1');
+          changeButton.classList.add('btn','btn-tertiary','m-1');
           li.appendChild(changeButton);
 
           // And a save button
           let saveButton = document.createElement('button');
           saveButton.innerText = 'Save';
           saveButton.setAttribute('id', 'saveButton' + spaceId);
-          saveButton.classList.add('noShow','btn','btn-tertiary','m-1');
+          saveButton.classList.add('btn','btn-tertiary','m-1');
           li.appendChild(saveButton);
+
+          // And a cancel button
+          let cancelButton = document.createElement('button');
+          cancelButton.innerText = 'Cancel';
+          cancelButton.setAttribute('id', 'cancelButton' + spaceId);
+          cancelButton.classList.add('btn','btn-tertiary','m-1');
+          li.appendChild(cancelButton);
 
           // And a delete button
           let deleteButton = document.createElement('button');
@@ -318,7 +338,12 @@ function refreshSpaces() {
           document.querySelector('#spaceList').insertBefore(li, document.querySelector('#newSpaceLi'));
           addChangeSpaceButtonListener(spaceId);
           addSaveSpaceButtonListener(spaceId);
+          addCancelButtonListener(spaceId);
           addDeleteSpaceButtonListener(spaceId);
+          $('#saveButton'+spaceId).hide();
+          $('#cancelButton'+spaceId).hide();
+          $('#spaceInput'+spaceId).hide();
+
         }
         document.querySelector("#totalSpaces").innerHTML = allSpaces.length+1 + '. ';
       }
