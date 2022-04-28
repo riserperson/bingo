@@ -25,7 +25,7 @@ block content
                   - for (var i = 0; i < 5; i++)
                     td(id='td'+i class='space') 
                       div.d-none.d-md-inline
-                        | #{card[i]['Space']['desc']}
+                        | !{card[i]['Space']['desc']}
                         input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
                         input(id='yLoc'+card[i]['position'] type = 'hidden' value = '5')
                         input(id='checked'+card[i]['position'] type='hidden' value = ''+card[i]['checked'] class='checkValue')
@@ -37,7 +37,7 @@ block content
                   - for (var i = 5; i < 10; i++)
                     td(id='td'+card[i]['position'] class='space') 
                       div.d-none.d-md-inline
-                        | #{card[i]['Space']['desc']}
+                        | !{card[i]['Space']['desc']}
                         input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
                         input(id='yLoc'+card[i]['position'] type = 'hidden' value = '4')
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
@@ -50,7 +50,7 @@ block content
                   - for (var i = 10; i < 12; i++)
                     td(id='td'+card[i]['position'] class='space') 
                       div.d-none.d-md-inline
-                        | #{card[i]['Space']['desc']}
+                        | !{card[i]['Space']['desc']}
                         input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
                         input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
@@ -69,7 +69,7 @@ block content
                   - for (var i = 13; i < 15; i++)
                     td(id='td'+card[i]['position'] class='space') 
                       div.d-none.d-md-inline
-                        | #{card[i]['Space']['desc']}
+                        | !{card[i]['Space']['desc']}
                         input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
                         input(id='yLoc'+card[i]['position'] type = 'hidden' value = '3')
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
@@ -82,7 +82,7 @@ block content
                   - for (var i = 15; i < 20; i++)
                     td(id='td'+card[i]['position'] class='space') 
                       div.d-none.d-md-inline
-                        | #{card[i]['Space']['desc']}
+                        | !{card[i]['Space']['desc']}
                         input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
                         input(id='yLoc'+card[i]['position'] type = 'hidden' value = '2')
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
@@ -95,7 +95,7 @@ block content
                   - for (var i = 20; i < 25; i++)
                     td(id='td'+card[i]['position'] class='space') 
                       div.d-none.d-md-inline
-                        | #{card[i]['Space']['desc']}
+                        | !{card[i]['Space']['desc']}
                         input(id='xLoc'+card[i]['position'] type = 'hidden' value = x)
                         input(id='yLoc'+card[i]['position'] type = 'hidden' value = '1')
                         input(id='checked'+i type='hidden' value = ''+card[i]['checked'] class='checkValue')
@@ -116,7 +116,7 @@ block content
                 else
                   li.list-group-item.mx-3(id='vlistItem'+i)
                       input(type="checkbox" value='checkbox'+i id='checkbox'+i).checkbox
-                      |  #{letters[j]}-#{row}. #{card[i]['Space']['desc']}
+                      |  !{letters[j]}-!{row}. !{card[i]['Space']['desc']}
                   - row++;                
                 
 
