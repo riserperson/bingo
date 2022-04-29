@@ -37,7 +37,7 @@ block content
           div#gameNameDiv
             if game.name
             h2 
-              | !{game.name}
+              | #{game.name}
           if game.name            
             if(game.status == false)
               form(action='' method='POST' novalidate onsubmit="return false;").m-1

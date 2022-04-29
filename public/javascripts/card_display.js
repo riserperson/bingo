@@ -3,6 +3,16 @@ var allTds = document.querySelectorAll('.space');
 var allCheckValues = document.querySelectorAll('.checkValue');
 var allCheckboxes = document.querySelectorAll('.checkbox')
 
+// Function to check for a win
+
+function checkWin() {
+  for (var i = 0; i < allTds.length; i++) {  
+    for (var j = 0; j < 5; j++) {
+      
+    }
+  }
+}
+
 // Create the listener function for buttons in large view
 
 function setCheckButtonListener(button, position) {
@@ -33,6 +43,7 @@ function setCheckButtonListener(button, position) {
       postRequest.send('cardId=' + document.querySelector('#cardId').value + '&position=' + position + '&checked=' + checked);
     })
     .then( (space) => {
+
       document.querySelector('#checked'+position).value = JSON.parse(space.response).checked;
       if (JSON.parse(space.response).checked) {
         document.querySelector('#td'+position).classList.add('bg-warning');
