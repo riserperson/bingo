@@ -7,24 +7,56 @@ var allCheckboxes = document.querySelectorAll('.checkbox')
 
 function checkWin() {
   var checked = [];
-  for (i = 0; i < 25; i++) {
+  for (var i = 0; i < 25; i++) {
     if (allTds[i].classList.contains("bg-warning")) {
         checked.push(i);
     }
   }
-  console.log(checked);
-  var counter = 1;
-  for (var checkedCounter = 0; checkedCounter < checked.length; checkedCounter++) {
-    for (var i = 1; i < 6; i++) {
-        if (checked.includes(checkedCounter+(i*5))) {
-          console.log(checked[checkedCounter]);
-            counter++;
-        }
+
+  var winners = [];
+  var counter = 0;
+  for (var i = 0; i < 5; i++) {
+    winners.push([]);
+    for (var j = 0; j < 5; j++) {
+      winners[i].push(counter);
+      counter++;
     }
-    counter = 1;
   }
-  if (counter >= 5) {
-    return true;
+
+  var counter = 0;
+  for (var i = 0; i < 5; i++) {
+    winners.push([]);
+    counter = i;
+    for (var j = 0; j < 5; j++) {
+      winners[i].push(counter);
+      counter+=5;
+    }
+  }
+  
+  winners.push([0,6,12,18,24]);
+  winners.push([4,8,12,16,20]);
+
+  var maxLine = 0;
+  var winnineLine = -1;
+
+  for (var i = 0; i < winners.length; i++) {
+    counter = 0;
+    for (var j = 0; j < 5; j++) {
+      if (checked.includes(winners[i][j])) {
+        counter++;
+      }
+    }
+    if (counter > maxLine) {
+      maxLine = counter;
+    }
+    if (counter == 5) {
+      winningLine = i;
+    }
+  }
+
+  
+  if (maxLine >= 5) {
+    return winners[winningLine];
   } else {
     return false;
   }
@@ -66,6 +98,13 @@ function setCheckButtonListener(button, position) {
         document.querySelector('#td'+position).classList.add('bg-warning');
       } else {
         document.querySelector('#td'+position).classList.remove('bg-warning');
+      }
+      if (checkWin()) {
+        var winners = checkWin();
+        for (var i = 0; i < 5; i++) {
+            allTds[winners[i]].classList.remove('bg-warning');
+            allTds[winners[i]].classList.add('bg-success');
+        }
       }
     });
   }
