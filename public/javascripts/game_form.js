@@ -353,34 +353,37 @@ function refreshSpaces() {
 
 refreshSpaces();
 
-addSpaceButton.onclick = function() {
-  var postRequest;
-  var postUrl;
-  postRequest = new XMLHttpRequest();
-  postUrl = "/play/space/create";
-
-  try
-    {
-      postRequest.onreadystatechange=getPostStatus;
-      postRequest.open("POST",postUrl,true);
-      postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      postRequest.send("desc="+document.getElementById("newSpace").value+"&gameId="+document.getElementById("gameId").value);
-    }
-  catch(e)
-    {
-      alert("Unable to connect to server");
-    }
+if(addSpaceButton) {
+  addSpaceButton.onclick = function() {
+    var postRequest;
+    var postUrl;
+    postRequest = new XMLHttpRequest();
+    postUrl = "/play/space/create";
   
-  function getPostStatus() {
-    if(postRequest.readyState==4) {
-      var val=postRequest.status;
-      if (val===200) {
-        refreshSpaces();
+    try
+      {
+        postRequest.onreadystatechange=getPostStatus;
+        postRequest.open("POST",postUrl,true);
+        postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        postRequest.send("desc="+document.getElementById("newSpace").value+"&gameId="+document.getElementById("gameId").value);
+      }
+    catch(e)
+      {
+        alert("Unable to connect to server");
+      }
+    
+    function getPostStatus() {
+      if(postRequest.readyState==4) {
+        var val=postRequest.status;
+        if (val===200) {
+          refreshSpaces();
+        }
       }
     }
+    document.getElementById('newSpace').value = '';
   }
-  document.getElementById('newSpace').value = '';
 }
+
 
 gameNameSaveButton.onclick = function() {
   updateGameName(document.querySelector("#gameName").value);

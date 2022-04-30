@@ -6,10 +6,27 @@ var allCheckboxes = document.querySelectorAll('.checkbox')
 // Function to check for a win
 
 function checkWin() {
-  for (var i = 0; i < allTds.length; i++) {  
-    for (var j = 0; j < 5; j++) {
-      
+  var checked = [];
+  for (i = 0; i < 25; i++) {
+    if (allTds[i].classList.contains("bg-warning")) {
+        checked.push(i);
     }
+  }
+  console.log(checked);
+  var counter = 1;
+  for (var checkedCounter = 0; checkedCounter < checked.length; checkedCounter++) {
+    for (var i = 1; i < 6; i++) {
+        if (checked.includes(checkedCounter+(i*5))) {
+          console.log(checked[checkedCounter]);
+            counter++;
+        }
+    }
+    counter = 1;
+  }
+  if (counter >= 5) {
+    return true;
+  } else {
+    return false;
   }
 }
 
