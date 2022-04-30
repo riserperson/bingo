@@ -105,6 +105,8 @@ function setCheckButtonListener(button, position) {
             allTds[winners[i]].classList.remove('bg-warning');
             allTds[winners[i]].classList.add('bg-success');
         }
+      } else {
+        location.reload();
       }
     });
   }
@@ -153,6 +155,15 @@ function setCheckBoxListener(checkbox, position) {
       } else {
         document.querySelector('#td'+position).classList.remove('bg-warning');
         $('#vlistItem'+position).removeClass('vlist-checked')
+      }
+      if (checkWin()) {
+        var winners = checkWin();
+        for (var i = 0; i < 5; i++) {
+            allTds[winners[i]].classList.remove('bg-warning');
+            allTds[winners[i]].classList.add('bg-success');
+        }
+      } else {
+        location.reload();
       }
     });
   }
