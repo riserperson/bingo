@@ -1,3 +1,5 @@
+/*
+
 $('#generate').hide();
 
 var decodeHTML = function (html) {
@@ -390,14 +392,12 @@ gameNameSaveButton.onclick = function() {
 }
 
 gameNameChangeButton.onclick = function() {
-  console.log('hello');
-  /*
+
   document.querySelector('#gameName').value = document.querySelector('#gameNameDiv').innerText;
   document.querySelector('#gameNameDiv').innerText = '';
   $('#gameName').show();
   $('#gameNameSaveButton').show();
   $('#gameNameChangeButton').hide();
-  */
 }
 
 startGameButton.onclick = function() {
@@ -478,3 +478,5 @@ generate.onclick = () => {
     refreshSpaces();
   });
 }
+
+*/
