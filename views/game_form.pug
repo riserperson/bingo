@@ -40,12 +40,12 @@ block content
               | #{game.name}
           if game.name            
             if(game.status == false)
-              
-              button.btn.btn-primary.btn-lg#gameNameChangeButton Change
-              input.form-control#gameName(type='text' placeholder='Game Name')
-              button.btn.btn-primary#gameNameSaveButton Save
+              form(action='' method='POST' novalidate).m-1.emptyform
+                button.btn.btn-primary.btn-lg#gameNameChangeButton Change
+                input.form-control#gameName(type='text' placeholder='Game Name')
+                button.btn.btn-primary#gameNameSaveButton Save
           else
-            form(action='' method='POST' novalidate onsubmit="return false;").m-1
+            form(action='' method='POST' novalidate).m-1.emptyform
               button.btn.btn-primary#gameNameChangeButton Change
               input.form-control#gameName(type='text' placeholder='Game Name')
               button.btn.btn-primary.btn-lg#gameNameSaveButton(type='submit') Save
@@ -83,7 +83,7 @@ block content
                           | Once you start the game you cannot add more spaces, but you can get a card and start playing!
               ul.m-1.list-group#spaceList
                 li.list-group-item#newSpaceLi
-                  form(action='' method='POST' novalidate onsubmit="return false;")
+                  form(action='' method='POST' novalidate).emptyform
                     div.input-group
                       div.input-group-prepend
                         span.input-group-text#totalSpaces
