@@ -40,10 +40,10 @@ block content
               | #{game.name}
           if game.name            
             if(game.status == false)
-              form(action='' method='POST' novalidate onsubmit="return false;").m-1
-                button.btn.btn-primary.btn-lg#gameNameChangeButton Change
-                input.form-control#gameName(type='text' placeholder='Game Name')
-                button.btn.btn-primary#gameNameSaveButton Save
+              
+              button.btn.btn-primary.btn-lg#gameNameChangeButton Change
+              input.form-control#gameName(type='text' placeholder='Game Name')
+              button.btn.btn-primary#gameNameSaveButton Save
           else
             form(action='' method='POST' novalidate onsubmit="return false;").m-1
               button.btn.btn-primary#gameNameChangeButton Change
