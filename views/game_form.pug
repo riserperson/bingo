@@ -40,15 +40,15 @@ block content
               | #{game.name}
           if game.name            
             if(game.status == false)
-              form(action='' method='POST' novalidate).m-1.emptyform
-                button.btn.btn-primary.btn-lg#gameNameChangeButton Change
-                input.form-control#gameName(type='text' placeholder='Game Name')
-                button.btn.btn-primary#gameNameSaveButton Save
-          else
-            form(action='' method='POST' novalidate).m-1.emptyform
-              button.btn.btn-primary#gameNameChangeButton Change
+              
+              button.btn.btn-primary.btn-lg#gameNameChangeButton Change
               input.form-control#gameName(type='text' placeholder='Game Name')
-              button.btn.btn-primary.btn-lg#gameNameSaveButton(type='submit') Save
+              button.btn.btn-primary#gameNameSaveButton Save
+          else
+        
+            button.btn.btn-primary#gameNameChangeButton Change
+            input.form-control#gameName(type='text' placeholder='Game Name')
+            button.btn.btn-primary.btn-lg#gameNameSaveButton(type='submit') Save
   div.row.col-12
     div.col
       div.border.rounded-3.text-center.text-box
@@ -83,12 +83,12 @@ block content
                           | Once you start the game you cannot add more spaces, but you can get a card and start playing!
               ul.m-1.list-group#spaceList
                 li.list-group-item#newSpaceLi
-                  form(action='' method='POST' novalidate).emptyform
-                    div.input-group
-                      div.input-group-prepend
-                        span.input-group-text#totalSpaces
-                      input.form-control#newSpace(type='text' placeholder='New Space' maxlength='120')
-                    button.btn.btn-primary.btn-lg.m-1#addSpaceButton(type="submit") Add Space
+                  
+                  div.input-group
+                    div.input-group-prepend
+                      span.input-group-text#totalSpaces
+                    input.form-control#newSpace(type='text' placeholder='New Space' maxlength='120')
+                  button.btn.btn-primary.btn-lg.m-1#addSpaceButton(type="submit") Add Space
   if(game.status == false)
     div.row.col-12#gameControlsBox
       div.col

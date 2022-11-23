@@ -451,10 +451,6 @@ yesButton.onclick = function() {
 
 refresh.onclick = refreshSpaces();
 
-$('.emptyform').onsubmit = () => {
-  return false;
-}
-
 generate.onclick = () => {
   var postRequest;
   var postUrl;
