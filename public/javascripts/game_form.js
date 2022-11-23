@@ -1,5 +1,3 @@
-/*
-
 $('#generate').hide();
 
 var decodeHTML = function (html) {
@@ -478,5 +476,3 @@ generate.onclick = () => {
     refreshSpaces();
   });
 }
-
-*/
