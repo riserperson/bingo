@@ -34,7 +34,7 @@ exports.card_send_post = function(req, res, next) {
       from: 'bingo@iserman.org',
       to: email,
       subject: 'Here\'s your BINGO card',
-      text: 'Your BINGO card can be reached here: richardiserman.com/play/card/'+hashedId+'. Please keep this email! You will need this link anytime you wish to access your BINGO card.'
+      text: 'Your BINGO card can be reached here: https://richardiserman.com/play/card/'+hashedId+'. Please keep this email! You will need this link anytime you wish to access your BINGO card.'
     });
   }
 
