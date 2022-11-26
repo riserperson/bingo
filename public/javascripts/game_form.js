@@ -182,65 +182,6 @@ function updateGameName(gameName) {
   }
 }
 
-function lockGame() {
-  document.querySelector('#requestCardButtonBox').classList.remove('noShow');
-  document.querySelector('#requestCardButtonBox').classList.add('show');
-  document.querySelector('#spaceRow').classList.add('noShow');
-  document.querySelector('#gameControlsBox').classList.remove('show');
-  document.querySelector('#gameControlsBox').classList.add('noShow');
-  document.querySelector('#gameStateConfirmBox').classList.remove('show');
-  document.querySelector('#gameStateConfirmBox').classList.add('noShow');
-  document.querySelector('#gameNameChangeButton').classList.remove('show');
-  document.querySelector('#gameNameChangeButton').classList.add('noShow');
-}
-
-//DELETE THIS FUNCTION
-function toggleGameStatus(currentStatus) {
-  //Tweaking this to make this less of a toggle and more of a one-way change.
-  //Rather than letting users endlessly go back and forth, now we expose
-  //A hidden div (later could animate) with a confirmation request
-  //Starting a game is now one-way. 
-  var postRequest;
-  var postUrl;
-  postRequest = new XMLHttpRequest();
-  postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
-  if (currentStatus == 'false') {
-    var gameStatus = 'true';
-  } else {
-    var gameStatus = 'false';
-  }
-
-  try
-    {
-      postRequest.onreadystatechange=getPostStatus;
-      postRequest.open("POST",postUrl,true);
-      postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      postRequest.send('gameName='+document.querySelector('#gameName').value + '&gameStatus=' + gameStatus);
-  }
-  catch(e)
-    {
-      alert("Unable to process POST request");
-    }
- 
-  function getPostStatus() {
-    if(postRequest.readyState==4) {
-      var game=JSON.parse(postRequest.responseText);
-      if (!game) {
-        // Response is null
-        console.log('GET request yielded null response.');
-      } else {
-        document.querySelector('#gameStatus').value = game.status;
-        document.querySelector('#gameStatusText').innerText = parseGameStatus(game.status);
-        if (game.status == true) {
-          location.reload();
-        } 
-     }
-    }
-  }
-}
-
-
-
 function refreshSpaces() {
   var getRequest;
   var getUrl;
