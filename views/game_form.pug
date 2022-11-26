@@ -34,9 +34,9 @@ block content
       div.border.rounded-3.text-center.text-box.quaternary
         div.col-lg-6.offset-lg-3
           | Game Name:
-          div#gameNameDiv
+          div
             if game.name
-            h2 
+            h2#gameNameDiv
               | #{game.name}
           if game.name            
             if(game.status == false)
