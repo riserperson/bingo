@@ -25,10 +25,10 @@ app.use(require('express-session') ({
   saveUninitialized: false
 }));
 app.use(require('connect-multiparty')());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/',express.static(path.join(__dirname, 'public')));
+app.use('/bingo',express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/play', playRouter);
 
 module.exports = app;
 
