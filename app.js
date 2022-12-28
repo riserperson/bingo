@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const dotenv = require('dotenv').config()
 var indexRouter = require('./routes/index');
-var playRouter = require('./routes/play'); // Import routes for "play" area of site
 
 var models = require('./models');
 
