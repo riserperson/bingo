@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const dotenv = require('dotenv').config()
 var indexRouter = require('./routes/index');
-var playRouter = require('./routes/play'); // Import routes for "play" area of site
 
 var models = require('./models');
 
@@ -26,11 +25,13 @@ app.use(require('express-session') ({
   saveUninitialized: false
 }));
 app.use(require('connect-multiparty')());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/play', playRouter);
+app.use('/bingo', indexRouter);
+
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/bingo', express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
+
 
 app.listen(process.env.PORT || '8080',process.env.IP,() => console.log("Server is running."));

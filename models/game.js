@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     url: {
        type: DataTypes.VIRTUAL,
        get() {
-         return '/play/game/' + this.getDataValue('id')
+         return '/bingo/game/' + this.getDataValue('id')
        }
     }
   }, {});
