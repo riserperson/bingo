@@ -30,7 +30,7 @@ function updateSpaceDesc(id, desc) {
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
-  postUrl = "/play/space/"+ id +"/update";
+  postUrl = "/bingo/space/"+ id +"/update";
 
   try
     {
@@ -61,7 +61,7 @@ function deleteSpace(id) {
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
-  postUrl = "/play/space/"+ id +"/delete";
+  postUrl = "/bingo/space/"+ id +"/delete";
   
   return new Promise(function (resolve, reject) {
   
@@ -145,7 +145,7 @@ function updateGameName(gameName) {
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
-  postUrl = "/play/game/"+document.querySelector("#gameId").value+"/update";
+  postUrl = "/bingo/game/"+document.querySelector("#gameId").value+"/update";
 
   try
     {
@@ -186,7 +186,7 @@ function refreshSpaces() {
   var getRequest;
   var getUrl;
   getRequest = new XMLHttpRequest();
-  getUrl = "/play/spaces?gameId="+document.getElementById("gameId").value;
+  getUrl = "/bingo/spaces?gameId="+document.getElementById("gameId").value;
 
   try
     {
@@ -299,7 +299,7 @@ if(addSpaceButton) {
     var postRequest;
     var postUrl;
     postRequest = new XMLHttpRequest();
-    postUrl = "/play/space/create";
+    postUrl = "/bingo/space/create";
   
     try
       {
@@ -368,7 +368,7 @@ yesButton.onclick = function() {
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
-  postUrl = '/play/game/'+document.querySelector('#gameId').value+'/update';
+  postUrl = '/bingo/game/'+document.querySelector('#gameId').value+'/update';
   return new Promise(function (resolve, reject) {
     postRequest.onreadystatechange = function() {
       if (postRequest.readyState !== 4) return;
@@ -396,7 +396,7 @@ generate.onclick = () => {
   var postRequest;
   var postUrl;
   postRequest = new XMLHttpRequest();
-  postUrl = '/play/generate_spaces';
+  postUrl = '/bingo/generate_spaces';
 
   return new Promise(function (resolve, reject) {
     postRequest.onreadystatechange = function() {

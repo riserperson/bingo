@@ -187,5 +187,5 @@ exports.space_update_post = [
 
 exports.generate_spaces = function(req, res) {
   generator.generate(req.body.gameId);
-  res.redirect('/play/game/'+req.body.gameId+'/update');
+  res.redirect('/bingo/game/'+req.body.gameId+'/update');
 };

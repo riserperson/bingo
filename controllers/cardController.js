@@ -4,7 +4,9 @@ var models = require('../models');
 const querystring = require('querystring');
 const Hashids = require('hashids/cjs');
 const hashids = new Hashids('hokey smokes');
-const nodemailer = require('nodemailer');
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 // Serve up a form for requesting a card from a GET request
 exports.card_request_get = function(req, res, next) {
@@ -16,28 +18,7 @@ exports.card_request_get = function(req, res, next) {
 // Handle a POST request for a new card
 
 exports.card_send_post = function(req, res, next) {
-  // Define our mailer
-  async function sendEmail(email, hashedId) {
-    let transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_URL,
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PWD
-      },
-      tls: {
-        ciphers:'SSLv3'
-      }
-    });
-    let info = await transporter.sendMail({
-      from: 'bingo@iserman.org',
-      to: email,
-      subject: 'Here\'s your BINGO card',
-      text: 'Your BINGO card can be reached here: https://richardiserman.com/play/card/'+hashedId+'. Please keep this email! You will need this link anytime you wish to access your BINGO card.'
-    });
-  }
-
+  
   // Define the shuffle function (thanks Fisher and Yates!)
   function shuffle(array) {
     var m = array.length, t, i;
@@ -70,11 +51,11 @@ exports.card_send_post = function(req, res, next) {
       function getCard() {
         const card = models.Card.findOrCreate({
           where: {
-            email: req.body.email.trim(),
+            phoneNumber: req.body.phoneNumber.trim(),
             GameId: parseInt(req.body.gameId)
           },
           defaults: {
-            email: req.body.email.trim(),
+            phoneNumber: req.body.phoneNumber.trim(),
             GameId: parseInt(req.body.gameId)
           }              
         })
@@ -110,18 +91,30 @@ exports.card_send_post = function(req, res, next) {
         if (card[1]) {
           updatedCard.hashedId = hashids.encode(card[0].id);
           updatedCard.save().then(() => {
-            // Everything worked. Email the new card out.
-            console.log('Sending email');
-            sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
-
+            // Everything worked. SMS the new card out.
+            console.log('Sending SMS');
+            client.messages
+              .create({
+                body: 'Welcome to Bingo! Your card is here: https://richardiserman.com/bingo/card/'+updatedCard.hashedId,
+                from: '+12183323860',
+                to: updatedCard.phoneNumber
+              })
+              .then(message => console.log(message.sid));
+            
             // Send the new card in the response
             res.send(updatedCard);
 
           }).catch(console.error);
         } else {
-          // Everything worked. Email the new card out.
-          console.log('Sending email');
-          sendEmail(updatedCard.email, updatedCard.hashedId).catch(console.error);
+          // Everything worked. SMS the new card out.
+          console.log('Sending SMS');
+          client.messages
+          .create({
+            body: 'Welcome to Bingo! Your card is here: https://richardiserman.com/bingo/card/'+updatedCard.hashedId,
+            from: '+12183323860',
+            to: updatedCard.phoneNumber
+          })
+          .then(message => console.log(message.sid));
 
           // Send the new card in the response
           res.send(updatedCard);
@@ -151,7 +144,7 @@ exports.card_display = function(req, res, next) {
     .then( (result) => {
       //res.send(result);
       models.Game.findOne( {where: { id: card.GameId } }).then(function (game) {
-        res.render('card_display', { card: result, code: game.code, player: card.email });
+        res.render('card_display', { card: result, code: game.code, player: card.phoneNumber });
       });
     });
   });

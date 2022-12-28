@@ -129,7 +129,7 @@ function setCheckBoxListener(checkbox, position) {
       checked = false;
     }
     const postRequest = new XMLHttpRequest();
-    const postUrl = '/play/card/'+document.querySelector('#cardId').value;
+    const postUrl = '/bingo/card/'+document.querySelector('#cardId').value;
   
     return new Promise(function (resolve, reject) {
       postRequest.onreadystatechange = function() {

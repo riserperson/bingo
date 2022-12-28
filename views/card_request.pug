@@ -10,10 +10,10 @@ block content
             p 
               form#requestForm(action='' method='POST' novalidate onsubmit="return false;").mx-2.needs-validation
                 input(type='hidden' id='gameId' name='gameId' value=game.id)
-                label(for='email') Email Address
-                input(id='email' name='email' type='email' required).form-control
+                label(for='phoneNumber') Mobile Phone Number
+                input(id='phoneNumber' name='phoneNumber' type='phoneNumber' required).form-control
                 div.invalid-feedback
-                  | Please enter a valid email address.
+                  | Please enter a valid US mobile phone number.
                 button.btn.btn-primary.m-2#submit Submit
   div.row.col-12#confirmation
       div.col
@@ -26,7 +26,7 @@ block content
         div.border.rounded-3.text-center.text-box
           div.col-lg-6.offset-lg-3     
             | Go back to 
-            a(href='/play/game/'+game.id+'/update') View Game
+            a(href='/bingo/game/'+game.id+'/update') View Game
 
   append foot
-    script(type='text/javascript', src='/javascripts/card_request.js')
+    script(type='text/javascript', src='/bingo/javascripts/card_request.js')
