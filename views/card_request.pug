@@ -7,10 +7,13 @@ block content
         div.col-lg-6.offset-lg-3
             h1 Get a Bingo Card
             p For game: #{game.name}
+            p Enter your US-based mobile phone number below to receive your customized Bingo card. (Standard messaging rates apply.) 
+            p By entering your phone number below, you consent to receive an SMS with your bingo card. 
             p 
               form#requestForm(action='' method='POST' novalidate onsubmit="return false;").mx-2.needs-validation
                 input(type='hidden' id='gameId' name='gameId' value=game.id)
                 label(for='phoneNumber') Mobile Phone Number
+                | +1 
                 input(id='phoneNumber' name='phoneNumber' required).form-control
                 div.invalid-feedback
                   | Please enter a valid US mobile phone number.
