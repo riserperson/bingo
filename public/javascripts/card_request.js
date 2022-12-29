@@ -20,7 +20,7 @@ document.querySelector('#submit').addEventListener('click', () => {
       };
       postRequest.open('POST', postUrl, true);
       postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      postRequest.send('gameId=' + document.querySelector('#gameId').value + '&email=' + document.querySelector('#email').value);
+      postRequest.send('gameId=' + document.querySelector('#gameId').value + '&phoneNumber=' + document.querySelector('#phoneNumber').value);
     })
     .then( (card) => {
       console.log(JSON.parse(card.response));
