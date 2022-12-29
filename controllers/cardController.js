@@ -18,7 +18,7 @@ exports.card_request_get = function(req, res, next) {
 // Handle a POST request for a new card
 
 exports.card_send_post = function(req, res, next) {
-  
+  console.log('phone number: ' + req.body.phoneNumber);
   // Define the shuffle function (thanks Fisher and Yates!)
   function shuffle(array) {
     var m = array.length, t, i;
