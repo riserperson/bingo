@@ -52,3 +52,23 @@ document.querySelector('#submit').addEventListener('click', () => {
       }, false)
     })
 })()
+
+function validatePhoneNumber(phoneNumber) {
+  const validPhoneEx = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if(document.querySelector('#phoneNumber').value.match(validPhoneEx)) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+document.querySelector('#phoneNumber').addEventListener('change', () => {
+  if(validatePhoneNumber(document.querySelector('#phoneNumber'))) {
+    document.querySelector('#phoneNumber').classList.remove('is-invalid');
+    document.querySelector('#phoneNumber').classList.add('is-valid');
+  } else {
+    document.querySelector('#phoneNumber').classList.remove('is-valid');    
+    document.querySelector('#phoneNumber').classList.add('is-invalid');
+  }
+});

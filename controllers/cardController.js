@@ -10,7 +10,6 @@ const client = require('twilio')(accountSid, authToken);
 
 // Serve up a form for requesting a card from a GET request
 exports.card_request_get = function(req, res, next) {
-  
   models.Game.findOne({where: { id: parseInt(req.query.gameId) } }).then(function (game) {
    res.render('card_request', { game: game });
   });
@@ -19,7 +18,8 @@ exports.card_request_get = function(req, res, next) {
 // Handle a POST request for a new card
 
 exports.card_send_post = function(req, res, next) {
-  // Define the shuffle function (thanks Fisher and Yates!)
+
+  // Define the shuffle function for later use (thanks Fisher and Yates!)
   function shuffle(array) {
     var m = array.length, t, i;
     // While there remain elements to shuffle…
@@ -32,7 +32,9 @@ exports.card_send_post = function(req, res, next) {
       array[i] = t;
     }
     return array;
-  }
+  }  
+
+  // Define the main card creation function, but don't call it yet.
 
   // Have to define an async function to use promises
   async function main() {
@@ -121,7 +123,23 @@ exports.card_send_post = function(req, res, next) {
       });
     }  
   }
-  main();  
+
+  // Then, we check to see if this phone number already has a card
+  // If it does, for now we won't resend to save on SMS costs
+
+  models.Card.findOne({where: { phoneNumber: req.body.phoneNumber} }).then(function (card) {
+    if(card) {
+
+      // ADD SOMETHING HERE TO TELL PEOPLE THEY ALREADY HAVE A CARD
+      console.log('hello');
+      return false;
+    } else {
+      main();  
+    }
+  })
+  .catch((e) => {
+    console.log(e);
+  })
 }
 
 // Display an existing card from a GET request
