@@ -19,6 +19,7 @@ exports.card_request_get = function(req, res, next) {
 
 exports.card_send_post = function(req, res, next) {
   console.log('****************************');
+  /*
   // Define the shuffle function (thanks Fisher and Yates!)
   function shuffle(array) {
     var m = array.length, t, i;
@@ -147,6 +148,7 @@ exports.card_display = function(req, res, next) {
       });
     });
   });
+  */
 }
 
 // Handle a POST request to handle updates to card contents
