@@ -1,11 +1,11 @@
-$("#confirmation").hide();
+$('#confirmation').hide();
 
-document.querySelector("#submit").addEventListener("click", () => {
-  if(document.querySelector("#requestForm").checkValidity() && document.querySelector("#email").value != '') {
+document.querySelector('#submit').addEventListener('click', () => {
+  if(document.querySelector('#phoneNumber').value != '') {
     var postRequest;
     var postUrl;
     postRequest = new XMLHttpRequest();
-    postUrl = '/play/card_request';
+    postUrl = '/bingo/card_request';
 
     return new Promise(function (resolve, reject) {
       postRequest.onreadystatechange = function() {
@@ -27,7 +27,7 @@ document.querySelector("#submit").addEventListener("click", () => {
       if (JSON.parse(card.response).hashedId) {
         $("#requestForm").hide();
         $("#confirmation").show();
-        document.querySelector('#cardLink').innerHTML = '<a href="http://'+location.host+'/play/card/' + JSON.parse(card.response).hashedId +'">View Your Card</a>'
+        document.querySelector('#cardLink').innerHTML = '<a href="http://'+location.host+'/bingo/card/' + JSON.parse(card.response).hashedId +'">View Your Card</a>'
       }
     });
   } 
