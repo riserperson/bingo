@@ -62,7 +62,6 @@ exports.card_send_post = function(req, res, next) {
         return card;
       }
 
-
       let card = await getCard();
       
       if (card[1]) {
