@@ -131,8 +131,8 @@ exports.card_send_post = function(req, res, next) {
     if(card) {
 
       // ADD SOMETHING HERE TO TELL PEOPLE THEY ALREADY HAVE A CARD
-      console.log('hello');
-      return false;
+      res.send(card);
+      
     } else {
       main();  
     }

@@ -14,9 +14,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      phoneNumber: {
-        type: Sequelize.STRING
-      },
       hashedId: {
         type: Sequelize.STRING
       },
