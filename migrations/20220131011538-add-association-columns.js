@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    if (process.env.DATABASE_URL != 'production') {
+    if (process.env.DATABASE_URL == 'development') {
       return queryInterface.addColumn(
         'Spaces',
         'GameId',
