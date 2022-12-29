@@ -13,11 +13,12 @@ block content
               form#requestForm(action='' method='POST' novalidate onsubmit="return false;").mx-2.needs-validation
                 input(type='hidden' id='gameId' name='gameId' value=game.id)
                 label(for='phoneNumber') Mobile Phone Number
-                div.input-group-prepend
-                  span.input-group-text +1
-                input(id='phoneNumber' name='phoneNumber' required).form-control
-                div.invalid-feedback
-                  | Please enter a valid US mobile phone number.
+                div.input-group
+                  div.input-group-prepend
+                    span.input-group-text +1
+                  input(id='phoneNumber' name='phoneNumber' required).form-control
+                  div.invalid-feedback
+                    | Please enter a valid US mobile phone number.
                 button.btn.btn-primary.m-2#submit Submit
   div.row.col-12#confirmation
       div.col
