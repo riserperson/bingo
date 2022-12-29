@@ -415,5 +415,7 @@ generate.onclick = () => {
     postRequest.send('gameId=' + document.querySelector('#gameId').value);
   }).then(resolve => {
     refreshSpaces();
+  }).catch(e => {
+    console.log(e);
   });
 }
